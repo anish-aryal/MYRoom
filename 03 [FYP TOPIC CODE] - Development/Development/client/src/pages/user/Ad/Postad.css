@@ -1,0 +1,86 @@
+.active-button{
+    background: linear-gradient(90deg, rgba(111, 27, 197, 0.88) -12%, rgba(164, 98, 233, 0.81) 20%);
+    color: #ffff;
+    font-family: 'sr';
+    border: none;
+    border-radius: 0;
+    padding: 37px 0px;
+}
+.active-button:focus {
+    outline: none;
+    border: none;
+    border-radius: 0;
+  }
+  .inactive-button{
+    background: #ffff;
+    background: linear-gradient(90deg, rgba(111, 27, 197, 0.88) -12%, rgba(164, 98, 233, 0.81) 20%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    font-family: 'sr';
+    border: 1px solid rgb(162, 8, 200);
+    padding: 37px 0px;
+
+}
+.inactive-button:focus {
+    outline: none;
+    border: none;
+    border-radius: 0;
+}
+
+.adH1{
+        background: linear-gradient(90deg, rgba(111, 27, 197, 0.88) -12%, rgba(164, 98, 233, 0.81) 20%);
+        background-clip: text;
+        -webkit-background-clip: text;
+        color: transparent;
+        font-size: 32px;
+        line-height: 42px;
+        font-family: 'sb';
+        margin-bottom: 10px;
+}
+
+.roomBtn{
+    height: 350px;
+    color: #ffff;
+    background-image: url("../../../../public/roomapartment.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+
+}
+.roomBtn:focus{
+    outline: none;
+    border: none;
+    border-radius: 0;
+}
+
+.apartmentBtn{
+   height: 350px;
+   color: #ffff;
+   background-image: url("../../../../public/roomapartment.jpg");
+   background-repeat: no-repeat;
+   background-size: cover;
+  
+}
+.apartmentBtn:hover {
+    opacity: 0.95;
+    transform: scale(1.02);
+    transition: 0.5s;
+    z-index: 99;
+  }
+
+  .roomBtn:hover {
+    opacity: 0.95;
+    transform: scale(1.02);
+    transition: 0.5s;
+    z-index: 99;
+  }
+.apartmentBtn:focus{
+    outline: none;
+    border: none;
+    border-radius: 0;
+}
+.adP{
+    font-size: 14px;
+    font-family: "sm";
+
+}

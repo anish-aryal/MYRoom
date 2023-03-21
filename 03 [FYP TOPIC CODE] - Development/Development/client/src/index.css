@@ -27,7 +27,9 @@ body{
          font-display: swap;
          font-style: normal;
   }
-  
+  .sl{
+    font-family: 'sl';
+  }
   
   @font-face {
     font-family: 'sli';
@@ -44,6 +46,9 @@ body{
          font-weight: 400;
          font-display: swap;
          font-style: normal;
+  }
+  .sr{
+    font-family: 'sr';
   }
   
   

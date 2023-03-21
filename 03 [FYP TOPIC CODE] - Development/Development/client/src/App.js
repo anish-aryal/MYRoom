@@ -14,8 +14,8 @@ import ActivateAccount from "../src/pages/auth/ActivateAccount.js";
 import AccessAccount from "../src/pages/auth/AccessAccount.js";
 import Dashboard from "../src/pages/user/Dashboard.js";
 import Postad from "./pages/user/Ad/Postad";
-import LoggedinRoute from "./components/routes/PrivateRoute";
 import LoggedInRoute from "./components/routes/PrivateRoute";
+import AdCreate from "./pages/user/Ad/Postad";
 
 
 function MainWithRoutes() {
@@ -49,6 +49,7 @@ function MainWithRoutes() {
           <Route path="/auth/activate-account/:token" element={<ActivateAccount />} />
           <Route path="/auth/access-account/:token" element={<AccessAccount />}/>
           <Route path="/auth/forgot-password" element={<ForgotPassword />}/>
+          <Route path="/auth/post/ad" element={<AdCreate />}/>
     
           
         </Routes>
