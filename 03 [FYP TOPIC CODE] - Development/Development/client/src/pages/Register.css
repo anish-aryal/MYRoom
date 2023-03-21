@@ -2,7 +2,7 @@
 padding-left: 2.25rem;
 }
 .rimage-container{
-    background-image: url("../../public/MyRoomLogo.jpg");
+    background-image: url("../../public/MyRoomLogo.svg");
     height:80px;
     width:180px;
     background-size: contain;

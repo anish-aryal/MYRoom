@@ -9,7 +9,12 @@ const schema = new Schema(
       unique: true,
       lowercase: true,
     },
-    name: {
+    firstname: {
+      type: String,
+      trim: true,
+      default: "",
+    },
+    lastname: {
       type: String,
       trim: true,
       default: "",

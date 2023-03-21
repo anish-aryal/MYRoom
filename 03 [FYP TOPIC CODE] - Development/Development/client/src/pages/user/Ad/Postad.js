@@ -1,7 +1,7 @@
-import Sidebar from "../../components/nav/sidebar";
-import Main from "../../components/nav/Main";
+import Sidebar from "../../../components/nav/sidebar";
+import Main from "../../../components/nav/Main";
 
-export default function Dashboard() {
+export default function Postad() {
 
     
     return (

@@ -1,0 +1,35 @@
+#sidebar{
+    background: linear-gradient(90deg, rgba(111, 27, 197, 0.02) 0%, rgba(164, 98, 233, 0.03) 75%);
+    height: 100vh;
+   position: sticky;
+}
+#sidebar strong{
+    font-family: 'sb';
+    font-size: 12px;
+}
+#sidebar p{
+    font-family: 'sl';
+    font-size: 12px;
+}
+
+.side-item {
+    font-family: 'sb';
+    font-size: 14px;
+ 
+    
+}
+.side-item i {
+    
+   padding-right: 10px;
+    font-size: 22px;
+    font-weight: bold;
+    background: linear-gradient(90deg, rgba(111, 27, 197, 0.88) 0%, rgba(164, 98, 233, 0.81) 60%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+
+    
+}
+.copy{
+    margin-left: 20px;
+}

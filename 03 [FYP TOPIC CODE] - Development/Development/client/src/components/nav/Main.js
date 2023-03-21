@@ -2,6 +2,7 @@ import { NavLink } from "react-router-dom";
 import { useLocation } from 'react-router-dom';
 import { useAuth } from "../../context/auth.js";
 import { useNavigate } from "react-router-dom";
+import style from "./nav.module.css";
 
 export default function Main() {
     const [auth, setAuth] = useAuth();
@@ -24,12 +25,20 @@ export default function Main() {
     }
 
     const location = useLocation();
-    if (location.pathname === '/login' || location.pathname === '/register' || location.pathname ==='/dashboard') {
+    if (location.pathname === '/login' || location.pathname === '/register') {
         return null;
     }
 
     //granting access to loggedin user
     const logged = auth.user !== null && auth.token !=="" && auth.refreshToken !=="";
+
+    const postAd =()=>{
+        if (logged) {
+            navigate("/create/ad");
+    }else{
+        navigate("/login");
+    }
+}
 
     return (
   <nav className="navbar navbar-expand-lg bg-body-tertiary">
@@ -42,10 +51,11 @@ export default function Main() {
     <div className="justify-content-end  w-50"> 
         <ul className="nav justify-content-between">
                
-                <NavLink className="nav-link" aria-current="page" to="/">
+                <NavLink className="nav-link " aria-current="page" to="/">
                     Home
                 </NavLink>
            
+                <button className="btn-primary" onClick={postAd}>Post Ad</button>
             
                 {!logged ?(
                 <>
@@ -67,7 +77,7 @@ export default function Main() {
                     className="nav-link pointer dropdown-toggle"
                     data-bs-toggle="dropdown"
                 >
-                    {auth?.user?.name? auth.user.name : auth.user.username }
+                    {auth?.user?.firstname? auth.user.firstname : auth.user.username }
              
                 <ul className="dropdown-menu">
                     <li>
@@ -93,39 +103,39 @@ export default function Main() {
         // <div className="d-flex justify-content-end">
         //     <ul className="nav justify-content-between w-50">
         //         <li className="nav-item">
-        //         <NavLink className="nav-link" aria-current="page" to="/">
+        //         <NavLink className="nav-item" aria-current="page" to="/">
         //             Home
         //         </NavLink>
         //         </li>
         //         <li className="nav-item">
-        //         <NavLink className="nav-link " to="/register">
+        //         <NavLink className="nav-item " to="/register">
         //             Register
         //         </NavLink>
         //         </li>
         //         <li className="nav-item">
-        //         <NavLink className="nav-link " to="/login">
+        //         <NavLink className="nav-item " to="/login">
         //             Login
         //         </NavLink>
         //         </li>
         //         <li className="nav-item">
-        //         <NavLink className="nav-link disabled " to="/">Disabled</NavLink>
+        //         <NavLink className="nav-item disabled " to="/">Disabled</NavLink>
         //         </li>
             //     <div className="dropdown">
             //     <li>
             //     <NavLink
-            //         className="nav-link pointer dropdown-toggle"
+            //         className="nav-item pointer dropdown-toggle"
             //         data-bs-toggle="dropdown"
             //     >
             //         User
             //     </NavLink>
             //     <ul className="dropdown-menu">
             //         <li>
-            //         <NavLink className="nav-link" to={`/dashboard`}>
+            //         <NavLink className="nav-item" to={`/dashboard`}>
             //             Dashboard
             //         </NavLink>
             //         </li>
             //         <li>
-            //         <NavLink className="nav-link">Logout</NavLink>
+            //         <NavLink className="nav-item">Logout</NavLink>
             //         </li>
             //     </ul>
             //     </li>

@@ -3,7 +3,7 @@ margin-top: -50px;
 height: 90vh;
 }
 .image-container{
-    background-image: url("../../public/MyRoomLogo.jpg");
+    background-image: url("../../public/MyRoomLogo.svg");
     height:100px;
     width:180px;
     background-size: contain;

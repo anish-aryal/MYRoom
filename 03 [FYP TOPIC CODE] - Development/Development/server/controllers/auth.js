@@ -32,7 +32,7 @@ export const welcome = (req, res)=>{
 
 export const preRegister = async (req, res) => {
   try {
-    const { email, password } = req.body;
+    const { email, password, firstname } = req.body;
 
     // check if email is valid
     if (!validator.validate(email)) {
@@ -56,7 +56,7 @@ export const preRegister = async (req, res) => {
 
 
     // generate jwt using email and password
-    const token = jwt.sign({ email, password }, config.JWT_SECRET, {
+    const token = jwt.sign({ email, password,firstname }, config.JWT_SECRET, {
       expiresIn: "1h",
     });
     // send test email
@@ -87,7 +87,7 @@ export const preRegister = async (req, res) => {
 export const register = async (req, res)=>{
     try {
         console.log(req.body);
-        const {email, password} = jwt.verify(req.body.token, config.JWT_SECRET);
+        const {email, password,firstname} = jwt.verify(req.body.token, config.JWT_SECRET);
 
         const userexist = await User.findOne({email});
         if(userexist){
@@ -99,6 +99,8 @@ export const register = async (req, res)=>{
             username: nanoid(8),
             email, 
             password: hashedPassword,
+            firstname,
+            
         }).save();
 
        tokenAndUserResponse(req, res,user);
@@ -209,7 +211,7 @@ export const refreshToken = async (req, res) => {
   
       const { _id } = jwt.verify(req.headers.refresh_token, config.JWT_SECRET);
   
-      const user = await User.findById(_id);
+    const user = await User.findById(_id);
      tokenAndUserResponse(req, res,user);
     } catch (err) {
       console.log("===> ", err.name);

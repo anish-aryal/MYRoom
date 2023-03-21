@@ -11,8 +11,11 @@ body{
 
 
 .active{
-    color: #7B30C8;
-    font-family: "sb";
+  background: linear-gradient(90deg, rgba(111, 27, 197, 0.88) 0%, rgba(164, 98, 233, 0.81) 80%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  font-family: 'sb';
 }
 
 
