@@ -27,13 +27,13 @@ export default function AdCreate() {
     return (
     <div className="container-fluid">
         <div className="row">
-            <div className ="col-3 p-0 justify-content-center"> <div><Sidebar /></div></div>
-                <div className ="col-9">
+            <div className ="col-3 col-lg-2 col-xxl-1 p-0 justify-content-center"> <div><Sidebar /></div></div>
+                <div className ="col-9 col-lg-10">
                   
                     <Main />
               
-                <div className="row ">
-                    <div className="col-12 mt-5 ">
+                <div className="row justify-content-center">
+                    <div className="col-10 mt-5 ">
                         <h1 className="adH1">Welcome to Ad Posting!</h1>
                      
                         <p className="w-75 adP"> Please select the type of ad you wish to post from the options below. </p>
@@ -58,20 +58,20 @@ export default function AdCreate() {
                     {sell && (
                          <div className="row mt-2 p-3">
                             <div className="col-6 p-0">
-                                <button className="roomBtn col-12 border-0 h5">ROOM / FLAT</button>
+                                <button onClick={()=> navigate(`/create/ad/sell/Room`)} className="roomBtn col-12 border-0 h5">ROOM / FLAT</button>
                             </div>
                             <div className="col-6 p-0 ">
-                                <button className="apartmentBtn col-12 border-0 h5">APARTMENT</button>
+                                <button onClick={()=> navigate(`/create/ad/sell/Apartment`)} className="apartmentBtn col-12 border-0 h5">APARTMENT</button>
                             </div>
                         </div>
                     )}
                     {rent && (
                         <div className="row mt-2 p-3">
                             <div className="col-6 p-0">
-                            <button className="roomBtn col-12 border-0 h5">ROOM / FLAT</button>
+                            <button onClick={()=> navigate(`/create/ad/rent/Room`)} className="roomBtn col-12 border-0 h5">ROOM / FLAT</button>
                             </div>
                             <div className="col-6 p-0 ">
-                                <button className="apartmentBtn col-12 border-0 h5">APARTMENT</button>
+                                <button onClick={()=> navigate(`/create/ad/rent/Apartment`)} className="apartmentBtn col-12 border-0 h5">APARTMENT</button>
                             </div>
                         </div>
                     )}

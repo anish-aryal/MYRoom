@@ -2,7 +2,7 @@ import { NavLink } from "react-router-dom";
 import { useLocation } from 'react-router-dom';
 import { useAuth } from "../../context/auth.js";
 import { useNavigate } from "react-router-dom";
-import style from "./nav.module.css";
+
 
 export default function Main() {
     const [auth, setAuth] = useAuth();

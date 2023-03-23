@@ -54,7 +54,7 @@ label span{
     font-size: 16px;
 }
 
-input{
+.login-input{
     font-family: 'sm';
     font-size: 14px;
     border-radius: 0px !important;

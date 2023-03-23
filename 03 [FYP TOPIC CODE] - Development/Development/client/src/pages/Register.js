@@ -100,7 +100,7 @@ export default function Register() {
                     <form className='row gx-3 pt-5' onSubmit={handleSubmit}>
                         <div className='d-flex col-6 mb-4 flex-column'>
                           <label htmlFor="fnamelabel" className="form-label" >First Name</label>
-                          <input type="text" className=" fnameinput" id="inputfname" placeholder='First Name' aria-describedby="FirstName" 
+                          <input type="text" className=" fnameinput login-input" id="inputfname" placeholder='First Name' aria-describedby="FirstName" 
                           value={firstname}
                           onChange={(e) => setFirstname(e.target.value)}
                           required
@@ -108,11 +108,11 @@ export default function Register() {
                         </div>
                         <div className='d-flex col-6 mb-4 flex-column'>
                           <label htmlFor="lanamelabel" className="form-label" >Last Name</label>
-                          <input type="text" className=" lnameinput" id="inputlname" placeholder='Last Name' aria-describedby="LastName" />
+                          <input type="text" className=" lnameinput login-input" id="inputlname" placeholder='Last Name' aria-describedby="LastName" />
                         </div>
                         <div className='d-flex col-6 mb-4 flex-column'>
                           <label htmlFor="emaillabel" className="form-label" >Email address</label>
-                          <input type="email" className=" emailinput"  id="inputemail" placeholder='something@gmail.com' aria-describedby="EmailAddress" 
+                          <input type="email" className=" emailinput login-input"  id="inputemail" placeholder='something@gmail.com' aria-describedby="EmailAddress" 
                           value={email}
                           onChange={(e) => setEmail(e.target.value.toLowerCase())}
                           required
@@ -121,26 +121,26 @@ export default function Register() {
                         </div>
                         <div className='d-flex col-6 mb-4 flex-column'>
                           <label htmlFor="phonelabel" className="form-label" >Phone Number</label>
-                          <input type="number" className=" phoneinput" id="inputphone" placeholder='Phone Number' aria-describedby="PhoneNumber" />
+                          <input type="number" className=" phoneinput login-input" id="inputphone" placeholder='Phone Number' aria-describedby="PhoneNumber" />
                         </div>
                         <div className='d-flex col-6 flex-column'>
                           <label htmlFor="passwordlabel" className="form-label" >Password</label>
-                          <input type="password" className=" passwordinput" id="inputpassword" placeholder='********' aria-describedby="PasswordHelp" 
+                          <input type="password" className=" passwordinput login-input" id="inputpassword" placeholder='********' aria-describedby="PasswordHelp" 
                           value={password}
                           onChange={(e) => setPassword(e.target.value)}
                           required/>
                         </div>
                         <div className='d-flex col-6 flex-column'>
                           <label htmlFor="confirmPassword" className="form-label" >Confirm Password</label>
-                          <input type="password" className=" confirmpassswordinput" id="inputconfirmpassword" placeholder='********' aria-describedby="ConfirmPassword" />
+                          <input type="password " className=" confirmpassswordinput" id="inputconfirmpassword" placeholder='********' aria-describedby="ConfirmPassword" />
                         </div>
                         <div>
                           <div className=" col-12 check mt-4 mb-2">
-                            <input type="checkbox" className="form-check-input ps-3" id="exampleCheck1" />
+                            <input type="checkbox" className="form-check-input ps-3 login-input" id="exampleCheck1" />
                             <label className="form-check-label" htmlFor="exampleCheck1">Yes i want to receive important emails from My room like message notifications.</label>
                           </div>
                           <div className=" col-12 check mb-4">
-                            <input type="checkbox" className="form-check-input ps-3" id="exampleCheck1" />
+                            <input type="checkbox" className="form-check-input ps-3 login-input" id="exampleCheck1" />
                             <label className="form-check-label" htmlFor="exampleCheck1">I agree to all the terms and conditions.</label>
                           </div>
                         </div>

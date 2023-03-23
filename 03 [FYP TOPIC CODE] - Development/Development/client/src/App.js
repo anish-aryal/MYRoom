@@ -13,22 +13,32 @@ import ForgotPassword from "../src/pages/auth/ForgotPassword.js";
 import ActivateAccount from "../src/pages/auth/ActivateAccount.js";
 import AccessAccount from "../src/pages/auth/AccessAccount.js";
 import Dashboard from "../src/pages/user/Dashboard.js";
-import Postad from "./pages/user/Ad/Postad";
+
 import LoggedInRoute from "./components/routes/PrivateRoute";
 import AdCreate from "./pages/user/Ad/Postad";
+import SellApartment from "../src/components/forms/SellApartment.js";
+import SellRoom from "./components/forms/SellRoom";
+import RentRoom from "./components/forms/RentRoom";
+import RentApartment from "./components/forms/RentApartment";
 
 
 function MainWithRoutes() {
   const location = useLocation();
-
-  if (location.pathname === "/dashboard" || location.pathname === "/create/ad") {
+  const onlylocalnav = [  "/dashboard",  "/create/ad",  "/create/ad/sell/Apartment",  "/create/ad/sell/Room",  "/create/ad/rent/Room",  "/create/ad/rent/Apartment"];
+  
+  if (onlylocalnav.includes(location.pathname)) {
     return (
       <>
         <Toaster />
-        <Routes>
+       <Routes>
           <Route path="/" element={<LoggedInRoute />}>
-          <Route path="dashboard" element={<Dashboard />} />
-          <Route path="create/ad" element={<Postad />} />
+            <Route path="dashboard" element={<Dashboard />} />
+            <Route path="create/ad" element={<AdCreate />}/>
+            <Route path="create/ad/sell/Apartment" element={<SellApartment />} />
+            <Route path="create/ad/sell/Room" element={<SellRoom />} />
+            <Route path="create/ad/rent/Room" element={<RentRoom />} />
+            <Route path="create/ad/rent/Apartment" element={<RentApartment />} />
+          
           </Route>
           
           
@@ -49,8 +59,8 @@ function MainWithRoutes() {
           <Route path="/auth/activate-account/:token" element={<ActivateAccount />} />
           <Route path="/auth/access-account/:token" element={<AccessAccount />}/>
           <Route path="/auth/forgot-password" element={<ForgotPassword />}/>
-          <Route path="/auth/post/ad" element={<AdCreate />}/>
-    
+         
+          
           
         </Routes>
     </>
