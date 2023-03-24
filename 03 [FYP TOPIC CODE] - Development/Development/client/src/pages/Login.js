@@ -86,7 +86,7 @@ export default function Login() {
                           <div className="mb-3 d-flex flex-column forgotpw">
                             <Link to="/auth/forgot-password">Forgot your password ?</Link>
                           </div>
-                          <button type="submit" className="btn login-btn btn-primary">{loading ? "Waiting..." : "Login"}</button>
+                          <button type="button" className="btn login-btn btn-primary">{loading ? "Waiting..." : "Login"}</button>
                           <p className='l-register mb-5 pb-3'>Dont have an account yet? <span> <a aria-current="page" href="/register">Register.</a></span></p>
                         </form>
                       </div>

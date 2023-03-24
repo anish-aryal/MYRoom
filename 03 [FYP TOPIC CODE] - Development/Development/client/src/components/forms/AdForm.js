@@ -38,7 +38,7 @@ export default function AdForm({action, type})  {
         else{
           toast.success('Ad created successfully');
           setAd({...ad, loading:false});
-          // navigate ("/dashboard");
+          navigate ("/");
         }
 
       }
@@ -59,7 +59,7 @@ export default function AdForm({action, type})  {
                 
                       <div className='heading d-flex flex-column'>
                         <h1 >Create an Ad.</h1>
-                        <p className="w-75">Please fill the form properly for listing your Apartment to sell.</p>
+                        <p className="w-75">Please fill the form properly for listing your {type} for {action}.</p>
                       </div>
                     <form className='row gx-3 pt-5' >
                         <div className=' col-6 mb-3'>
@@ -151,13 +151,11 @@ export default function AdForm({action, type})  {
                         </div>
                         
                         <div className="col-12">
-                        <button onClick={handleSubmit} type="button" className="btn login-btn btn-primary">Post Ad</button>
+                        <button onClick={handleSubmit} type="button" className={` login-btn ${ad.loading ? "disabled" : ""} `} disabled={ad.loading} >{ad.loading ? "Verifying information.." :"Post Ad"}</button>
                         </div>
 
                     </form>
-                    <pre>
-                        {JSON.stringify(ad, null, 4)}
-                    </pre>
+                  
                 </div>
               </div>
             </div>

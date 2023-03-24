@@ -94,11 +94,12 @@ export const uploadImage = async (req, res) => {
 
             ...req.body,
             postedBy: req.user._id,
-            slug: (`${title}/${nanoid()}`),
+            slug: (`${title}/${nanoid(8)}`),
             location: {
                 type: "Point",
                 coordinates: [ geography[0]?.longitude, geography[0].latitude ],
             },
+            googleMap: geography,
 
         }).save();
         user.password = undefined;
@@ -110,4 +111,30 @@ export const uploadImage = async (req, res) => {
         console.log(err);
 
      }
+  }
+
+  export const ads = async (req, res) => {
+    try{
+      const apartmentForSell = await Ad.find({action: "Sell", type:"Apartment"})
+      .select("-googleMap -location -photo.Key -photo.key -photo.ETag ")
+      .sort({createdAt: -1}).limit(12).exec();
+
+      const apartmentForRent = await Ad.find({action: "Rent", type:"Apartment"})
+      .select("-googleMap -location -photo.Key -photo.key -photo.ETag ")
+      .sort({createdAt: -1}).limit(12).exec();
+
+      const roomForRent = await Ad.find({action: "Rent", type:"Room"})
+      .select("-googleMap -location -photo.Key -photo.key -photo.ETag ")
+      .sort({createdAt: -1}).limit(12).exec();
+
+      const roomForSell = await Ad.find({action: "Sell", type:"Room"})
+      .select("-googleMap -location -photo.Key -photo.key -photo.ETag ")
+      .sort({createdAt: -1}).limit(12).exec();
+
+
+      res.json({apartmentForSell, apartmentForRent, roomForRent, roomForSell})
+    }
+    catch(err){
+      console.log(err)
+    }
   }

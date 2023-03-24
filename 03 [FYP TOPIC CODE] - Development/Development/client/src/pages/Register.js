@@ -146,7 +146,7 @@ export default function Register() {
                         </div>
 
                         <div className="col-12">
-                        <button type="submit" className="btn login-btn btn-primary">{loading ? "Waiting..." : "Register"}</button>
+                        <button type="button" className="btn login-btn btn-primary">{loading ? "Waiting..." : "Register"}</button>
                         <p className='l-register'>Already Have an Account?  <span><a href="/login">Login.</a></span></p>
                         </div>
 

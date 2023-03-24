@@ -1,0 +1,67 @@
+.adimage{
+
+    object-fit: "cover";
+
+}
+.card {
+    cursor: pointer;
+}
+.card:hover{
+    transform: scale(1.02);
+    transition: all 0.2s ease-in-out;
+    box-shadow: 0 0 8px #EEE3EE;
+}
+.cardtitle{
+    border-bottom: 1px solid rgba(144, 82, 208, 0.2);
+    font-family: 'sm';
+    
+}
+.adtitle{
+    font-family: 'sm';
+    font-size: 15px;
+}
+.features{
+    border-bottom: 1px solid rgba(144, 82, 208, 0.2);
+    font-family: 'sm';
+}
+ .icons{
+    font-size: 18px;
+    color:#a86fe1;
+    margin-top: -5px;
+    margin-right: 8px;
+
+
+}
+.iconsmark{
+    /* color: rgb(220, 15, 15); */
+    color:#9052D0;
+    font-size: 15px;
+}
+
+.features span{
+    font-family: 'sm';
+    font-size: 13px;
+    margin-top: -5px;
+}
+
+.adprice{
+    font-family: 'sm';
+    font-size: 16px;
+    background: linear-gradient(120deg, rgba(111, 27, 197, 0.88) 60%, rgba(164, 98, 233, 0.70) 90%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+}
+.pricetag{
+    font-family: 'sr';
+    /* background: linear-gradient(60deg, rgba(111, 27, 197, 0.88) 40%, rgba(164, 98, 233, 0.70) 95%);
+    background-clip: text;
+    -webkit-background-clip: text; */
+    color: black;
+    font-size: 10px;
+}
+.adaddress{
+    font-size: 13px;
+
+    
+}

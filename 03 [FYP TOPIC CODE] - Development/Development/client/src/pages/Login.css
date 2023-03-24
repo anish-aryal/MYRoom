@@ -41,7 +41,13 @@ p{
     border: none;
     border-radius: 0;
     padding: 10px;
+    outline: none;
+
 }
+.login-btn:focus {
+    /* Other button focus styles */
+    outline: none;
+  }
 
 label{
     font-family: 'sm';
