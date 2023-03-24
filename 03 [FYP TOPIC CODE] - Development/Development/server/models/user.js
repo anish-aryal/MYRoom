@@ -37,8 +37,8 @@ const schema = new Schema(
     photo: {},
     role: {
       type: [String],
-      default: ["Buyer"],
-      enum: ["Buyer", "Seller", "Admin"],
+      default: ["User"],
+      enum: ["User", "Admin"],
     },
     enquiredProperties: [{ type: ObjectId, ref: "Ad" }],
     wishlist: [{ type: ObjectId, ref: "Ad" }],

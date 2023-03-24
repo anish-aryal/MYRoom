@@ -4,10 +4,14 @@ import { GOOGLE_PLACES_API_KEY } from "../../config";
 import CurrencyInput from 'react-currency-input-field';
 import "../../pages/Login.css";
 import UploadImage from "./UploadImage";
+import axios from "axios";
+import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 
 
 export default function AdForm({action, type})  {
 
+    const navigate = useNavigate();
     const [ad, setAd] = useState({
         photos: "",
         uploading: false,
@@ -16,10 +20,34 @@ export default function AdForm({action, type})  {
         bedrooms: "",
         bathrooms: "",
         parking:"",
-        type:'',
+        type,
+        action,
         title:'',
         description:'',
         loading:false})
+
+    const handleSubmit = async () => {
+      try{
+        setAd({...ad, loading:true});
+
+        const {data} = await axios.post('/ad', ad);
+        if(data?.error){
+          toast.error(data.error);
+          setAd({...ad, loading:false});
+        }
+        else{
+          toast.success('Ad created successfully');
+          setAd({...ad, loading:false});
+          // navigate ("/dashboard");
+        }
+
+      }
+      catch (err){
+        console.log(err)
+        setAd({...ad, loading:false});
+      }
+    }
+
     return (
         <div className="container-fluid">
           <div className='row'>
@@ -111,18 +139,6 @@ export default function AdForm({action, type})  {
                             />
                         </div>
 
-                        <div className='d-flex col-6 mb-3 flex-column landsize'>
-                          <label htmlFor="confirmPassword" className="form-label" >Land Size</label>
-                          <input
-                            type="text"
-                            className="form-control mb-3 rounded-0 sr"
-                            placeholder="Size of land"
-                            value={ad.landsize}
-                            onChange={(e) => setAd({ ...ad, landsize: e.target.value })}
-                            required
-                            />
-                        </div>
-
                         <div className='d-flex col-6 mb-3 flex-column description'>
                           <label htmlFor="lanamelabel" className="form-label" >Description of property</label>
                           <textarea
@@ -135,7 +151,7 @@ export default function AdForm({action, type})  {
                         </div>
                         
                         <div className="col-12">
-                        <button type="submit" className="btn login-btn btn-primary">Post Ad</button>
+                        <button onClick={handleSubmit} type="button" className="btn login-btn btn-primary">Post Ad</button>
                         </div>
 
                     </form>
@@ -147,34 +163,6 @@ export default function AdForm({action, type})  {
             </div>
             
 
-       
-      
 
-        /* 
-       
- 
-
-
-
-  <div className=" col-6 check mt-4 mb-2">
-                          <label className="form-check-label" htmlFor="exampleCheck1">Yes i want to receive important emails from My room like message notifications.</label>
-                          
-                            
-                          </div>
-                          <div className=" col-6 check mb-4">
-                          <label className="form-check-label" htmlFor="exampleCheck1">I agree to all the terms and conditions.</label>
-                          
-                          
-                          </div>
-
-
-
-
-
-
-
-<button className="btn btn-primary">Submit</button>
-      
-        </> */
-    )
+    );
 }

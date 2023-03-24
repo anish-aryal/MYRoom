@@ -1,4 +1,7 @@
 import SES from 'aws-sdk/clients/ses.js';
+import S3 from 'aws-sdk/clients/s3.js';
+import NodeGeocoder from "node-geocoder"
+
 
 export const DATABASE ='mongodb://127.0.0.1:27017/My-Room';
 
@@ -20,5 +23,15 @@ const awsConfig = {
     apiVersion: '2010-12-01'
 
 }
+const options ={
+    provider: "google",
+    apiKey: "AIzaSyBXsZsk-rcRl-LUPPxW9LPcX4S8AeNUvUg", // for Mapquest, OpenCage, Google Premier
+    formatter: null // 'gpx', 'string', ...
+};
+
+export const Google_Geocoder   = NodeGeocoder(options);
+   
+
 
 export const AWSSES = new SES(awsConfig);
+export const AWSS3 = new S3(awsConfig);
