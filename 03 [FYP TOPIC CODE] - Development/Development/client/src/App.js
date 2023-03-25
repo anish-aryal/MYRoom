@@ -20,7 +20,7 @@ import SellApartment from "../src/components/forms/SellApartment.js";
 import SellRoom from "./components/forms/SellRoom";
 import RentRoom from "./components/forms/RentRoom";
 import RentApartment from "./components/forms/RentApartment";
-
+import Viewpage from "./pages/user/Ad/Viewpage";
 
 function MainWithRoutes() {
   const location = useLocation();
@@ -59,6 +59,7 @@ function MainWithRoutes() {
           <Route path="/auth/activate-account/:token" element={<ActivateAccount />} />
           <Route path="/auth/access-account/:token" element={<AccessAccount />}/>
           <Route path="/auth/forgot-password" element={<ForgotPassword />}/>
+          <Route path="/ad/:slug" element={<Viewpage />}/>
          
           
           

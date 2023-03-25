@@ -6,6 +6,7 @@ import { BsSignNoParking } from 'react-icons/bs';
 import { RiHotelBedLine } from 'react-icons/ri';
 import { MdLocationOn } from 'react-icons/md';
 import { Badge } from 'antd';
+import { Link } from 'react-router-dom';
 
 export default function Card({ad}){
 
@@ -40,28 +41,33 @@ export default function Card({ad}){
         
 
     return(
-        <div className=" col-md-6 col-lg-4 p-4 gx-4 gy-2  ">
-            <Badge.Ribbon text={text} color="#9052D0" style={{'font-family':'sr'}}>
-                <div className=" card ">
-                    <img src={ad?.photos?.[0].Location} className="card-img-top adimage" style={{"max-height":"200px"}} alt={`${ad?.type}=${ad?.title}-${ad?.action}`} />
         
-                    <div className="card-body py-2 px-3">
-                        <div className=" cardtitle d-flex justify-content-between  align-item-center pt-2 mb-3">
-                            <h6 className='adtitle'>{ad?.title}</h6>
-                            <h6 className='adprice'><span className='pricetag'>NPR</span>{formatPrice(ad?.price)}</h6>
+            <div className=" col-md-6 col-lg-4 p-4 gx-4 gy-2  ">
+                <Link to={`/ad/${ad.slug}`} className="text-decoration-none text-dark">
+                <Badge.Ribbon text={text} color="#9052D0" style={{'font-family':'sr'}}>
+                    <div className=" card ">
+                        <img src={ad?.photos?.[0].Location} className="card-img-top adimage" style={{"max-height":"200px"}} alt={`${ad?.type}=${ad?.title}-${ad?.action}`} />
+            
+                        <div className="card-body py-2 px-3">
+                            <div className=" cardtitle d-flex justify-content-between  align-item-center pt-2 mb-3">
+                                <h6 className='adtitle'>{ad?.title}</h6>
+                                <h6 className='adprice'><span className='pricetag'>NPR</span>{formatPrice(ad?.price)}</h6>
+                            </div>
+                            <p className='features d-flex justify-content-between pb-2 mt-2'>
+                                <span><RiHotelBedLine className='icons'/>{ad.bedrooms}</span>
+                                <span><GiBathtub className='icons' />{ad.bathrooms}</span>
+                                {ad?.parking ? (<span> <AiOutlineCar className='icons'/></span>): (<span><BsSignNoParking className='icons'/></span>)}
+                                </p>
+                            <div>
+                            <p className='adaddress text-center mb-1'><MdLocationOn className='iconsmark mb-1' />{ad?.address}</p>
+                            </div>
+                        
                         </div>
-                        <p className='features d-flex justify-content-between pb-2 mt-2'>
-                            <span><RiHotelBedLine className='icons'/>{ad.bedrooms}</span>
-                            <span><GiBathtub className='icons' />{ad.bathrooms}</span>
-                            {ad?.parking ? (<span> <AiOutlineCar className='icons'/></span>): (<span><BsSignNoParking className='icons'/></span>)}
-                            </p>
-                        <div>
-                        <p className='adaddress text-center mb-1'><MdLocationOn className='iconsmark mb-1' />{ad?.address}</p>
-                        </div>
-                    
                     </div>
-                </div>
-            </Badge.Ribbon>
-    </div>
+                </Badge.Ribbon>
+                </Link>
+            </div>
+      
+    
     )
 } 

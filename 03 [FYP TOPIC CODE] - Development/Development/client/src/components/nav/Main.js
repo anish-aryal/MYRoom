@@ -2,6 +2,7 @@ import { NavLink } from "react-router-dom";
 import { useLocation } from 'react-router-dom';
 import { useAuth } from "../../context/auth.js";
 import { useNavigate } from "react-router-dom";
+import './nav.css'
 
 
 export default function Main() {
@@ -29,6 +30,9 @@ export default function Main() {
         return null;
     }
 
+    const onlylocalnav = [  "/dashboard",  "/create/ad",  "/create/ad/sell/Apartment",  "/create/ad/sell/Room",  "/create/ad/rent/Room",  "/create/ad/rent/Apartment"];
+  
+
     //granting access to loggedin user
     const logged = auth.user !== null && auth.token !=="" && auth.refreshToken !=="";
 
@@ -47,7 +51,10 @@ export default function Main() {
     <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span className="navbar-toggler-icon" />
     </button>
-    <div className="collapse navbar-collapse justify-content-end" id="navbarNav">
+    <div className="collapse navbar-collapse justify-content-between" id="navbarNav">
+    <div className={'navlogo'}>
+
+    </div>
     <div className="justify-content-end  w-50"> 
         <ul className="nav justify-content-between">
                
