@@ -94,7 +94,7 @@ export const uploadImage = async (req, res) => {
 
             ...req.body,
             postedBy: req.user._id,
-            slug: (`${title}/${nanoid(8)}`),
+            slug: slugify(`${title}-${nanoid(8)}`),
             location: {
                 type: "Point",
                 coordinates: [ geography[0]?.longitude, geography[0].latitude ],
@@ -136,5 +136,50 @@ export const uploadImage = async (req, res) => {
     }
     catch(err){
       console.log(err)
+    }
+  }
+
+  export const read = async (req, res) => {
+    try {
+      const ad = await Ad.findOne({ slug: req.params.slug}).populate('postedBy', 'name username email phone, photo.Location');
+      console.log(ad);
+
+
+     
+      // related
+      // const related = await Ad.find({
+      //   _id: { $ne: ad._id },
+      //   action: ad?.action,
+      //   type: ad?.type,
+      //   address: {
+      //     $regex: ad.googleMap?.[0]?.administrativeLevels?.level2long || "",
+      //     $options: "i",
+      //   },
+      // })
+      //   .limit(3)
+      //   .select("-photos.Key -photos.key -photos.ETag -photos.Bucket -googleMap")
+      //   .populate("postedBy", "name username email phone company photo.Location");
+
+      console.log("AD => ", ad);
+
+  
+
+      const related = await Ad.find({
+        _id: { $ne: ad._id },
+        action: ad.action,
+        type: ad.type,
+        location: {
+          $near: {
+            $geometry: {
+              type: "Point",
+              coordinates: [ad.location.coordinates[0], ad.location.coordinates[1]]
+            },
+            $maxDistance: 5000 // 2 km in meters
+          }
+        }
+      });
+      res.json({ ad, related });
+    } catch (err) {
+      console.log(err);
     }
   }

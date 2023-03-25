@@ -15,27 +15,32 @@ export default function Card({ad}){
     const createdAt = ad.createdAt; // assuming that ad.createdAt contains the creation time
     const elapsedTime = new Date() - new Date(createdAt); // time elapsed since createdAt in milliseconds
     let text = '';
-if (elapsedTime < 1000 * 60) { // less than a minute
-  const seconds = Math.floor(elapsedTime / 1000);
-  text = `${seconds} s${seconds !== 1 ? 's' : ''} ago.`;
-} else if (elapsedTime < 1000 * 60 * 60) { // less than an hour
-  const minutes = Math.floor(elapsedTime / (1000 * 60));
-  text = `${minutes} min${minutes !== 1 ? 's' : ''} ago.`;
-} else if (elapsedTime < 1000 * 60 * 60 * 24) { // less than a day
-  const hours = Math.floor(elapsedTime / (1000 * 60 * 60));
-  text = `${hours} hr${hours !== 1 ? 's' : ''} ago.`;
-} else if (elapsedTime < 1000 * 60 * 60 * 24 * 30) { // less than a month
+    if (elapsedTime < 1000 * 60) {
+    // less than a minute
+    const seconds = Math.floor(elapsedTime / 1000);
+    text = `${seconds} s${seconds !== 1 ? "" : ""} ago.`;
+    } else if (elapsedTime < 1000 * 60 * 60) {
+    // less than an hour
+    const minutes = Math.floor(elapsedTime / (1000 * 60));
+    text = `${minutes} min${minutes !== 1 ? "s" : ""} ago.`;
+    } else if (elapsedTime < 1000 * 60 * 60 * 24) {
+    // less than a day
+    const hours = Math.floor(elapsedTime / (1000 * 60 * 60));
+    text = `${hours} hr${hours !== 1 ? "s" : ""} ago.`;
+    } else if (elapsedTime < 1000 * 60 * 60 * 24 * 30) {
+    // less than a month
     const days = Math.floor(elapsedTime / (1000 * 60 * 60 * 24));
-    text = `Hippies (${days} day${days !== 1 ? 's' : ''} ago)`;
-  } else { // a month or more
+    text = `Hippies (${days} day${days !== 1 ? "s" : ""} ago)`;
+    } else {
+    // a month or more
     const months = Math.floor(elapsedTime / (1000 * 60 * 60 * 24 * 30));
-    text = `Hippies (${months} month${months !== 1 ? 's' : ''} ago)`;
-  }
+    text = `Hippies (${months} month${months !== 1 ? "s" : ""} ago)`;
+    }
 
         
 
     return(
-        <div className="  col-lg-4 p-4 gx-4 gy-2  ">
+        <div className=" col-md-6 col-lg-4 p-4 gx-4 gy-2  ">
             <Badge.Ribbon text={text} color="#9052D0" style={{'font-family':'sr'}}>
                 <div className=" card ">
                     <img src={ad?.photos?.[0].Location} className="card-img-top adimage" style={{"max-height":"200px"}} alt={`${ad?.type}=${ad?.title}-${ad?.action}`} />
