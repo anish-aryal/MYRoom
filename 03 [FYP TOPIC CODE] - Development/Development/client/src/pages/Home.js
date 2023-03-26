@@ -33,18 +33,8 @@ export default function Home() {
 
   return (
    
-      <div className="apartmentsForRent container" >
-         <h6 > Apartments for Rent</h6>
-         <div className="container">
-            <div className="row">
-            {apartmentForRent?.map((ad) => (
-            <Card ad={ad} key={ad._id} />
-            ))
-            }
-            </div>
-         </div>
-    
-          <div className="apartmentsForSell" >
+    <div className="container">
+       <div className="apartmentsForSell" >
             <h6 > Apartments for Sell</h6>
             <div className="container">
                 <div className="row">
@@ -67,6 +57,18 @@ export default function Home() {
                 </div>
             </div>
           </div>
+      <div className="apartmentsForRent " >
+         <h6 > Apartments for Rent</h6>
+         <div className="container">
+            <div className="row">
+            {apartmentForRent?.map((ad) => (
+            <Card ad={ad} key={ad._id} />
+            ))
+            }
+            </div>
+         </div>
+        </div>
+
           <div className="roomsForRent" >
             <h6 > Rooms for Rent</h6>
             <div className="container">
@@ -78,8 +80,10 @@ export default function Home() {
                 </div>
             </div>
           </div>
-     </div>
- 
+             
+          <pre>{JSON.stringify(auth.user, null, 2)}</pre>
+  </div>
+
   
 
   );

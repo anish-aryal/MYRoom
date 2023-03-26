@@ -1,9 +1,9 @@
 import Resizer from "react-image-file-resizer";
 import axios from "axios";
 import { Avatar } from "antd";
+import toast from "react-hot-toast";
 
-export default function UploadImage ({ad,setAd}){
-    
+export default function UploadImage({ ad, setAd }) {
   const handleUpload = (e) => {
     let files = e.target.files;
     files = [...files];
@@ -22,6 +22,16 @@ export default function UploadImage ({ad,setAd}){
             0,
             async (uri) => {
               try {
+                toast.promise(
+                  axios.post("/upload-image", {
+                    image: uri,
+                  }),
+                  {
+                    loading: "Uploading image...",
+                    success: "Image uploaded successfully!",
+                    error: "Failed to upload image",
+                  }
+                );
                 const { data } = await axios.post("/upload-image", {
                   image: uri,
                 });
@@ -43,35 +53,38 @@ export default function UploadImage ({ad,setAd}){
       setAd({ ...ad, uploading: false });
     }
   };
-    
+
   const handleDelete = async (file) => {
     const answer = window.confirm("Delete image?");
     if (!answer) return;
-    setAd({ ...ad, uploading: true });
+    setAd({ ...ad, removing: true });
     try {
       const { data } = await axios.post("/remove-image", file);
       if (data?.ok) {
         setAd((prev) => ({
           ...prev,
           photos: prev.photos.filter((p) => p.Key !== file.Key),
-          uploading: false,
+          removing: false,
         }));
+        toast.success("Image deleted successfully");
       }
     } catch (err) {
       console.log(err);
-      setAd({ ...ad, uploading: false });
+      setAd({ ...ad, removing: false });
+      toast.error("Image deletion failed");
     }
   };
-    return(
-        <>
-        <div className="d-flex mt-4">
+
+  return (
+    <>
+      <div className="d-flex mt-4">
         <label className="btn btn-secondary">
           {ad.uploading
             ? "Uploading..."
             : ad.removing
             ? "Removing..."
             : "Upload photos"}
-        
+
           <input
             onChange={handleUpload}
             type="file"
@@ -80,12 +93,18 @@ export default function UploadImage ({ad,setAd}){
             hidden
           />
         </label>
-        {Array.isArray(ad.photos) && ad.photos.map((file,index)=>(
-          <Avatar src={file?.Location} 
-          key = {index}
-          shape="square" size={40} className='ml-2 mr-1' 
-          onClick={() => handleDelete(file)}/>
-        ))}
-      </div> </>
-    )
+        {Array.isArray(ad.photos) &&
+          ad.photos.map((file, index) => (
+            <Avatar
+              src={file?.Location}
+              key={index}
+              shape="square"
+              size={40}
+              className="ml-2 mr-1"
+              onClick={() => handleDelete(file)}
+            />
+          ))}
+      </div>{" "}
+    </>
+  );
 }

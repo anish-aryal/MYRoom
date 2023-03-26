@@ -24,6 +24,10 @@ export default function Main() {
         navigate("/dashboard");
 
     }
+    const navlogo =()=>{
+        navigate("/");
+
+    }
 
     const location = useLocation();
     if (location.pathname === '/login' || location.pathname === '/register') {
@@ -39,10 +43,11 @@ export default function Main() {
     const postAd =()=>{
         if (logged) {
             navigate("/create/ad");
-    }else{
+        }else{
         navigate("/login");
+        }
     }
-}
+  
 
     return (
   <nav className="navbar p-4 navbar-expand-lg bg-body-tertiary">
@@ -51,8 +56,8 @@ export default function Main() {
     <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span className="navbar-toggler-icon" />
     </button>
-    <div className="collapse navbar-collapse justify-content-between" id="navbarNav">
-    <div className={'navlogo'}>
+    <div className={`collapse navbar-collapse ${onlylocalnav.includes(location.pathname) ? 'justify-content-end' : 'justify-content-between'}`} id="navbarNav">
+    <div onClick={navlogo} className={`navlogo ${onlylocalnav.includes(location.pathname) ? 'd-none' : ''}`} >
 
     </div>
     <div className="justify-content-end  w-50"> 
@@ -79,7 +84,7 @@ export default function Main() {
 
                 {logged ?(
                 <>
-                <div className="dropdown">
+                <div className="dropdown pointer">
                 <li
                     className="nav-link pointer dropdown-toggle"
                     data-bs-toggle="dropdown"

@@ -1,13 +1,14 @@
+
 @keyframes slideInFromLeft {
-    0% {
-      transform: translateX(-80%);
-    }
-    100% {
-      transform: translateX(0);
-    }
+  0% {
+    transform: translateX(-80%);
   }
-  
-  /* Apply the animation to the component */
-  .dashside {
-    animation: slideInFromLeft 0.5s ease;
+  100% {
+    transform: translateX(0);
   }
+}
+
+/* Apply the animation to the component */
+.dashside {
+  animation: slideInFromLeft 0.5s ease;
+}

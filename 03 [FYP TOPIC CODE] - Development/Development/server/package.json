@@ -23,6 +23,7 @@
     "node-geocoder": "^4.2.0",
     "nodemon": "^2.0.21",
     "react-hot-toast": "^2.4.0",
+    "react-quill": "^2.0.0",
     "slugify": "^1.6.5"
   }
 }

@@ -2,7 +2,7 @@ import { nanoid } from "nanoid";
 import * as config from "../config.js";
 import slugify from "slugify";
 import Ad from "../models/ad.js";
-import user from "../models/user.js";
+import User from "../models/user.js";
 
 
 export const uploadImage = async (req, res) => {
@@ -65,53 +65,52 @@ export const uploadImage = async (req, res) => {
     }
   };
   export const create = async (req, res) => {
-     try{
-        // console.log(req.body);
-        const {title, description, price, type, address, photos} = req.body;
-        if (!photos?.length){
-              return res.json({error: "No image. Please upload atleast 1 image"});
-        }
-        if (!price){
-            return res.json({error: "Price is required"});
-        }
-        if (!type){
-            return res.json({error: "Type is required"});
-        }
-        if (!address){
-            return res.json({error: "Address is required"});
-        }
-        if (!description){
-            return res.json({error: "Provide some description about the property "});
-        }
-        if (!title){
-            return res.json({error: "Enter the title for the Ad"});
-        }
-
-        const geography = await config.Google_Geocoder.geocode(address);
-        console.log('geography =>', geography);
-
-        const ad = new Ad({
-
-            ...req.body,
-            postedBy: req.user._id,
-            slug: slugify(`${title}-${nanoid(8)}`),
-            location: {
-                type: "Point",
-                coordinates: [ geography[0]?.longitude, geography[0].latitude ],
-            },
-            googleMap: geography,
-
-        }).save();
-        user.password = undefined;
-        user.resetCode = undefined;
-        res.json({ad,user});
-     }
-     catch{
-        res.json({error:"Something went wrong. Try again."});
-        console.log(err);
-
-     }
-  }
+    try {
+      // console.log(req.body);
+      const { title, description, price, type, address, photos } = req.body;
+      if (!photos?.length) {
+        return res.json({ error: "No image. Please upload atleast 1 image" });
+      }
+      if (!price) {
+        return res.json({ error: "Price is required" });
+      }
+      if (!type) {
+        return res.json({ error: "Type is required" });
+      }
+      if (!address) {
+        return res.json({ error: "Address is required" });
+      }
+      if (!description) {
+        return res.json({
+          error: "Provide some description about the property ",
+        });
+      }
+      if (!title) {
+        return res.json({ error: "Enter the title for the Ad" });
+      }
+  
+      const geography = await config.Google_Geocoder.geocode(address);
+      console.log("geography =>", geography);
+  
+      const ad = new Ad({
+        ...req.body,
+        postedBy: req.user._id,
+        slug: slugify(`${title}-${nanoid(8)}`),
+        location: {
+          type: "Point",
+          coordinates: [geography[0]?.longitude, geography[0].latitude],
+        },
+        googleMap: geography,
+      }).save();
+  
+      const user = new User();
+      user.password = undefined;
+      user.resetCode = undefined;
+      res.json({ ad, user });
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   export const ads = async (req, res) => {
     try{
@@ -162,8 +161,6 @@ export const uploadImage = async (req, res) => {
 
       console.log("AD => ", ad);
 
-  
-
       const related = await Ad.find({
         _id: { $ne: ad._id },
         action: ad.action,
@@ -174,7 +171,7 @@ export const uploadImage = async (req, res) => {
               type: "Point",
               coordinates: [ad.location.coordinates[0], ad.location.coordinates[1]]
             },
-            $maxDistance: 5000 // 2 km in meters
+            $maxDistance: 5000 // 5 km in meters
           }
         }
       });
@@ -182,4 +179,37 @@ export const uploadImage = async (req, res) => {
     } catch (err) {
       console.log(err);
     }
+  };
+
+  export const addToWishlist = async (req, res) => {
+    try {
+      const user = await User.findByIdAndUpdate(
+        req.user._id,
+        {
+          $addToSet: { wishlist: req.body.adId },
+        },
+        { new: true }
+      );
+      const { password, resetCode, ...rest } = user._doc;
+      res.json(rest);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  export const removeFromWishlist = async (req, res) => {
+  try {
+    const user = await User.findByIdAndUpdate(
+      req.user._id,
+      {
+        $pull: { wishlist: req.params.adId },
+      },
+      { new: true }
+    );
+    const { password, resetCode, ...rest } = user._doc;
+    res.json(rest);
+  } catch (err) {
+    console.log(err);
   }
+};
+

@@ -1,6 +1,6 @@
 .active{
     background-color: none;
-    color: black;
+    color: #9d52e7;
 }
 .navlogo{
     background-image: url("../../../public/MyRoomLogo.jpg");
@@ -8,4 +8,5 @@
     width:190px;
     background-size: contain;
     background-repeat: no-repeat;
+    cursor: pointer;
 }

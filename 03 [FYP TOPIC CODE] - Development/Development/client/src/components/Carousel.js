@@ -6,7 +6,7 @@ import 'react-image-gallery/styles/css/image-gallery.css';
 import '../pages/user/Ad/Viewad.css'
 
 export default function Carousel ({photos}){
-    const params = useParams();
+    // const params = useParams();
     
     const [originalHeight, setOriginalHeight] = useState(400);
 
@@ -34,15 +34,9 @@ export default function Carousel ({photos}){
       };
 
 
-    
-
-   
-     
- 
-
     return (
       
-            <div className="col-12">
+           
                 <div className="viewimage pt-5">
                     <div className="pb-4" >
                         <ImageGallery className='adimagecontainer' items={photosArray()}                        showNav={true}
@@ -52,7 +46,7 @@ export default function Carousel ({photos}){
                         />
                     </div>
                 </div> 
-            </div>
+        
             
     )
    

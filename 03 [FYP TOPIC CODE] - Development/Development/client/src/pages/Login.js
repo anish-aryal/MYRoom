@@ -3,7 +3,7 @@ import { useAuth } from "../context/auth.js";
 import { useState } from "react";
 import axios from "axios";
 import { Link } from 'react-router-dom';
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import toast from "react-hot-toast";
 
 
@@ -14,7 +14,7 @@ export default function Login() {
   const [loading, setLoading] = useState(false);
   //hooks 
   const navigate = useNavigate();
-
+  const location = useLocation();
   //context access
   const [auth, setAuth] = useAuth();
 
@@ -41,7 +41,7 @@ export default function Login() {
         localStorage.setItem("auth", JSON.stringify(data));
         toast.success("Welcome to MyRoom");
         setLoading(false);
-        navigate("/");
+        location?.state !== null ? navigate(location.state) : navigate("/");
       }
      
     } catch (err) {
@@ -86,7 +86,7 @@ export default function Login() {
                           <div className="mb-3 d-flex flex-column forgotpw">
                             <Link to="/auth/forgot-password">Forgot your password ?</Link>
                           </div>
-                          <button type="button" className="btn login-btn btn-primary">{loading ? "Waiting..." : "Login"}</button>
+                          <button type="submit"  className="btn login-btn btn-primary">{loading ? "Waiting..." : "Login"}</button>
                           <p className='l-register mb-5 pb-3'>Dont have an account yet? <span> <a aria-current="page" href="/register">Register.</a></span></p>
                         </form>
                       </div>
