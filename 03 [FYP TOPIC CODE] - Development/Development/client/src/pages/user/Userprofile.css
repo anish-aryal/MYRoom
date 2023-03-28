@@ -1,0 +1,24 @@
+.emailinput{
+    border: none !important;
+    font-family: 'sr';
+    font-size: 14px;
+    border-radius: 0px !important;
+    padding:10px !important; 
+    outline: none;
+    color: rgb(169, 169, 169);
+}
+.profile-btn{
+
+    border: 2px solid #c4c4c4;
+    border-radius: 5px;
+    color: black;
+    font-size: 16px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+
+ 
+}
+.avatar{
+    cursor: pointer;
+}

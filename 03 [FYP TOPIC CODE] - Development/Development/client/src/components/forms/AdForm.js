@@ -151,7 +151,7 @@ export default function AdForm({action, type})  {
                         </div>
                         
                         <div className="col-12">
-                        <button onClick={handleSubmit} type="button" className={` login-btn ${ad.loading ? "disabled" : ""} `} disabled={ad.loading} >{ad.loading ? "Verifying information.." :"Post Ad"}</button>
+                        <button onClick={handleSubmit} type="button" className="login-btn" disabled={ad.loading} >{ad.loading ? "Verifying information.." :"Post Ad"}</button>
                         </div>
 
                     </form>

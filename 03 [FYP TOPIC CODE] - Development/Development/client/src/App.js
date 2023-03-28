@@ -13,6 +13,7 @@ import ForgotPassword from "../src/pages/auth/ForgotPassword.js";
 import ActivateAccount from "../src/pages/auth/ActivateAccount.js";
 import AccessAccount from "../src/pages/auth/AccessAccount.js";
 import Dashboard from "../src/pages/user/Dashboard.js";
+import UserProfile from "../src/pages/user/UserProfile.js";
 
 import LoggedInRoute from "./components/routes/PrivateRoute";
 import AdCreate from "./pages/user/Ad/Postad";
@@ -24,7 +25,7 @@ import Viewpage from "./pages/user/Ad/Viewpage";
 
 function MainWithRoutes() {
   const location = useLocation();
-  const onlylocalnav = [  "/dashboard",  "/create/ad",  "/create/ad/sell/Apartment",  "/create/ad/sell/Room",  "/create/ad/rent/Room",  "/create/ad/rent/Apartment"];
+  const onlylocalnav = [  "/dashboard",  "/create/ad",  "/create/ad/sell/Apartment",  "/create/ad/sell/Room",  "/create/ad/rent/Room",  "/create/ad/rent/Apartment","/user/profile"];
   
   if (onlylocalnav.includes(location.pathname)) {
     return (
@@ -34,6 +35,7 @@ function MainWithRoutes() {
           <Route path="/" element={<LoggedInRoute />}>
             <Route path="dashboard" element={<Dashboard />} />
             <Route path="create/ad" element={<AdCreate />}/>
+            <Route path="user/profile" element={<UserProfile />}/>
             <Route path="create/ad/sell/Apartment" element={<SellApartment />} />
             <Route path="create/ad/sell/Room" element={<SellRoom />} />
             <Route path="create/ad/rent/Room" element={<RentRoom />} />

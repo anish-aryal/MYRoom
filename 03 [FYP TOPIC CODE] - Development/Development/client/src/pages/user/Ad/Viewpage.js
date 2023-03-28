@@ -6,6 +6,7 @@ import { MdLocationOn } from 'react-icons/md';
 import LikeFeature from "../../../components/Likefeature";
 import Googlemap from "../../../components/Googlemap";
 import React from "react";
+import Card from "../../../components/card";
 
 
 
@@ -16,8 +17,6 @@ export default function Viewpage (){
     const [ad, setAd] = useState();
     const [related, setRelated] = useState();
    
-   
-
     const getAd = async () => {
         try{
             const {data} = await axios.get(`/ad/${params.slug}`);
@@ -42,7 +41,7 @@ export default function Viewpage (){
 
     },[params?.slug]);
 
-    
+   
 
     function formatPrice(x){
         return x?.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
@@ -76,7 +75,7 @@ export default function Viewpage (){
  
 
     return (
-        <div className="container">
+        <div className="container" id="top">
             <div className="row ">
                 <div className="col-9 pl-0 pt-5 pb-3 ">
                
@@ -140,7 +139,25 @@ export default function Viewpage (){
                     {descriptionWithLineBreaks}
                 </div>
             </div>      
+            <div className="row">
+                    <div className="col-12 text-center border-bottom">
+                    <h1>Nearby {ad?.type.toLowerCase()}s for {ad?.action.toLowerCase()}</h1>
+                    </div>
                    
+                    <div className="col-12 d-flex text-center">
+                    {related && related.length > 0 ? (
+                    related.map((ad) => (
+ 
+                            <Card  ad={ad} key={ad._id}
+                             
+                            />
+                
+                     ))
+                    ) : (
+                    <p>Sorry, no ads near this property were found.</p>
+                    )}
+                    </div>
+            </div>
            
                 
                 <pre>

@@ -1,7 +1,17 @@
 import { NavLink } from "react-router-dom";
 import '../nav/sidebar.css'
+import { useNavigate } from "react-router-dom";
+
+
 
 export default function Sidebar(){
+
+  const navigate = useNavigate();
+
+  const sidelogo =()=>{
+    navigate("/");
+
+}
 
     return (
 
@@ -9,7 +19,7 @@ export default function Sidebar(){
   <div className="col-12  d-lg-block align-content-center pe-0 collapse accordion-collapse" id="sidebar">
   <button className="btn d-lg-none ms-lg-0 bg-light  me-5" id="burger" type="button" data-bs-toggle="collapse" data-bs-target="#sidebar" aria-expanded="false" aria-controls="sidebar" aria-label="Toogle Navigation"><i className="bi bi-list" /></button>
     <div className="d-flex justify-content-center p-0">
-    <div className="image-container mt-4"> </div>
+    <div onClick={sidelogo} className="image-container mt-4 pointer"> </div>
       <button className="btn d-lg-none ms-lg-0 bg-light mt-3 ms-4 " id="burger" type="button" data-bs-toggle="collapse" data-bs-target="#sidebar" aria-expanded="false" aria-controls="sidebar" aria-label="Toogle Navigation"><i className="bi bi-list" /></button>
     </div>
     <div>
@@ -30,7 +40,7 @@ export default function Sidebar(){
           <NavLink className="nav-link side-item mt-1 " to="/enquiries"> <i className="bi bi-envelope"></i> Enquiries</NavLink>
     
 
-          <NavLink className="nav-link side-item mt-1" to="/update-profile"> <i className="bi bi-person-fill-gear" />Update Profile</NavLink>
+          <NavLink className="nav-link side-item mt-1" to="/user/profile"> <i className="bi bi-person-fill-gear" />Update Profile</NavLink>
    
    
           <NavLink className="nav-link side-item mt-1" to="/update-password"> <i className="bi bi-fingerprint" /> Password</NavLink>

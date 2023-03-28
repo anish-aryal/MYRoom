@@ -69,7 +69,7 @@ export default function Login() {
                         <form className='pb-5' onSubmit={handleSubmit}>
                           <div className='d-flex mb-4 flex-column'>
                             <label htmlFor="emaillabel" className="form-label " >Email address</label>
-                            <input type="email" className=" emailinput login-input" id="inputemail" placeholder='something@gmail.com' aria-describedby="emailHelp"
+                            <input type="email" className=" loginemailinput login-input" id="inputemail" placeholder='something@gmail.com' aria-describedby="emailHelp"
                               value={email}
                               onChange={(e) => setEmail(e.target.value.toLowerCase())}
                               required

@@ -112,7 +112,7 @@ export default function Register() {
                         </div>
                         <div className='d-flex col-6 mb-4 flex-column'>
                           <label htmlFor="emaillabel" className="form-label" >Email address</label>
-                          <input type="email" className=" emailinput login-input"  id="inputemail" placeholder='something@gmail.com' aria-describedby="EmailAddress" 
+                          <input type="email" className=" registeremailinput login-input"  id="inputemail" placeholder='something@gmail.com' aria-describedby="EmailAddress" 
                           value={email}
                           onChange={(e) => setEmail(e.target.value.toLowerCase())}
                           required

@@ -1,5 +1,5 @@
 import './card.css'
-
+import { useEffect } from 'react';
 import { AiOutlineCar } from 'react-icons/ai';
 import { GiBathtub } from 'react-icons/gi';
 import { BsSignNoParking } from 'react-icons/bs';
@@ -42,14 +42,22 @@ export default function Card({ad}){
       text = `${months} month${months !== 1 ? "s" : ""} ago`;
     }
 
+    useEffect(() => {
+      const body = document.querySelector('#root');
+  
+      body.scrollIntoView({
+          behavior: 'smooth'
+      }, 1000)
+  
+  }, []);
+
     return(
         
-            <div className=" col-md-6 col-lg-4 p-4 gx-4 gy-2  ">
+            <div className=" col-md-6 col-lg-4 p-4 gx-4 gy-2  " id='cardtop'>
                 <Link to={`/ad/${ad.slug}`} className="text-decoration-none text-dark">
                 <Badge.Ribbon text={text} color="#9052D0" style={{'fontFamily':'sr'}}>
                     <div className=" card ">
                         <img src={ad?.photos?.[0].Location} className="card-img-top adimage" style={{"maxHeight":"200px"}} alt={`${ad?.type}=${ad?.title}-${ad?.action}`} />
-            
                         <div className="card-body py-2 px-3">
                             <div className=" cardtitle d-flex justify-content-between  align-item-center pt-2 mb-3">
                                 <h6 className='adtitle'>{ad?.title}</h6>

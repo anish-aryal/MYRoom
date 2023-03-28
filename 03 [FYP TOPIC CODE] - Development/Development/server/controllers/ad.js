@@ -116,19 +116,19 @@ export const uploadImage = async (req, res) => {
     try{
       const apartmentForSell = await Ad.find({action: "Sell", type:"Apartment"})
       .select("-googleMap -location -photo.Key -photo.key -photo.ETag ")
-      .sort({createdAt: -1}).limit(12).exec();
+      .sort({createdAt: -1}).limit(6).exec();
 
       const apartmentForRent = await Ad.find({action: "Rent", type:"Apartment"})
       .select("-googleMap -location -photo.Key -photo.key -photo.ETag ")
-      .sort({createdAt: -1}).limit(12).exec();
+      .sort({createdAt: -1}).limit(6).exec();
 
       const roomForRent = await Ad.find({action: "Rent", type:"Room"})
       .select("-googleMap -location -photo.Key -photo.key -photo.ETag ")
-      .sort({createdAt: -1}).limit(12).exec();
+      .sort({createdAt: -1}).limit(6).exec();
 
       const roomForSell = await Ad.find({action: "Sell", type:"Room"})
       .select("-googleMap -location -photo.Key -photo.key -photo.ETag ")
-      .sort({createdAt: -1}).limit(12).exec();
+      .sort({createdAt: -1}).limit(6).exec();
 
 
       res.json({apartmentForSell, apartmentForRent, roomForRent, roomForSell})
@@ -143,24 +143,6 @@ export const uploadImage = async (req, res) => {
       const ad = await Ad.findOne({ slug: req.params.slug}).populate('postedBy', 'name username email phone, photo.Location');
       console.log(ad);
 
-
-     
-      // related
-      // const related = await Ad.find({
-      //   _id: { $ne: ad._id },
-      //   action: ad?.action,
-      //   type: ad?.type,
-      //   address: {
-      //     $regex: ad.googleMap?.[0]?.administrativeLevels?.level2long || "",
-      //     $options: "i",
-      //   },
-      // })
-      //   .limit(3)
-      //   .select("-photos.Key -photos.key -photos.ETag -photos.Bucket -googleMap")
-      //   .populate("postedBy", "name username email phone company photo.Location");
-
-      console.log("AD => ", ad);
-
       const related = await Ad.find({
         _id: { $ne: ad._id },
         action: ad.action,
@@ -174,7 +156,7 @@ export const uploadImage = async (req, res) => {
             $maxDistance: 5000 // 5 km in meters
           }
         }
-      });
+      }).limit(3);
       res.json({ ad, related });
     } catch (err) {
       console.log(err);

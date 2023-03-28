@@ -34,7 +34,7 @@ export default function Main() {
         return null;
     }
 
-    const onlylocalnav = [  "/dashboard",  "/create/ad",  "/create/ad/sell/Apartment",  "/create/ad/sell/Room",  "/create/ad/rent/Room",  "/create/ad/rent/Apartment"];
+    const onlylocalnav = [  "/dashboard",  "/create/ad",  "/create/ad/sell/Apartment",  "/create/ad/sell/Room",  "/create/ad/rent/Room",  "/create/ad/rent/Apartment","/user/profile"];
   
 
     //granting access to loggedin user
