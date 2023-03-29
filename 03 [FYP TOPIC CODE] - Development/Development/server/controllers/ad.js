@@ -3,6 +3,7 @@ import * as config from "../config.js";
 import slugify from "slugify";
 import Ad from "../models/ad.js";
 import User from "../models/user.js";
+import {emailTemplate} from '../helpers/email.js';
 
 
 export const uploadImage = async (req, res) => {
@@ -116,18 +117,22 @@ export const uploadImage = async (req, res) => {
     try{
       const apartmentForSell = await Ad.find({action: "Sell", type:"Apartment"})
       .select("-googleMap -location -photo.Key -photo.key -photo.ETag ")
+      .populate("postedBy", "firstname username email phone company")
       .sort({createdAt: -1}).limit(6).exec();
 
       const apartmentForRent = await Ad.find({action: "Rent", type:"Apartment"})
       .select("-googleMap -location -photo.Key -photo.key -photo.ETag ")
+      .populate("postedBy", "firstname username email phone company")
       .sort({createdAt: -1}).limit(6).exec();
 
       const roomForRent = await Ad.find({action: "Rent", type:"Room"})
       .select("-googleMap -location -photo.Key -photo.key -photo.ETag ")
+      .populate("postedBy", "firstname username email phone company")
       .sort({createdAt: -1}).limit(6).exec();
 
       const roomForSell = await Ad.find({action: "Sell", type:"Room"})
       .select("-googleMap -location -photo.Key -photo.key -photo.ETag ")
+      .populate("postedBy", "firstname username email phone company")
       .sort({createdAt: -1}).limit(6).exec();
 
 
@@ -140,7 +145,9 @@ export const uploadImage = async (req, res) => {
 
   export const read = async (req, res) => {
     try {
-      const ad = await Ad.findOne({ slug: req.params.slug}).populate('postedBy', 'name username email phone, photo.Location');
+      const ad = await Ad.findOne({ slug: req.params.slug}) 
+      .select("-photos.Key -photos.key -photos.ETag -photos.Bucket -googleMap")
+      .populate('postedBy', 'firstname lastname username email phone, photo.Location');
       console.log(ad);
 
       const related = await Ad.find({
@@ -156,7 +163,9 @@ export const uploadImage = async (req, res) => {
             $maxDistance: 5000 // 5 km in meters
           }
         }
-      }).limit(3);
+      }).limit(3)
+      .select("-photos.Key -photos.key -photos.ETag -photos.Bucket -googleMap")
+      .populate("postedBy", "username  email phone company photo.Location");
       res.json({ ad, related });
     } catch (err) {
       console.log(err);
@@ -195,3 +204,69 @@ export const uploadImage = async (req, res) => {
   }
 };
 
+export const contactSeller= async (req, res) => {
+  try {
+    const { firstname, email, phone, message,adId } = req.body;
+    const ad = await Ad.findById(adId).populate('postedBy','email');
+   const user = await User.findOneAndUpdate(
+      { email },
+      {
+        $addToSet: { enquiredProperties: adId },
+      }
+    );
+
+    if(!user){
+      return res.json({error: "User not found"})
+    }else{
+      
+      config.AWSSES.sendEmail(
+        emailTemplate(
+          ad.postedBy.email,
+          `
+          <p>You have recieved an enquiry from ${firstname} about the ${ad.type} you listed in MyRoom for ${ad.action}</p>
+          <a href="${config.CLIENT_URL}/ad/${ad.slug}">View Enquired Property</a>
+
+          <h3>Enquiry Details</h3>
+          <p>Firstname: ${firstname}</p>
+          <p>Email: ${email}</p>
+          <p>Phone: ${phone}</p>
+          <p>Message: <strong>${message}</stong></p>
+      `,
+          email,
+          `New Enquiry for ${ad.title}`
+        ),
+        (err, data) => {
+          if (err) {
+            return res.json({ error: "Provide a valid email address" });
+          } else {
+            return res.json({ sucess: "Check your email to complete the registeration" });
+          }
+        }
+      );
+    }
+
+ 
+  } catch (err) {
+    console.log(err);
+  }
+}
+
+export const  postedByUser = async (req, res) => {
+  try {
+    const perPage=4;
+    const page = req.params.page ? req.params.page : 1;
+    const total = await Ad.find({ postedBy: req.user._id }).countDocuments();
+    const ads = await Ad.find({ postedBy: req.user._id })
+      .select("-googleMap -location -photo.Key -photo.key -photo.ETag photo ")
+      .populate("postedBy", "firstname username email phone")
+      .sort({ createdAt: -1 })
+      // .skip((perPage * page) - perPage)
+      .skip((page-1)* perPage )
+      .limit(perPage)
+      .sort({ createdAt: -1 })
+
+    res.json({ ads, total: total.length });
+  } catch (err) {
+    console.log(err);
+  }
+}

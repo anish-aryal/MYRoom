@@ -7,6 +7,7 @@ import LikeFeature from "../../../components/Likefeature";
 import Googlemap from "../../../components/Googlemap";
 import React from "react";
 import Card from "../../../components/card";
+import ContactForm from "./ContactForm";
 
 
 
@@ -16,7 +17,7 @@ export default function Viewpage (){
     
     const [ad, setAd] = useState();
     const [related, setRelated] = useState();
-   
+  
     const getAd = async () => {
         try{
             const {data} = await axios.get(`/ad/${params.slug}`);
@@ -50,27 +51,31 @@ export default function Viewpage (){
     const createdAt = ad?.createdAt; // assuming that ad.createdAt contains the creation time
     const elapsedTime = new Date() - new Date(createdAt); // time elapsed since createdAt in milliseconds
     let text = '';
-    if (elapsedTime < 1000 * 60) {
-    // less than a minute
-    const milliseconds = Math.floor(elapsedTime);
-    text = `${milliseconds} s${milliseconds !== 1 ? "" : ""} ago.`;
+    if (elapsedTime < 1000) {
+      // less than a second
+      const milliseconds = Math.floor(elapsedTime);
+      text = `${milliseconds} ms${milliseconds !== 1 ? "" : ""} ago.`;
+    } else if (elapsedTime < 1000 * 60) {
+      // less than a minute
+      const seconds = Math.floor(elapsedTime / 1000);
+      text = `${seconds} s${seconds !== 1 ? "" : ""} ago.`;
     } else if (elapsedTime < 1000 * 60 * 60) {
-    // less than an hour
-    const minutes = Math.floor(elapsedTime / (1000 * 60));
-    text = `${minutes} min${minutes !== 1 ? "s" : ""} ago.`;
+      // less than an hour
+      const minutes = Math.floor(elapsedTime / (1000 * 60));
+      text = `${minutes} min${minutes !== 1 ? "s" : ""} ago.`;
     } else if (elapsedTime < 1000 * 60 * 60 * 24) {
-    // less than a day
-    const hours = Math.floor(elapsedTime / (1000 * 60 * 60));
-    text = `${hours} hr${hours !== 1 ? "s" : ""} ago.`;
+      // less than a day
+      const hours = Math.floor(elapsedTime / (1000 * 60 * 60));
+      text = `${hours} hr${hours !== 1 ? "s" : ""} ago.`;
     } else if (elapsedTime < 1000 * 60 * 60 * 24 * 30) {
-    // less than a month
-    const days = Math.floor(elapsedTime / (1000 * 60 * 60 * 24));
-    text = `${days} day${days !== 1 ? "s" : ""} ago`;
+      // less than a month
+      const days = Math.floor(elapsedTime / (1000 * 60 * 60 * 24));
+      text = `${days} day${days !== 1 ? "s" : ""} ago`;
     } else {
-    // a month or more
-    const months = Math.floor(elapsedTime / (1000 * 60 * 60 * 24 * 30));
-    text = `${months} month${months !== 1 ? "s" : ""} ago`;
-    }  
+      // a month or more
+      const months = Math.floor(elapsedTime / (1000 * 60 * 60 * 24 * 30));
+      text = `${months} month${months !== 1 ? "s" : ""} ago`;
+    }
  
  
 
@@ -80,9 +85,9 @@ export default function Viewpage (){
                 <div className="col-9 pl-0 pt-5 pb-3 ">
                
                     <div className="mb-3">
-                    <span className="typeofad sl">{ad?.type} for {ad?.action} / Posted by: <span className="viewpostedby">{ad?.postedBy.username}</span>   </span>
+                    <span className="typeofad sl">{ad?.type} for {ad?.action} / Posted by: <span className="viewpostedby">{ad?.postedBy.firstname}  </span>   </span>
                     </div>
-                   
+                  
                     <p className="viewTitle  d-flex flex-column">{ad?.title}
                     <span className="viewAddress "> <MdLocationOn className="viewAddressMark"/> {ad?.address}</span>
                     </p>
@@ -103,23 +108,7 @@ export default function Viewpage (){
                         
                 </div>
                 <div className=" col-12 col-lg-4  contactseller pb-5">       
-                    <div className=" pt-5">
-                        <h1 className="sm text-center">Contact Seller.</h1>
-                    </div>
-                    <form className="pt-5">
-                        <div className='d-flex mb-4 flex-column'>
-                            <label htmlFor="emaillabel" className="form-label " >Email address</label>
-                            <input type="email" className=" emailinput login-input" id="inputemail" placeholder='something@gmail.com' aria-describedby="emailHelp"
-                                required
-                                autoFocus />
-                        </div>
-                        <div className="mb-4 d-flex flex-column">
-                            <label htmlFor="passwordlabel" className="form-label">Password<span>*</span></label>
-                            <input type="password" className=" password login-input" placeholder='********' id="passwordinput"
-                            required />
-                        </div>
-                        <button type="button" className="btn login-btn btn-primary">Send Email</button>
-                    </form>     
+                  <ContactForm ad={ad}/>
                 </div>
             </div>
             <div className="row">

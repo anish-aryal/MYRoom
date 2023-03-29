@@ -3,6 +3,7 @@ import { AuthProvider } from "./context/auth";
 import Main from "./components/nav/Main";
 // import Cards from './components/Card';
 import { Toaster } from "react-hot-toast";
+import UpdatePassword from "./pages/user/UpdatePassword";
 
 import "./index.css";
 
@@ -25,7 +26,7 @@ import Viewpage from "./pages/user/Ad/Viewpage";
 
 function MainWithRoutes() {
   const location = useLocation();
-  const onlylocalnav = [  "/dashboard",  "/create/ad",  "/create/ad/sell/Apartment",  "/create/ad/sell/Room",  "/create/ad/rent/Room",  "/create/ad/rent/Apartment","/user/profile"];
+  const onlylocalnav = [  "/dashboard",  "/create/ad",  "/create/ad/sell/Apartment",  "/create/ad/sell/Room",  "/create/ad/rent/Room",  "/create/ad/rent/Apartment","/user/profile",'/update-password'];
   
   if (onlylocalnav.includes(location.pathname)) {
     return (
@@ -36,6 +37,7 @@ function MainWithRoutes() {
             <Route path="dashboard" element={<Dashboard />} />
             <Route path="create/ad" element={<AdCreate />}/>
             <Route path="user/profile" element={<UserProfile />}/>
+            <Route path="update-password" element={<UpdatePassword />}/>
             <Route path="create/ad/sell/Apartment" element={<SellApartment />} />
             <Route path="create/ad/sell/Room" element={<SellRoom />} />
             <Route path="create/ad/rent/Room" element={<RentRoom />} />

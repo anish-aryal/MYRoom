@@ -74,7 +74,7 @@ export const preRegister = async (req, res) => {
         if (err) {
           return res.json({ error: "Provide a valid email address" });
         } else {
-          return res.json({ error: "Check email to complete registration" });
+          return res.json({ sucess: "Check your email to complete the registeration" });
         }
       }
     );
@@ -122,6 +122,8 @@ export const login = async (req, res)=>{
 
         //find user by email
         const user = await User.findOne({email});
+
+
         if (!user){
             return res.json ({error: "Could not find the user with provided email"});
         }

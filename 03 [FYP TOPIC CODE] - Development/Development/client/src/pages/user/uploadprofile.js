@@ -79,14 +79,12 @@ export default function UploadProfile({ photo, setPhoto, uploading, setUploading
       <div className="d-flex mt-4">
         <label className="btn profile-btn text-center">
            <span style={{"font-size":"24px"}}> <FcOldTimeCamera /> </span> Profile   
-
           <input
             onChange={handleUpload}
             type="file"
             accept="image/*"
             hidden
             className="text-center"
-            style={{ background: `url(${photo?.Location})` }}
            
           />
         </label>
