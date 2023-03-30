@@ -11,7 +11,7 @@ router.post("/remove-image", requireSignin, ad.removeImage);
 router.post("/ad", requireSignin, ad.create);
 router.post("/contact-seller", requireSignin, ad.contactSeller);
 router.get("/ads", ad.ads);
-router.get("/postedbyuser",requireSignin, ad.postedByUser);
+router.get("/postedByUser",requireSignin, ad.postedByUser);
 router.get("/ad/:slug", ad.read);
 router.post("/wishlist", requireSignin, ad.addToWishlist);
 router.delete("/wishlist/:adId", requireSignin, ad.removeFromWishlist);

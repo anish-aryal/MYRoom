@@ -251,22 +251,80 @@ export const contactSeller= async (req, res) => {
   }
 }
 
-export const  postedByUser = async (req, res) => {
-  try {
-    const perPage=4;
-    const page = req.params.page ? req.params.page : 1;
-    const total = await Ad.find({ postedBy: req.user._id }).countDocuments();
-    const ads = await Ad.find({ postedBy: req.user._id })
-      .select("-googleMap -location -photo.Key -photo.key -photo.ETag photo ")
-      .populate("postedBy", "firstname username email phone")
-      .sort({ createdAt: -1 })
-      // .skip((perPage * page) - perPage)
-      .skip((page-1)* perPage )
-      .limit(perPage)
-      .sort({ createdAt: -1 })
+// export const  postedByUser = async (req, res) => {
+//   try {
+//     const total = await Ad.find({ postedBy: req.user._id }).countDocuments();
+//     const ads = await Ad.find({ postedBy: req.user._id })
+//       .populate("postedBy", "firstname username email phone")
+//       .sort({ createdAt: -1 })
+     
 
-    res.json({ ads, total: total.length });
-  } catch (err) {
-    console.log(err);
-  }
-}
+//     res.json({ ads, total});
+//   } catch (err) {
+//     console.log(err);
+//   }
+// }
+
+
+ // const perPage=12;
+    // const page = req.params.page ? req.params.page : 1;
+    // const total = await Ad.find({ postedBy: req.user._id }).countDocuments();
+ // .skip((perPage * page) - perPage)
+      // .skip((page-1)* perPage )
+      // .limit(perPage)
+
+      export const postedByUser = async (req, res) => {
+        try {
+
+          const page = parseInt(req.query.page) || 1;
+          const limit = 3;
+          const skip = (page - 1) * limit;
+
+          const total = await Ad.find({ postedBy: req.user._id }).countDocuments();
+      
+          const apartmentSell = await Ad.find({
+            postedBy: req.user._id,
+            type: "Apartment",
+            action: "Sell"
+          })
+            .populate("postedBy", "firstname username email phone")
+            .sort({ createdAt: -1 })
+            .skip(skip)
+            .limit(3);
+      
+          const apartmentRent = await Ad.find({
+            postedBy: req.user._id,
+            type: "Apartment",
+            action: "Rent"
+          })
+            .populate("postedBy", "firstname username email phone")
+            .sort({ createdAt: -1 })
+            .skip(skip)
+            .limit(3);
+      
+          const roomSell = await Ad.find({
+            postedBy: req.user._id,
+            type: "Room",
+            action: "Sell"
+          })
+            .populate("postedBy", "firstname username email phone")
+            .sort({ createdAt: -1 })
+            .skip(skip)
+            .limit(3);
+      
+          const roomRent = await Ad.find({
+            postedBy: req.user._id,
+            type: "Room",
+            action: "Rent"
+          })
+            .populate("postedBy", "firstname username email phone")
+            .sort({ createdAt: -1 })
+            .skip(skip)
+            .limit(3);
+      
+          res.json({ apartmentSell, apartmentRent, roomSell, roomRent, total });
+        } catch (err) {
+          console.log(err);
+        }
+      };
+      

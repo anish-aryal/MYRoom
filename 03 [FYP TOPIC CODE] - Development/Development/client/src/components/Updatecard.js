@@ -8,7 +8,7 @@ import { MdLocationOn } from 'react-icons/md';
 import { Badge } from 'antd';
 import { Link } from 'react-router-dom';
 
-export default function Card({ad}){
+export default function Updatecard({ad}){
 
     function formatPrice(x){
         return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
@@ -52,12 +52,11 @@ export default function Card({ad}){
   }, []);
 
     return(
-        
-            <div className=" col-md-6 col-lg-4 p-4 gx-4 gy-2  " id='cardtop'>
-                <Link to={`/ad/${ad.slug}`} className="text-decoration-none text-dark">
+            <div className=" col-md-6 col-lg-4 p-4 gx-4 gy-2  " id='cardtop' key={ad._id}>
+                <Link to={`/update/ad/${ad.slug}`} className="text-decoration-none text-dark">
                 <Badge.Ribbon text={text} color="#9052D0" style={{'fontFamily':'sr'}}>
                     <div className=" card ">
-                        <img src={ad?.photos?.[0].Location} className="card-img-top adimage" style={{"maxHeight":"200px", "height":"200px"}} alt={`${ad?.type}=${ad?.title}-${ad?.action}`} />
+                        <img src={ad?.photos?.[0].Location} className="card-img-top adimage" style={{"max-eight":"200px", "height":"200px"}} alt={`${ad?.type}=${ad?.title}-${ad?.action}`} />
                         <div className="card-body py-2 px-3">
                             <div className=" cardtitle d-flex justify-content-between  align-item-center pt-2 mb-3">
                                 <h6 className='adtitle'>{ad?.title}</h6>

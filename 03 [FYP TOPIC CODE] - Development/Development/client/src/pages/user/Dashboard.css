@@ -9,6 +9,15 @@
 }
 
 /* Apply the animation to the component */
-.dashside {
-  animation: slideInFromLeft 0.5s ease;
+
+.dashboard-banner{
+  background: linear-gradient(90deg, rgba(111, 27, 197, 0.05) 100%, rgba(164, 98, 233, 0.9) 90%);
+
+  position: sticky;
+}
+
+.box{
+  font-family: 'sm';
+  font-size: 12px;
+  border: 1px solid rgba(144, 82, 208, 0.2);
 }

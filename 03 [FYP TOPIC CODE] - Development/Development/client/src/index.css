@@ -8,6 +8,13 @@ body{
     color: black;
 
 }
+.sticky{
+    position: fixed;
+    top: 0;
+}
+.dashside {
+  animation: slideInFromLeft 0.5s ease;
+}
 .pointer{
     cursor: pointer;
 }
