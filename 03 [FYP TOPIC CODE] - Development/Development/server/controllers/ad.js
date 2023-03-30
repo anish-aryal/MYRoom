@@ -276,11 +276,25 @@ export const contactSeller= async (req, res) => {
       export const postedByUser = async (req, res) => {
         try {
 
-          const page = parseInt(req.query.page) || 1;
+          const page = req.params.page ? req.params.page : 1;
           const limit = 3;
           const skip = (page - 1) * limit;
 
-          const total = await Ad.find({ postedBy: req.user._id }).countDocuments();
+          const totalapartmentsell = await Ad.find({ postedBy: req.user._id,type: "Apartment",
+          action: "Sell"  }).countDocuments();
+          console.log(totalapartmentsell);
+
+          const totalroomsell = await Ad.find({ postedBy: req.user._id,type: "Room",
+          action: "Sell"  }).countDocuments();
+          console.log(totalroomsell);
+
+          const totalroomrent = await Ad.find({ postedBy: req.user._id,type: "Room",
+          action: "Rent"  }).countDocuments();
+          console.log(totalroomrent);
+
+          const totalapartmentrent = await Ad.find({ postedBy: req.user._id,type: "Apartment",
+          action: "Rent"  }).countDocuments();
+          console.log(totalapartmentrent);
       
           const apartmentSell = await Ad.find({
             postedBy: req.user._id,
@@ -322,7 +336,7 @@ export const contactSeller= async (req, res) => {
             .skip(skip)
             .limit(3);
       
-          res.json({ apartmentSell, apartmentRent, roomSell, roomRent, total });
+          res.json({ apartmentSell, apartmentRent, roomSell, roomRent, totalapartmentsell,totalroomsell,totalroomrent,totalapartmentrent });
         } catch (err) {
           console.log(err);
         }
