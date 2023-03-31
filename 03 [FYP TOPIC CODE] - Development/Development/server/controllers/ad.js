@@ -414,5 +414,38 @@ export const wishlist = async (req, res) => {
     
   }
 }
+
+export const remove = async (req, res) => {
+  try {
+    const ad = await Ad.findById(req.params._id);
+    const owner = req.user._id == ad?.postedBy;
+    if (!owner) {
+      return res.json({ error: "Permission denied" });
+    } else {
+      
+      ad?.photos?.forEach((photo) => {
+        const key = photo.key;
+        const params = {
+          Bucket: 'myroom-bucket',
+          Key: key
+        };
+        config.AWSS3.deleteObject(params, (err, data) => {
+          if (err) {
+            console.log(err);
+          } else {
+            console.log(`Deleted image with key: ${key}`);
+          }
+        });
+      });
+      await Ad.findByIdAndRemove(ad._id);
+      res.json({ ok: true });
+    }
+  } catch (err) {
+    console.log(err);
+  }
+}
+
+
+
     
       

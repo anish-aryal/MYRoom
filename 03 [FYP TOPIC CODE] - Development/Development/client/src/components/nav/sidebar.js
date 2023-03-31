@@ -16,7 +16,7 @@ export default function Sidebar(){
     return (
 
 <div className="sticky">
-  <div className="col-11  d-lg-block align-content-center pe-0 collapse accordion-collapse" id="sidebar">
+  <div className="col-12  d-lg-block align-content-center pe-0 collapse accordion-collapse" id="sidebar">
   <button className="btn d-lg-none ms-lg-0 bg-light  me-5" id="burger" type="button" data-bs-toggle="collapse" data-bs-target="#sidebar" aria-expanded="false" aria-controls="sidebar" aria-label="Toogle Navigation"><i className="bi bi-list" /></button>
     <div className="d-flex justify-content-center p-0">
     <div onClick={sidelogo} className="image-container mt-4 pointer"> </div>

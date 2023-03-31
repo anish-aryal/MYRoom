@@ -18,7 +18,7 @@ export default function Enquiries() {
   
     const fetchWishlist = async () => {
       try {
-        const { data } = await axios.get(`/wishlist`);
+        const { data } = await axios.get(`/enquiredByUser`);
         setAds(data);
         setLoading(false);
       } catch (err) {
@@ -41,14 +41,14 @@ export default function Enquiries() {
     <div className="container-fluid">
         <div className="row">
             <div className ="col-3 col-lg-2  p-0 justify-content-center"> <div><Sidebar /></div></div>
-                <div className ="col-9 col-lg-10 pl-0 pr-5">
+                <div className ="col-9 col-lg-10 pl-0 pr-4">
                 {ads?.length > 0 ?(      <div className="row">
                     {ads?.map((ad) => (
                         <>
                         <Card ad={ad} key={ad._id} />
                         </>
                     ))}
-                    </div>) :"No Ads added to wishlist yet"}
+                    </div>) :"You have not yet enquired any properties."}
                 </div>
                 
 

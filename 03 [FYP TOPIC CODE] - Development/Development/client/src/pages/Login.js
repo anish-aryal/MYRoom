@@ -23,7 +23,6 @@ export default function Login() {
   const handleSubmit = async (e) => {
     e.preventDefault();
    try {
-      console.log(email, password);
    
       const {data} = await axios.post('/login', {
         email,
@@ -41,7 +40,13 @@ export default function Login() {
         localStorage.setItem("auth", JSON.stringify(data));
         toast.success("Welcome to MyRoom");
         setLoading(false);
-        location?.state !== null ? navigate(location.state) : navigate("/");
+        console.log()
+        if (data?.user?.role.includes("Admin")) {
+          navigate("/dashboard"); // Redirect to the dashboard
+        } else {
+          location?.state !== null ? navigate(location.state) : navigate("/"); // Redirect to the home page
+        }
+        // location?.state !== null ? navigate(location.state) : navigate("/");
       }
      
     } catch (err) {

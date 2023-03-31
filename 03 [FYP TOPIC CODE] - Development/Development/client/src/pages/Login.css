@@ -42,8 +42,31 @@ p{
     border-radius: 0;
     padding: 10px;
     outline: none;
+    font-family: 'sm';
 
 }
+
+.deletebtn {
+    border: 1px solid #ff0000;
+    color: #ff0000;
+    border-radius: 0;
+    display: block;
+    background: linear-gradient(to right, #ff0000 50%, white 50%);
+    background-size: 200% 100%;
+    background-position: right bottom;
+    transition: all .2s ease-out;
+    outline: none;
+  }
+  
+  .deletebtn:hover {
+    background-position: left bottom;
+    color: white;
+  }
+  
+  .deletebtn:focus {
+    /* Other button focus styles */
+    outline: none;
+  }
 .login-btn:focus {
     /* Other button focus styles */
     outline: none;

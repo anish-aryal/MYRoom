@@ -42,12 +42,13 @@ export default function Wishlist() {
         <div className="row">
             <div className ="col-3 col-lg-2  p-0 justify-content-center"> <div><Sidebar /></div></div>
                 <div className ="col-9 col-lg-10 pl-0 pr-5">
-                {ads?.length > 0 ?(      <div className="row">
-                    {ads?.map((ad) => (
-                        <>
-                        <Card ad={ad} key={ad._id} />
-                        </>
-                    ))}
+                {ads?.length > 0 ?(     
+                     <div className="row">
+                        {ads?.map((ad) => (
+                            <>
+                            <Card ad={ad} key={ad._id} />
+                            </>
+                        ))}
                     </div>) :"No Ads added to wishlist yet"}
                 </div>
                 

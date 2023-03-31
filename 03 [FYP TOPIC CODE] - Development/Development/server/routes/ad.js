@@ -10,6 +10,7 @@ router.post("/upload-image", requireSignin, ad.uploadImage);
 router.post("/remove-image", requireSignin, ad.removeImage);
 router.post("/ad", requireSignin, ad.create);
 router.put("/ad/:_id", requireSignin, ad.update);
+router.delete("/ad/:_id", requireSignin, ad.remove);
 router.post("/contact-seller", requireSignin, ad.contactSeller);
 router.get("/ads", ad.ads);
 router.get("/postedByUser/:page",requireSignin, ad.postedByUser);

@@ -43,7 +43,7 @@ export default function UpdatePassword() {
     <div className="container-fluid">
         <div className="row">
             <div className ="col-3 col-lg-2 p-0 justify-content-center"> <div ><Sidebar /></div></div>
-            <div className ="col-9 col-lg-10 pl-0 pr-5">
+            <div className ="col-9 col-lg-10 pl-0 pr-4">
         
                 <div className="container">
                     <div className="row justify-content-center">

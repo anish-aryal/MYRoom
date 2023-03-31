@@ -5,8 +5,10 @@ import User from '../models/user.js';
 import { nanoid } from "nanoid";
 import validator from 'email-validator';
 import {emailTemplate} from '../helpers/email.js';
+import Ad from '../models/ad.js';
 
-const tokenAndUserResponse = (req,res,user) =>{
+
+const tokenAndUserResponse = (req,res,user,role) =>{
     const token = jwt.sign({ _id: user._id}, config.JWT_SECRET,{
         expiresIn: '1h',
     });
@@ -21,6 +23,7 @@ const tokenAndUserResponse = (req,res,user) =>{
         token,
         refreshToken,
         user,
+        role,
     });
 };
 
@@ -132,7 +135,8 @@ export const login = async (req, res)=>{
         if(!match){
             return res.json({error: 'Wrong password. Please try again'});
         }
-        tokenAndUserResponse(req, res,user);
+        console.log(user.role)
+        tokenAndUserResponse(req, res, user, user.role);
     }
     catch(err){
         return res.json({ error: "Something went wrong. Try again."})
@@ -293,3 +297,34 @@ export const updateProfile = async (req, res) => {
       }
     }
   };
+
+  export const noOfUserAd = async (req, res) => {
+    try {
+      const noOfUserAd = Ad.find({postedBy: req.params._id}).select('_id');
+      res.json(noOfUserAd);
+    } catch (err) {
+      console.log(err);
+      
+    }
+  }
+  export const user = async (req, res) => {
+    try {
+      const user = await User.findOne({username: req.params.username}).select("-password -resetCode -role -enquiredProperties -wishlist ");
+      const ads = await Ad.find({postedBy: user._id});
+      res.json({user,ads});
+    } catch (err) {
+      console.log(err);
+      
+    }
+  }
+
+  export const userList = async (req, res) => {
+    try {
+        const userList = await User.find({role:'User'}).select("-password -resetCode -role -enquiredProperties -wishlist ");
+        res.json(userList)
+    } catch (err) {
+      console.log(err);
+      
+    }
+  }
+

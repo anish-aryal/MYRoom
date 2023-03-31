@@ -26,7 +26,8 @@ export default function UpdateAd({action, type})  {
         action,
         title:'',
         description:'',
-        loading:false})
+        loading:false,
+        removing:false,})
 
       const params = useParams();
       const [loaded , setLoaded] = useState(false);
@@ -48,12 +49,40 @@ export default function UpdateAd({action, type})  {
         }
       }
 
+      const handleDelete = async () => {
+        const answer = window.confirm("Delete this ad ?");
+        if (!answer) return;
+        else{
+          try{
+            setAd({...ad, removing:true});
+    
+            const {data} = await axios.delete(`/ad/${ad._id}`);
+            if(data?.error){
+              toast.error(data.error);
+              setAd({...ad, removing:false});
+            }
+            else{
+              toast.success('Your ad has been deleted successfully');
+              setAd({...ad, removing:false});
+              navigate ("/dashboard");
+            }
+    
+          }
+          catch (err){
+            console.log(err)
+            setAd({...ad, removing:false});
+          }
+        }
+      
+
+      }
+
 
     const handleSubmit = async () => {
       try{
         setAd({...ad, loading:true});
 
-        const {data} = await axios.put(`/ad/${ad._id}`, ad);
+        const {data} = await axios.put(`/ad/${ad._id}`,ad);
         if(data?.error){
           toast.error(data.error);
           setAd({...ad, loading:false});
@@ -80,7 +109,7 @@ export default function UpdateAd({action, type})  {
           <div className='row'>
         
             </div>
-            <div className="col-12 login-form pt-3 mb-5">
+            <div className="col-12 login-form pt-3 mb-4">
            
                 <div className='col-12  '>
                 
@@ -175,9 +204,18 @@ export default function UpdateAd({action, type})  {
                             />
                         </div>
                         
-                        <div className="col-12">
-                        <button onClick={handleSubmit} type="button" className="login-btn" disabled={ad.loading} >{ad.loading ? "Verifying information.." :"Post Ad"}</button>
+                        <div className="col-12 mt-4">
+                          <div className="row justify-content-end">
+                            <div className="col-12 col-md-3">
+                            <button onClick={handleSubmit} type="button" className="login-btn" disabled={ad.loading} >{ad.loading ? "Updating..." :"Update"}</button>
+                            </div>
+                            <div className=" col-12 col-md-3">
+                            <button onClick={handleDelete} type="button" className="login-btn deletebtn bg-danger" disabled={ad.loading} >{ad.loading ? "Deleting..." :"Delete"}</button>
+                            </div>
+                          </div>
+                       
                         </div>
+                       
 
                     </form>
                   
