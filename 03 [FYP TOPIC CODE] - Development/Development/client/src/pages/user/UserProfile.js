@@ -70,7 +70,7 @@ export default function UserProfile() {
     <div className="container-fluid">
         <div className="row">
             <div className ="col-3 col-lg-2 p-0 justify-content-center"> <div ><Sidebar /></div></div>
-                <div className ="col-9">
+                <div className ="col-9 col-lg-10 pl-0 pr-5">
                     <Main />
                     <div className="container">
                     <div className="row justify-content-center">
@@ -136,7 +136,8 @@ export default function UserProfile() {
                     </div>
                
                 </div>
-                    <pre>{JSON.stringify({username,firstname,lastname,email,phone,address})}</pre>
+                   
+
             </div>
                 
         </div>

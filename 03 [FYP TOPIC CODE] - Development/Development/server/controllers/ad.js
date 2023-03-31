@@ -341,4 +341,78 @@ export const contactSeller= async (req, res) => {
           console.log(err);
         }
       };
+
+
+export const update = async (req, res) => {
+  try {
+    // console.log("req.body update => ", req.body);
+    const { title, photos, price, type, address, description } = req.body;
+
+    let ad = await Ad.findById(req.params._id);
+    console.log(ad)
+    const owner = req.user._id == ad?.postedBy;
+    if (!owner) {
+      return res.json({ error: "Permission denied" });
+    } else {
+      if (!title) {
+        return res.json({ error: "Enter the title for the Ad" });
+      }
+      if (!photos?.length) {
+        return res.json({ error: "Photos are required" });
+      }
+      if (!price) {
+        return res.json({ error: "Price is required" });
+      }
+      if (!type) {
+        return res.json({ error: "Is property house or land?" });
+      }
+      if (!address) {
+        return res.json({ error: "Address is required" });
+      }
+      if (!description) {
+        return res.json({ error: "Description is required" });
+      }
+
+      const geography = await config.Google_Geocoder.geocode(address);
+
+       await ad.updateOne({
+        ...req.body,
+        postedBy: req.user._id,
+        slug: slugify(`${title}-${nanoid(8)}`),
+        location: {
+          type: "Point",
+          coordinates: [geography[0]?.longitude, geography[0].latitude],
+        },
+      });
+      res.json({ ok: true });
+    }
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+export const enquiredByUser = async (req, res) => {
+  try {
+    const user = await User.findById(req.user._id);
+    const ads = await Ad.find({ _id: user.enquiredProperties }).sort({createdAt: -1})
+    res.json(ads);
+    
+  } catch (err) {
+    console.log(err);
+    
+  }
+}
+
+export const wishlist = async (req, res) => {
+  try {
+    const user = await User.findById(req.user._id);
+    const ads = await Ad.find({ _id: user.wishlist }).sort({createdAt: -1})
+    res.json(ads);
+    console.log(user.wishlist)
+  } catch (err) {
+    console.log(err);
+    
+  }
+}
+    
       

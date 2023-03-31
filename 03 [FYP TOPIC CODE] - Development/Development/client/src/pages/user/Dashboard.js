@@ -1,5 +1,4 @@
 import Sidebar from "../../components/nav/sidebar";
-import Main from "../../components/nav/Main";
 import './Dashboard.css'
 import { useAuth } from "../../context/auth";
 import { useState, useEffect } from "react";
@@ -84,8 +83,8 @@ export default function Dashboard() {
     <div className="container-fluid">
         <div className="row">
             <div className ="col-3 col-lg-2 p-0 justify-content-center"> <div  className="dashside"><Sidebar /></div></div>
-                <div className ="col-9">
-                    <Main />
+                <div className ="col-9  col-lg-10 pl-0 pr-5"> 
+                  
                     <div className="container">
                         <div className="row  ">
                             <div className="col-12 dashboard-banner sticky-top p-3 text-center">

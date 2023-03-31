@@ -42,7 +42,7 @@
 .roomBtn{
     height: 350px;
     color: #ffff;
-    background-image: url("../../../../public/roomapartment.jpg");
+    /* background-image: url("../../../../public/roomapartment.jpg");  */
     background-repeat: no-repeat;
     background-size: cover;
 
@@ -56,7 +56,7 @@
 .apartmentBtn{
    height: 350px;
    color: #ffff;
-   background-image: url("../../../../public/roomapartment.jpg");
+   /* background-image: url("../../../../public/roomapartment.jpg");  */
    background-repeat: no-repeat;
    background-size: cover;
   

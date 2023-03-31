@@ -29,12 +29,29 @@ export default function Main() {
 
     }
 
+    const onlylocalnav = [ 
+        "/login",
+        "/register", 
+        "/dashboard",  
+        "/create/ad",  
+        "/create/ad/sell/Apartment",  
+        "/create/ad/sell/Room",  
+        "/create/ad/rent/Room",  
+        "/create/ad/rent/Apartment",
+        "/user/profile",
+        "/update-password",
+        "/update/ad/:slug",
+        "/wishlist",
+        "/enquiries"
+    ];
+    
     const location = useLocation();
-    if (location.pathname === '/login' || location.pathname === '/register') {
+    if (onlylocalnav.some(pattern => location.pathname.startsWith(pattern.replace(':slug', '')))) {
         return null;
     }
+    
 
-    const onlylocalnav = [  "/dashboard",  "/create/ad",  "/create/ad/sell/Apartment",  "/create/ad/sell/Room",  "/create/ad/rent/Room",  "/create/ad/rent/Apartment","/user/profile","/update-password"];
+  
   
 
     //granting access to loggedin user
