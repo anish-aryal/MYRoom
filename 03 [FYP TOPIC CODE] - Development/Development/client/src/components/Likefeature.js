@@ -18,7 +18,7 @@ export default function LikeUnlike({ ad }) {
       navigate("/login",{
         state: `/ad/${ad.slug}`
       });
-      toast.promise('please login first')
+      toast.error('please login first')
       return;
     }
     try {

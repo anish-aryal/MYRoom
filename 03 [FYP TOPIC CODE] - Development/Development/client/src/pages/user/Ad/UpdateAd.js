@@ -110,12 +110,8 @@ export default function UpdateAd({action, type})  {
         
             </div>
             <div className="col-12 login-form pt-3 mb-4">
-           
-                <div className='col-12  '>
-                
                       <div className='heading d-flex flex-column'>
-                        <h1 >Create an Ad.</h1>
-                        <p className="w-75"> Update your Listing for <span> <h1>{ad.title}</h1></span>  {type} for {action}.</p>
+                        <h1 className="w-75"> Update your Listing </h1>
                       </div>
                     <form className='row gx-3 pt-5' >
                         <div className=' col-6 mb-3'>
@@ -213,10 +209,8 @@ export default function UpdateAd({action, type})  {
                             <button onClick={handleDelete} type="button" className="login-btn deletebtn bg-danger" disabled={ad.loading} >{ad.loading ? "Deleting..." :"Delete"}</button>
                             </div>
                           </div>
-                       
                         </div>
-                       
-
+                      
                     </form>
                   
                 </div>
@@ -226,7 +220,7 @@ export default function UpdateAd({action, type})  {
                 
         </div>
         
-    </div>
+
       
             
 

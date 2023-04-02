@@ -61,7 +61,7 @@ export default function AdForm({action, type})  {
                         <h1 >Create an Ad.</h1>
                         <p className="w-75">Please fill the form properly for listing your {type} for {action}.</p>
                       </div>
-                    <form className='row gx-3 pt-5' >
+                    <form className='row justify-content-end gx-3 pt-5' >
                         <div className=' col-6 mb-3'>
                         <UploadImage ad={ad} setAd={setAd} />
                         </div>

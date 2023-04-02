@@ -32,8 +32,10 @@ const schema = new Schema(
       maxlength: 256,
     },
     address: { type: String, default: "" },
-    company: { type: String, default: "" },
-    phone: { type: String, default: "" },
+    phone: { 
+      type: String, 
+      default: "",      
+      unique: true, },
     photo: {},
     role: {
       type: [String],

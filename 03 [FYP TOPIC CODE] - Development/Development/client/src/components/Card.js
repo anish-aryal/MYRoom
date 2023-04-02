@@ -17,9 +17,7 @@ export default function Card({ad}){
     const elapsedTime = new Date() - new Date(createdAt); // time elapsed since createdAt in milliseconds
     let text = '';
     if (elapsedTime < 1000) {
-      // less than a second
-      const milliseconds = Math.floor(elapsedTime);
-      text = `${milliseconds} ms${milliseconds !== 1 ? "" : ""} ago.`;
+      text = `1 s ago.`;
     } else if (elapsedTime < 1000 * 60) {
       // less than a minute
       const seconds = Math.floor(elapsedTime / 1000);

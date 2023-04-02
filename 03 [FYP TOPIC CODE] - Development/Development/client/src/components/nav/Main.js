@@ -2,6 +2,8 @@ import { NavLink } from "react-router-dom";
 import { useLocation } from 'react-router-dom';
 import { useAuth } from "../../context/auth.js";
 import { useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
+
 import './nav.css'
 
 
@@ -13,12 +15,12 @@ export default function Main() {
 
 
     //logout function
-    const logout =()=>{
-        setAuth(null);
+    const logout = () => {
+        setAuth({ user: null, token: "", refreshToken: "" });
         localStorage.removeItem("auth");
-        navigate("/login");
-
-    }
+        toast.success("Logged out successfully");
+        navigate("/");
+      }
 
     const dash =()=>{
         navigate("/dashboard");
@@ -55,7 +57,7 @@ export default function Main() {
   
 
     //granting access to loggedin user
-    const logged = auth.user !== null && auth.token !=="" && auth.refreshToken !=="";
+    const logged = auth?.user !== null && auth.token !=="" && auth.refreshToken !=="";
 
     const postAd =()=>{
         if (logged) {
@@ -84,41 +86,50 @@ export default function Main() {
                     Home
                 </NavLink>
            
-                <button className="btn-primary" onClick={postAd}>Post Ad</button>
+              
+
+                <NavLink className="nav-link " aria-current="page" to="/rent">
+                    Rent
+                </NavLink>
+
+                <NavLink className="nav-link " aria-current="page" to="/buy">
+                    Buy
+                </NavLink>
             
-                {!logged ?(
-                <>
-                <NavLink className="nav-link " to="/register">
-                    Register
-                </NavLink>
-                <NavLink className="nav-link " to="/login">
-                    Login
-                </NavLink>
-                </>):("")}
-      
-  
-                <NavLink className="nav-link disabled " to="/">Disabled</NavLink>
+              
+
+
+                
+              
 
                 {logged ?(
                 <>
+                <button className=" loadmore sr addnew" onClick={postAd}>+ List your Property</button>
                 <div className="dropdown pointer">
                 <li
                     className="nav-link pointer dropdown-toggle"
                     data-bs-toggle="dropdown"
                 >
-                    {auth?.user?.firstname? auth.user.firstname : auth.user.username }
+                    {auth?.user?.firstname? auth?.user?.firstname : auth?.user?.username }
              
                 <ul className="dropdown-menu">
                     <li>
                         <a className="nav-link" onClick={dash} href="/dashboard">Dashboard</a>
                     </li>
                     <li>
-                    <a className="nav-link" onClick={logout} href="/">Logout</a>
+                    <a className="nav-link" onClick={logout}  href='/'>Logout</a>
                     </li>
                 </ul>
                 </li>
                 </div>
-                </>):("")}
+                </>):(<>
+                <NavLink className="nav-link " to="/register">
+                    Register
+                </NavLink>
+                <NavLink className="nav-link  loginbtn" to="/login">
+                    Login
+                </NavLink>
+                </>)}
          </ul>
     </div>
    
@@ -129,48 +140,6 @@ export default function Main() {
 
 
 
-        // <div className="d-flex justify-content-end">
-        //     <ul className="nav justify-content-between w-50">
-        //         <li className="nav-item">
-        //         <NavLink className="nav-item" aria-current="page" to="/">
-        //             Home
-        //         </NavLink>
-        //         </li>
-        //         <li className="nav-item">
-        //         <NavLink className="nav-item " to="/register">
-        //             Register
-        //         </NavLink>
-        //         </li>
-        //         <li className="nav-item">
-        //         <NavLink className="nav-item " to="/login">
-        //             Login
-        //         </NavLink>
-        //         </li>
-        //         <li className="nav-item">
-        //         <NavLink className="nav-item disabled " to="/">Disabled</NavLink>
-        //         </li>
-            //     <div className="dropdown">
-            //     <li>
-            //     <NavLink
-            //         className="nav-item pointer dropdown-toggle"
-            //         data-bs-toggle="dropdown"
-            //     >
-            //         User
-            //     </NavLink>
-            //     <ul className="dropdown-menu">
-            //         <li>
-            //         <NavLink className="nav-item" to={`/dashboard`}>
-            //             Dashboard
-            //         </NavLink>
-            //         </li>
-            //         <li>
-            //         <NavLink className="nav-item">Logout</NavLink>
-            //         </li>
-            //     </ul>
-            //     </li>
-            //     </div>
-            //     </ul>
-            //  </div>
      
-        );
-        }
+    );
+}

@@ -10,3 +10,36 @@
     background-repeat: no-repeat;
     cursor: pointer;
 }
+.nav-link {
+    font-size: 13px;
+    font-family: 'sm';
+}
+.addnew{
+    border: 1px solid !important;
+    padding: 5px 13px;
+    font-size: 13px;
+    font-family: 'sm';
+}
+.loginbtn {
+    border: 1px solid #7B30C8;
+    color: #7B30C8;
+    border-radius: 0;
+    display: block;
+    background: linear-gradient(to right, #7B30C8 50%, white 50%);
+    background-size: 200% 100%;
+    background-position: right bottom;
+    transition: all .2s ease-out;
+    outline: none;
+    padding: 5px 20px;
+    font-size: 14px !important;
+  }
+  
+  .loginbtn:hover {
+    background-position: left bottom;
+    color: white;
+  }
+  
+  .loginbtn:focus {
+    /* Other button focus styles */
+    outline: none;
+  }

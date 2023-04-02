@@ -1,0 +1,27 @@
+.text-animation {
+	background: linear-gradient(to right, #a467e2 50%, rgb(189, 187, 187) 40%);
+	background-size: 200% 400%;
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
+	animation: color-move 5s ease-in infinite;
+	font-size: 24px;
+	font-family: 'sr';
+	padding: 5px 30px;
+	border: 2px solid rgb(251, 111, 111);
+}
+.nothinghight{
+	height: 30vh
+}
+
+@keyframes color-move {
+	0% {
+	  background-position: right;
+	}
+	50% {
+	  background-position: left;
+	}
+	100% {
+	  background-position: left;
+	}
+}
+

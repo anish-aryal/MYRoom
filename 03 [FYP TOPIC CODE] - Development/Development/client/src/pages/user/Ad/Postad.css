@@ -42,8 +42,8 @@
 .roomBtn{
     height: 350px;
     color: #ffff;
-    /* background-image: url("../../../../public/roomapartment.jpg");  */
     background-repeat: no-repeat;
+    background-image: url("../../../../public/roomapartment.jpg");
     background-size: cover;
 
 }
@@ -51,12 +51,14 @@
     outline: none;
     border: none;
     border-radius: 0;
+   
+
 }
 
 .apartmentBtn{
    height: 350px;
    color: #ffff;
-   /* background-image: url("../../../../public/roomapartment.jpg");  */
+   background-image: url("../../../../public/roomapartment.jpg");
    background-repeat: no-repeat;
    background-size: cover;
   

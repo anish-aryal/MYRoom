@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { AuthProvider } from "./context/auth";
 import Main from "./components/nav/Main";
 // import Cards from './components/Card';
@@ -27,6 +27,9 @@ import Dashboard from "../src/pages/user/Dashboard.js";
 import UserProfile from "../src/pages/user/UserProfile.js";
 import Wishlist from "../src/pages/user/Wishlist.js";
 import Enquiries from "../src/pages/user/Enquiries";
+import UserList from "../src/pages/UserList.js";
+import Buy from "./pages/Buy";
+import Rent from "./pages/Rent";
 
 function MainWithRoutes() {
 
@@ -46,6 +49,8 @@ function MainWithRoutes() {
           <Route path="/auth/access-account/:token" element={<AccessAccount />}/>
           <Route path="/auth/forgot-password" element={<ForgotPassword />}/>
           <Route path="/ad/:slug" element={<Viewpage />}/>
+          <Route path="/buy" element={<Buy />}/>
+          <Route path="/rent" element={<Rent />}/>
           <Route path="/" element={<LoggedInRoute />}>
             <Route path="dashboard" element={<Dashboard />} />
             <Route path="create/ad" element={<AdCreate />}/>
@@ -58,6 +63,7 @@ function MainWithRoutes() {
             <Route path="create/ad/sell/Room" element={<SellRoom />} />
             <Route path="create/ad/rent/Room" element={<RentRoom />} />
             <Route path="create/ad/rent/Apartment" element={<RentApartment />} />
+            <Route path="userlist" element={<UserList />} />
           
           </Route>
           

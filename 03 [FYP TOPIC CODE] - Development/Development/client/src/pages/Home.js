@@ -1,11 +1,11 @@
-import { useAuth } from "../context/auth";
+// import { useAuth } from "../context/auth";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import Card from "../components/card.js";
 
 export default function Home() {
   // context
-  const [auth, setAuth] = useAuth();
+  // const [auth, setAuth] = useAuth();
 
   const [apartmentForRent, setApartmentForRent] = useState();
   const [apartmentForSell, setApartmentForSell] = useState();
@@ -33,7 +33,7 @@ export default function Home() {
 
   return (
    
-    <div className="container">
+    <div className="container mt-5 pt-3">
        <div className="apartmentsForSell" >
             <h6 > Apartments for Sell</h6>
             <div className="container">
@@ -81,7 +81,7 @@ export default function Home() {
             </div>
           </div>
              
-          <pre>{JSON.stringify(auth.user, null, 2)}</pre>
+          {/* <pre>{JSON.stringify(auth.user, null, 2)}</pre> */}
   </div>
 
   

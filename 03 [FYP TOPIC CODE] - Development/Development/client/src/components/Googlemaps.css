@@ -1,0 +1,23 @@
+
+.hospitals {
+    border: 2px solid rgb(49, 165, 49);
+    color:  rgb(49, 165, 49);
+    border-radius: 0;
+    display: block;
+    background: linear-gradient(to right, rgb(49, 165, 49) 50%, white 50%);
+    background-size: 200% 100%;
+    background-position: right bottom;
+    transition: all .2s ease-out;
+    outline: none;
+    
+  }
+  
+  .hospitals:hover {
+    background-position: left bottom;
+    color: white;
+  }
+  
+  .hospitals:focus {
+    /* Other button focus styles */
+    outline: none;
+  }

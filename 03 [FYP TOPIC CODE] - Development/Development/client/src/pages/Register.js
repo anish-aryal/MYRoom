@@ -10,7 +10,11 @@ export default function Register() {
   const [email, setEmail] = useState("");
   const [firstname, setFirstname] = useState("");
   const [password, setPassword] = useState("");
+  const [confirmpassword, setconfirmPassword] = useState("");
+  const [lastname, setLastname] = useState("");
+  const [phone, setPhone] = useState("");
   const [loading, setLoading] = useState(false);
+
   //hooks 
   const navigate = useNavigate();
 
@@ -18,33 +22,41 @@ export default function Register() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-   try {
-      console.log(email, password);
-   
-      const {data} = await axios.post('/pre-register', {
-        email,
-        password,
-        firstname,
-       
-      });
-      setLoading(true);
-      console.log(data);
 
-      if(data?.error){
-        toast.error(data.error);
-        setLoading(false);
-      }
-      else{
-        toast.success("Please check your email");
-        setLoading(false);
-        navigate("/");
-      }
-     
-    } catch (err) {
-      console.log(err);
-      toast.error("Something went wrong. Try again.");
-      setLoading(false);
+    if(password !== confirmpassword){
+      toast.error("Password does not match");
+    }else{
+
+      try {
+        console.log(email, password);
     
+        const {data} = await axios.post('/pre-register', {
+          email,
+          password,
+          firstname,
+          lastname,
+          phone,
+        
+        });
+        setLoading(true);
+        console.log(data);
+
+        if(data?.error){
+          toast.error(data.error);
+          setLoading(false);
+        }
+        else{
+          toast.success("Please check your email");
+          setLoading(false);
+          navigate("/");
+        }
+      
+      } catch (err) {
+        console.log(err);
+        toast.error("Something went wrong. Try again.");
+        setLoading(false);
+      
+      }
     }
   };
 
@@ -108,7 +120,10 @@ export default function Register() {
                         </div>
                         <div className='d-flex col-6 mb-4 flex-column'>
                           <label htmlFor="lanamelabel" className="form-label" >Last Name</label>
-                          <input type="text" className=" lnameinput login-input" id="inputlname" placeholder='Last Name' aria-describedby="LastName" />
+                          <input type="text" className=" lnameinput login-input" id="inputlname" placeholder='Last Name' aria-describedby="LastName"
+                           value={lastname}
+                           onChange={(e) => setLastname(e.target.value)}
+                          required />
                         </div>
                         <div className='d-flex col-6 mb-4 flex-column'>
                           <label htmlFor="emaillabel" className="form-label" >Email address</label>
@@ -121,7 +136,10 @@ export default function Register() {
                         </div>
                         <div className='d-flex col-6 mb-4 flex-column'>
                           <label htmlFor="phonelabel" className="form-label" >Phone Number</label>
-                          <input type="number" className=" phoneinput login-input" id="inputphone" placeholder='Phone Number' aria-describedby="PhoneNumber" />
+                          <input type="number" className=" phoneinput login-input" id="inputphone" placeholder='Phone Number' aria-describedby="PhoneNumber" 
+                            value={phone}
+                            onChange={(e) => setPhone(e.target.value)}
+                            required />
                         </div>
                         <div className='d-flex col-6 flex-column'>
                           <label htmlFor="passwordlabel" className="form-label" >Password</label>
@@ -130,9 +148,17 @@ export default function Register() {
                           onChange={(e) => setPassword(e.target.value)}
                           required/>
                         </div>
-                        <div className='d-flex col-6 flex-column'>
+                        {/* <div className='d-flex col-6 flex-column'>
                           <label htmlFor="confirmPassword" className="form-label" >Confirm Password</label>
-                          <input type="password " className=" confirmpassswordinput" id="inputconfirmpassword" placeholder='********' aria-describedby="ConfirmPassword" />
+                          <input type="password " className="login-input confirmpassswordinput" id="inputconfirmpassword" placeholder='********' aria-describedby="ConfirmPassword" />
+                        </div> */}
+                          <div className='d-flex col-6 flex-column'>
+                          <label htmlFor="passwordlabel" className="form-label" >Confirm password</label>
+                          <input type="password" className=" passwordinput login-input" id="inputpassword" placeholder='********' aria-describedby="PasswordHelp" 
+                          value ={confirmpassword}
+                          onChange={(e) => setconfirmPassword(e.target.value)}
+                 
+                          required/>
                         </div>
                         <div>
                           <div className=" col-12 check mt-4 mb-2">

@@ -15,8 +15,8 @@ router.get('/current-user',requireSignin, controllers.currentUser);
 router.get('/profile/:username', controllers.publicProfile);
 router.put('/update-password',requireSignin, controllers.updatePassword);
 router.put('/update-profile',requireSignin, controllers.updateProfile);
-router.get('/userlist',requireSignin, controllers.userList);
-router.get('/noofuserad/:_id',requireSignin, controllers.noOfUserAd);
-router.get('/publicprofile/:username',requireSignin, controllers.user);
+router.get('/users',requireSignin, controllers.users);
+router.get('/user-ad-count/:_id',requireSignin, controllers.userad);
+router.get('/user/:username',requireSignin, controllers.user);
 
 export default router;

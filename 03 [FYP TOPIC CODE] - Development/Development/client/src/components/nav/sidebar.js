@@ -1,15 +1,20 @@
 import { NavLink } from "react-router-dom";
 import '../nav/sidebar.css'
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../context/auth";
 
 
 
 export default function Sidebar(){
 
   const navigate = useNavigate();
+  const [auth, setAuth] = useAuth();
+
 
   const sidelogo =()=>{
     navigate("/");
+
+
 
 }
 
@@ -25,7 +30,13 @@ export default function Sidebar(){
     <div>
       <ul className="nav side-col  flex-column mt-4">
    
-          <NavLink className="nav-link side-item mt-1" aria-current="page" to="/dashboard"> <i className="bi bi-house-door"></i> Dashboard</NavLink>
+          <NavLink className="nav-link side-item mt-1" aria-current="page" to="/dashboard"> <i className="bi bi-house-door"></i> Overview</NavLink>
+
+          {auth.user.role.includes("Admin") && (
+            <NavLink className="nav-link side-item mt-1" to="/userlist">
+              <i className="bi bi-fingerprint" /> MyRoom Users
+            </NavLink>
+          )}
      
    
           <NavLink className="nav-link side-item mt-1" style={{color: '#303972'}} to="/chat"><i className="bi bi-wechat" />  Chat</NavLink>
@@ -44,7 +55,8 @@ export default function Sidebar(){
    
    
           <NavLink className="nav-link side-item mt-1" to="/update-password"> <i className="bi bi-fingerprint" /> Password</NavLink>
-      
+
+          
         
          
       </ul>

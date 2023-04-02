@@ -35,7 +35,7 @@ export const welcome = (req, res)=>{
 
 export const preRegister = async (req, res) => {
   try {
-    const { email, password, firstname } = req.body;
+    const { email, password, firstname,lastname, phone } = req.body;
 
     // check if email is valid
     if (!validator.validate(email)) {
@@ -43,6 +43,9 @@ export const preRegister = async (req, res) => {
     }
     if (!email) {
       return res.json({ error: "Email is required" });
+    }
+    if (!phone) {
+      return res.json({ error: "Phone number is required" });
     }
     // check if email is taken
     if(!password){
@@ -57,9 +60,13 @@ export const preRegister = async (req, res) => {
         return res.json({error: "Email is taken"});
     }
 
+    const phoneexist = await User.findOne({phone})
+    if(phoneexist){
+        return res.json({error: "Phone number is already registered"});
+    }
 
     // generate jwt using email and password
-    const token = jwt.sign({ email, password,firstname }, config.JWT_SECRET, {
+    const token = jwt.sign({ email, password,firstname,lastname,phone }, config.JWT_SECRET, {
       expiresIn: "1h",
     });
     // send test email
@@ -90,11 +97,16 @@ export const preRegister = async (req, res) => {
 export const register = async (req, res)=>{
     try {
         console.log(req.body);
-        const {email, password,firstname} = jwt.verify(req.body.token, config.JWT_SECRET);
+        const {email, password,firstname,lastname,phone} = jwt.verify(req.body.token, config.JWT_SECRET);
 
         const userexist = await User.findOne({email});
         if(userexist){
             return res.json({error: "Email is taken"})
+        }
+        const phoneexist = await User.findOne({phone})
+
+        if(phoneexist){
+            return res.json({error: "Phone number is already registered"});
         }
 
         const hashedPassword = await hashPassword(password);
@@ -103,6 +115,8 @@ export const register = async (req, res)=>{
             email, 
             password: hashedPassword,
             firstname,
+            lastname,
+            phone,
             
         }).save();
 
@@ -291,17 +305,28 @@ export const updateProfile = async (req, res) => {
     } catch (err) {
       console.log(err);
       if (err.codeName === "DuplicateKey") {
-        return res.status(403).json({ error: "Username or email is taken" });
+        return res.status(403).json({ error: "Username or phone number must be unique.  " });
       } else {
         return res.status(403).json({ error: "Unauhorized" });
       }
     }
   };
 
-  export const noOfUserAd = async (req, res) => {
+  export const users = async (req, res) => {
     try {
-      const noOfUserAd = Ad.find({postedBy: req.params._id}).select('_id');
-      res.json(noOfUserAd);
+        const userList = await User.find({role:'User'}).select("-password -resetCode -role -enquiredProperties -wishlist ");
+        res.json(userList)
+        console.log(userList)
+    } catch (err) {
+      console.log(err);
+      
+    }
+  }
+
+  export const userad = async (req, res) => {
+    try {
+      const ads = Ad.find({postedBy: req.params._id}).select('_id');
+      res.json(ads);
     } catch (err) {
       console.log(err);
       
@@ -312,16 +337,6 @@ export const updateProfile = async (req, res) => {
       const user = await User.findOne({username: req.params.username}).select("-password -resetCode -role -enquiredProperties -wishlist ");
       const ads = await Ad.find({postedBy: user._id});
       res.json({user,ads});
-    } catch (err) {
-      console.log(err);
-      
-    }
-  }
-
-  export const userList = async (req, res) => {
-    try {
-        const userList = await User.find({role:'User'}).select("-password -resetCode -role -enquiredProperties -wishlist ");
-        res.json(userList)
     } catch (err) {
       console.log(err);
       

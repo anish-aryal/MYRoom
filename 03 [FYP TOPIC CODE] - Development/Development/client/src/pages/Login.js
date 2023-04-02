@@ -38,13 +38,14 @@ export default function Login() {
       else{
         setAuth(data);
         localStorage.setItem("auth", JSON.stringify(data));
-        toast.success("Welcome to MyRoom");
         setLoading(false);
         console.log()
         if (data?.user?.role.includes("Admin")) {
           navigate("/dashboard"); // Redirect to the dashboard
+          toast.success("Welcome admin to the Dashboard");
         } else {
           location?.state !== null ? navigate(location.state) : navigate("/"); // Redirect to the home page
+          toast.success("Welcome to MyRoom");
         }
         // location?.state !== null ? navigate(location.state) : navigate("/");
       }

@@ -53,8 +53,7 @@ export default function Viewpage (){
     let text = '';
     if (elapsedTime < 1000) {
       // less than a second
-      const milliseconds = Math.floor(elapsedTime);
-      text = `${milliseconds} ms${milliseconds !== 1 ? "" : ""} ago.`;
+      text = `1 s ago.`;
     } else if (elapsedTime < 1000 * 60) {
       // less than a minute
       const seconds = Math.floor(elapsedTime / 1000);
@@ -85,7 +84,7 @@ export default function Viewpage (){
                 <div className="col-9 pl-0 pt-5 pb-3 ">
                
                     <div className="mb-3">
-                    <span className="typeofad sl">{ad?.type} for {ad?.action} / Posted by: <span className="viewpostedby">{ad?.postedBy.firstname}  </span>   </span>
+                    <span className="typeofad sl">{ad?.type} for {ad?.action} / Posted by: <span className="viewpostedby">{ad?.postedBy?.firstname}  </span>   </span>
                     </div>
                   
                     <p className="viewTitle  d-flex flex-column">{ad?.title}
@@ -123,7 +122,7 @@ export default function Viewpage (){
                     <Googlemap ad={ad}/>
                 </div>
             </div>      
-            <div className="row">
+            <div className="row mt-4">
                 <div className=" col-12 highlightssection mt-4 py-5 px-4 sr ">
                     {descriptionWithLineBreaks}
                 </div>
@@ -131,9 +130,8 @@ export default function Viewpage (){
             <div className="row">
                     <div className="col-12 text-center border-bottom">
                     <h1>Nearby {ad?.type.toLowerCase()}s for {ad?.action.toLowerCase()}</h1>
-                    </div>
-                   
-                    <div className="col-12 d-flex text-center">
+                    </div>            
+                 
                     {related && related.length > 0 ? (
                     related.map((ad) => (
  
@@ -145,7 +143,7 @@ export default function Viewpage (){
                     ) : (
                     <p>Sorry, no ads near this property were found.</p>
                     )}
-                    </div>
+                 
             </div>
            
                 

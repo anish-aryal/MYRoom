@@ -12,8 +12,6 @@ export default function Dashboard() {
  
     const [page, setPage] = useState(1);
 
-
-
     const [apartmentSellAds, setApartmentSellAds] = useState([]);
     const [roomSellAds, setRoomSellAds] = useState([]);
     const [roomRentAds, setRoomRentAds] = useState([]);
@@ -88,7 +86,7 @@ export default function Dashboard() {
                     <div className="container">
                         <div className="row  ">
                             <div className="col-12 dashboard-banner sticky-top p-3 text-center">
-                                <h1 className="d-flex flex-column sb "> Overview
+                                <h1 className="d-flex flex-column sb "> You have posted
                                 </h1>
                             </div>
                             <div className="col-12 mt-5 px-5 py-3 ">
@@ -144,7 +142,7 @@ export default function Dashboard() {
                                         <Updatecard ad={ad} key={ad._id}/>
                                     ))}
                                        <div className="col-12 d-flex justify-content-end">
-                                        <button className=" loadmore py-2 px-3 sr" onClick={handleLoadMoreRoomRent}>Load more</button>
+                                        <button className=" loadmore py-2 px-3 sm" onClick={handleLoadMoreRoomRent}>Load more</button>
                                     </div>
                                  
                                 </div>

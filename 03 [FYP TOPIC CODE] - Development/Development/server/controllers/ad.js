@@ -445,7 +445,48 @@ export const remove = async (req, res) => {
   }
 }
 
+export const adsForRent = async (req, res) => {
+  try{
+  
 
+    const apartmentForRent = await Ad.find({action: "Rent", type:"Apartment"})
+    .select("-googleMap -location -photo.Key -photo.key -photo.ETag ")
+    .populate("postedBy", "firstname username email phone company")
+    .sort({createdAt: -1}).exec();
+
+    const roomForRent = await Ad.find({action: "Rent", type:"Room"})
+    .select("-googleMap -location -photo.Key -photo.key -photo.ETag ")
+    .populate("postedBy", "firstname username email phone company")
+    .sort({createdAt: -1}).exec();
+
+
+
+    res.json({ apartmentForRent, roomForRent})
+  }
+  catch(err){
+    console.log(err)
+  }
+}
+
+export const adsForSell = async (req, res) => {
+  try{
+    const apartmentForSell = await Ad.find({action: "Sell", type:"Apartment"})
+    .select("-googleMap -location -photo.Key -photo.key -photo.ETag ")
+    .populate("postedBy", "firstname username email phone company")
+    .sort({createdAt: -1}).exec();
+
+    const roomForSell = await Ad.find({action: "Sell", type:"Room"})
+    .select("-googleMap -location -photo.Key -photo.key -photo.ETag ")
+    .populate("postedBy", "firstname username email phone company")
+    .sort({createdAt: -1}).exec();
+
+
+    res.json({apartmentForSell, roomForSell})
+  }
+  catch(err){
+    console.log(err)
+  }
+}
 
     
       
