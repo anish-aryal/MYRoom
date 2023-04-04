@@ -19,6 +19,10 @@ const schema = new Schema(
             required: true,
             maxlength: 1000
         },
+        pets: {
+            type: String,
+            enum: ['yes', 'no']
+          },
         address: {
             type: String,
             required: true,

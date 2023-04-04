@@ -3,6 +3,11 @@ import { AuthProvider } from "./context/auth";
 import Main from "./components/nav/Main";
 // import Cards from './components/Card';
 import { Toaster } from "react-hot-toast";
+import { SearchProvider } from "./context/search";
+import Chat from "./pages/Chat/Chat";
+
+
+
 import UpdatePassword from "./pages/user/UpdatePassword";
 
 import "./index.css";
@@ -13,7 +18,6 @@ import Login from "./pages/Login";
 import ForgotPassword from "../src/pages/auth/ForgotPassword.js";
 import ActivateAccount from "../src/pages/auth/ActivateAccount.js";
 import AccessAccount from "../src/pages/auth/AccessAccount.js";
-
 
 import LoggedInRoute from "./components/routes/PrivateRoute";
 import AdCreate from "./pages/user/Ad/Postad";
@@ -30,6 +34,12 @@ import Enquiries from "../src/pages/user/Enquiries";
 import UserList from "../src/pages/UserList.js";
 import Buy from "./pages/Buy";
 import Rent from "./pages/Rent";
+
+// search
+import Search from "./pages/Search";
+
+
+
 
 function MainWithRoutes() {
 
@@ -51,6 +61,8 @@ function MainWithRoutes() {
           <Route path="/ad/:slug" element={<Viewpage />}/>
           <Route path="/buy" element={<Buy />}/>
           <Route path="/rent" element={<Rent />}/>
+          <Route path="/search" element={<Search />}/>
+    
           <Route path="/" element={<LoggedInRoute />}>
             <Route path="dashboard" element={<Dashboard />} />
             <Route path="create/ad" element={<AdCreate />}/>
@@ -64,6 +76,7 @@ function MainWithRoutes() {
             <Route path="create/ad/rent/Room" element={<RentRoom />} />
             <Route path="create/ad/rent/Apartment" element={<RentApartment />} />
             <Route path="userlist" element={<UserList />} />
+            <Route path="chat" element={<Chat />} />
           
           </Route>
           
@@ -77,11 +90,11 @@ function App() {
   return (
     <BrowserRouter>
       <AuthProvider>
+        <SearchProvider>
         <Routes>
-         
-       
           <Route path="/*" element={<MainWithRoutes />} />
         </Routes>
+        </SearchProvider>
       </AuthProvider>
     </BrowserRouter>
   );

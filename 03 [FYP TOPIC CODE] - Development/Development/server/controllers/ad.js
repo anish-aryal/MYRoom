@@ -91,7 +91,7 @@ export const uploadImage = async (req, res) => {
       }
   
       const geography = await config.Google_Geocoder.geocode(address);
-      console.log("geography =>", geography);
+   
   
       const ad = new Ad({
         ...req.body,
@@ -450,12 +450,12 @@ export const adsForRent = async (req, res) => {
   
 
     const apartmentForRent = await Ad.find({action: "Rent", type:"Apartment"})
-    .select("-googleMap -location -photo.Key -photo.key -photo.ETag ")
+    .select("-googleMap -location -photos.Key -photos.key -photos.ETag ")
     .populate("postedBy", "firstname username email phone company")
     .sort({createdAt: -1}).exec();
 
     const roomForRent = await Ad.find({action: "Rent", type:"Room"})
-    .select("-googleMap -location -photo.Key -photo.key -photo.ETag ")
+    .select("-googleMap -location -photos.Key -photos.key -photos.ETag ")
     .populate("postedBy", "firstname username email phone company")
     .sort({createdAt: -1}).exec();
 
@@ -471,12 +471,12 @@ export const adsForRent = async (req, res) => {
 export const adsForSell = async (req, res) => {
   try{
     const apartmentForSell = await Ad.find({action: "Sell", type:"Apartment"})
-    .select("-googleMap -location -photo.Key -photo.key -photo.ETag ")
+    .select("-googleMap -location -photos.Key -photos.key -photos.ETag ")
     .populate("postedBy", "firstname username email phone company")
     .sort({createdAt: -1}).exec();
 
     const roomForSell = await Ad.find({action: "Sell", type:"Room"})
-    .select("-googleMap -location -photo.Key -photo.key -photo.ETag ")
+    .select("-googleMap -location -photos.Key -photos.key -photos.ETag ")
     .populate("postedBy", "firstname username email phone company")
     .sort({createdAt: -1}).exec();
 
@@ -487,6 +487,44 @@ export const adsForSell = async (req, res) => {
     console.log(err)
   }
 }
+
+export const search = async (req, res) => {
+  try {
+    console.log('req query', req.query);
+    const {  type, action, priceRange, address } = req.query;
+
+    // check if the address is empty
+    if (!address) {
+      return res.status(400).json({ error: "Address is required" });
+    }
+
+    const geography = await config.Google_Geocoder.geocode(address);
+    const ads = await Ad.find({
+      action: action === "Buy" ? "Sell" : "Rent",
+      type,
+      price: {
+        $gte: parseInt(priceRange[0]),
+        $lte: parseInt(priceRange[1]),
+      },
+      location: {
+        $near: {
+          $maxDistance: 5000,
+          $geometry: {
+            type: "Point",
+            coordinates: [geography[0]?.longitude, geography[0].latitude],
+          },
+        }
+      }
+
+    }).sort({createdAt: -1})
+    .select('-photos.Key -photos.key -photos.ETag -photos.Bucket -location -googleMap');
+    res.json(ads);
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({ error: "Server Error" });
+  }
+}
+
 
     
       

@@ -95,6 +95,10 @@ export default function Main() {
                 <NavLink className="nav-link " aria-current="page" to="/buy">
                     Buy
                 </NavLink>
+
+                <NavLink className="nav-link " aria-current="page" to="/search">
+                    Search
+                </NavLink>
             
               
 

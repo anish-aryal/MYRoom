@@ -2,6 +2,7 @@ import { useAuth } from "../context/auth";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import Card from "../components/card.js";
+import SearchForm from "../components/forms/SearchForm";
 
 export default function Rent() {
   // context
@@ -34,6 +35,7 @@ export default function Rent() {
   return (
    
     <div className="container">
+      <SearchForm />
       <div className="apartmentsForRent " >
          <h6 > Apartments for Rent</h6>
          <div className="container">

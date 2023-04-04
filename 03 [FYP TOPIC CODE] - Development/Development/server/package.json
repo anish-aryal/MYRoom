@@ -24,6 +24,7 @@
     "nodemon": "^2.0.21",
     "react-hot-toast": "^2.4.0",
     "react-quill": "^2.0.0",
-    "slugify": "^1.6.5"
+    "slugify": "^1.6.5",
+    "socket.io": "^4.6.1"
   }
 }

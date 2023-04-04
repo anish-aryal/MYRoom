@@ -1,0 +1,74 @@
+.searchbtn {
+    border: 1px solid white;
+    color: black;
+    border-radius: 0;
+    display: block;
+    background: linear-gradient(90deg, rgba(111, 27, 197, 0.05) 100%, rgba(164, 98, 233, 0.9) 90%);
+    background-size: 200% 100%;
+    background-position: right bottom;
+    transition: all .2s ease-out;
+    outline: none;
+    padding: 9px 20px;
+    font-size: 18px !important;
+  }
+  
+  .searchbtn:hover {
+    background-position: left bottom;
+    border:1px solid #7B30C8;
+  }
+  
+  .searchbtn:focus {
+    /* Other button focus styles */
+    outline: none;
+  }
+  .searchfeature{
+    border: 1px solid rgba(144, 82, 208, 0.2);
+    z-index: 1
+
+  }
+  .css-yk16xz-control{
+    border-radius: 0px !important;
+    font-size: 15px !important;
+
+  }
+  .css-1hwfws3{
+    border-radius: 0px;
+    padding: 5px;
+  }
+  .css-1wy0on6{
+    border-radius:0px;
+    padding: 3px;
+  }
+  .css-1g6gooi{
+    border-radius: 0px;
+  
+    font-size: 15px!important;
+  }
+  .css-1wa3eu0-placeholder{
+    font-size: 15px !important;
+    padding-left: 5px;
+  }
+  .advancesearch a{
+    padding-bottom: 0px;
+    font-family: 'sr';
+    font-size: 15px;
+    font-weight: 100;
+    padding: 6px 15px;
+    background-color: #7B30C8;
+    color:white !important;
+ 
+  }
+  .filter{
+    padding: 5px 10px;
+    background-color: linear-gradient(90deg, rgba(111, 27, 197, 0.5) 30%, rgba(208, 176, 242, 0.4) 90%);
+    border: 0;
+    border-radius: 0px;
+    outline: none;
+
+  }
+  .filter:focus{
+  
+    outline: none;
+
+  }
+ 

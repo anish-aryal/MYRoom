@@ -2,6 +2,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import Card from "../components/card.js";
+import SearchForm from "../components/forms/SearchForm.js";
 
 export default function Buy() {
   // context
@@ -34,6 +35,7 @@ export default function Buy() {
   return (
    
     <div className="container">
+      <SearchForm />
        <div className="apartmentsForSell" >
             <h6 > Apartments for Sell</h6>
             <div className="container">

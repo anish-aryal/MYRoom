@@ -8,6 +8,10 @@ import {emailTemplate} from '../helpers/email.js';
 import Ad from '../models/ad.js';
 
 
+
+
+
+
 const tokenAndUserResponse = (req,res,user,role) =>{
     const token = jwt.sign({ _id: user._id}, config.JWT_SECRET,{
         expiresIn: '1h',
@@ -131,6 +135,7 @@ export const register = async (req, res)=>{
 
 
 
+
 // Login User Controller
 export const login = async (req, res)=>{
     try{
@@ -141,6 +146,9 @@ export const login = async (req, res)=>{
         const user = await User.findOne({email});
 
 
+        
+
+
         if (!user){
             return res.json ({error: "Could not find the user with provided email"});
         }
@@ -149,10 +157,14 @@ export const login = async (req, res)=>{
         if(!match){
             return res.json({error: 'Wrong password. Please try again'});
         }
-        console.log(user.role)
+      
         tokenAndUserResponse(req, res, user, user.role);
+        console.log(user.role)
+  
+
     }
     catch(err){
+      console.log(err)
         return res.json({ error: "Something went wrong. Try again."})
     }
 }
@@ -342,4 +354,5 @@ export const updateProfile = async (req, res) => {
       
     }
   }
+
 

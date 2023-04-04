@@ -2,6 +2,7 @@ import express from "express";
 import morgan from "morgan";
 import cors from "cors";
 
+
 // importing database
 import mongoose from "mongoose";
 import {DATABASE} from "./config.js";
@@ -27,5 +28,10 @@ app.use(cors());
 //routes middlewares
 app.use('/api',authRoutes);
 app.use('/api',adRoutes);
+
+
+
+
+
 
 app.listen(8000, ()=> console.log("Server running on port 8000"));

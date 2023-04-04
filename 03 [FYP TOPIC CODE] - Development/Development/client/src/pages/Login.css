@@ -113,3 +113,38 @@ span a{
     text-decoration: none;
     text-align: end;
 }
+/* .homebanner{
+    background-image: url('../..//public/hompagebanner.jpeg');
+    background-repeat: no-repeat;
+    background-size: cover;
+
+
+} */
+.homesectiontitle{
+    color: #7B30C8;
+    padding-top:10px;
+    padding-bottom:10px;
+    border-bottom: 1px solid rgba(144, 82, 208, 0.2);
+}
+.homebanner {
+    position: relative;
+  }
+  
+  .homebanner::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: url('../..//public/hompagebanner.jpeg');
+    background-repeat: no-repeat;
+    background-size: cover;
+   
+    opacity: 0.9;
+  }
+  
+  .homebanner .searchbox {
+    position: relative;
+    z-index: 99;
+  }

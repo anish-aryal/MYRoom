@@ -22,6 +22,7 @@ export default function AdForm({action, type})  {
         parking:"",
         type,
         action,
+        pets: "",
         title:'',
         description:'',
         loading:false})
@@ -48,6 +49,8 @@ export default function AdForm({action, type})  {
       }
     }
 
+
+
     return (
         <div className="container-fluid">
           <div className='row'>
@@ -70,14 +73,13 @@ export default function AdForm({action, type})  {
                           <label htmlFor="fnamelabel" className="form-label" >Address</label>
                           
                               
-                                <GooglePlacesAutocomplete 
+                                <GooglePlacesAutocomplete  
                                     apiKey={GOOGLE_PLACES_API_KEY}
                                     apiOptions={{ region: "au" }}
                                     selectProps={{
                                             defaultInputValue: ad?.address,
                                             placeholder: "Search for address..",
                                             onChange: ({ value }) => {
-                                            // console.log("address onchange => ", value.description);
                                             setAd({ ...ad, address: value.description });
                                         },
                                 }}
@@ -116,7 +118,23 @@ export default function AdForm({action, type})  {
                             />
                           
                         </div>
-
+                        <div className='d-flex col-6 mb-3 flex-column parking'>
+                          <label htmlFor="pets" className="form-label" >Pets</label>
+                          <select
+                            className="form-select"
+                            aria-label="Default select example"
+                            value={ad.pets} // set the selected value of the select element to ad.pets
+                            onChange={(e) => setAd({ ...ad, pets: e.target.value })}
+                          >
+                            <option value="yes">Allowed</option>
+                            <option value="no">Not Allowed</option>
+                            
+                          </select>
+                          {ad.pets}
+                        </div>
+                      
+          
+            
                         <div className='d-flex col-6 mb-3 flex-column bathrooms'>
                           <label htmlFor="passwordlabel" className="form-label" >Bathrooms</label>
                           <input type="number" min="0" className="form-control mb-3 rounded-0 sr" placeholder="Enter how many bathrooms" 
