@@ -8,12 +8,17 @@ import Googlemap from "../../../components/Googlemap";
 import React from "react";
 import Card from "../../../components/card";
 import ContactForm from "./ContactForm";
-
+import { useAuth } from "../../../context/auth";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-hot-toast";
+// import OpenChatButton from "../../../components/OpenChatButton";
 
 
 
 export default function Viewpage (){
     const params = useParams();
+    const [auth, setAuth] = useAuth();
+    const navigate = useNavigate();
     
     const [ad, setAd] = useState();
     const [related, setRelated] = useState();
@@ -23,6 +28,7 @@ export default function Viewpage (){
             const {data} = await axios.get(`/ad/${params.slug}`);
             setAd(data.ad);
             setRelated(data.related);
+
         } catch (err){
             console.log(err);
         }
@@ -75,7 +81,8 @@ export default function Viewpage (){
       const months = Math.floor(elapsedTime / (1000 * 60 * 60 * 24 * 30));
       text = `${months} month${months !== 1 ? "s" : ""} ago`;
     }
- 
+    
+
  
 
     return (
@@ -145,6 +152,26 @@ export default function Viewpage (){
                     )}
                  
             </div>
+            <div className="div">
+            { auth?.user?._id !== ad?.postedBy?._id ? (  <button
+                    onClick={() => {
+                      axios.post('/chat', { senderId: auth?.user?._id, receiverId: ad?.postedBy?._id })
+                      .then((response) => {
+                        console.log(response.data);
+                       
+                        navigate('/chat');
+
+                        toast.success('Seller Has been added to your chat list');
+                      })
+                    }}
+                  >
+                    Message
+                  </button>) : ""}
+            </div>
+            
+           
+          
+            
            
                 
                 <pre>

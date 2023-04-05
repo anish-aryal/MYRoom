@@ -118,7 +118,7 @@ export default function AdForm({action, type})  {
                             />
                           
                         </div>
-                        <div className='d-flex col-6 mb-3 flex-column parking'>
+                        {/* <div className='d-flex col-6 mb-3 flex-column parking'>
                           <label htmlFor="pets" className="form-label" >Pets</label>
                           <select
                             className="form-select"
@@ -131,7 +131,7 @@ export default function AdForm({action, type})  {
                             
                           </select>
                           {ad.pets}
-                        </div>
+                        </div> */}
                       
           
             

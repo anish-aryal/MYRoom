@@ -6,6 +6,7 @@ import { nanoid } from "nanoid";
 import validator from 'email-validator';
 import {emailTemplate} from '../helpers/email.js';
 import Ad from '../models/ad.js';
+import nodemailer from 'nodemailer';
 
 
 
@@ -39,7 +40,7 @@ export const welcome = (req, res)=>{
 
 export const preRegister = async (req, res) => {
   try {
-    const { email, password, firstname,lastname, phone } = req.body;
+    const { email, password, firstname, lastname, phone } = req.body;
 
     // check if email is valid
     if (!validator.validate(email)) {
@@ -52,46 +53,65 @@ export const preRegister = async (req, res) => {
       return res.json({ error: "Phone number is required" });
     }
     // check if email is taken
-    if(!password){
-        return res.json({error: "Password is required"});
+    if (!password) {
+      return res.json({ error: "Password is required" });
     }
-    if(password && password?.length < 8){
-        return res.json({error: "Password must be at least 8 characters long"});
+    if (password && password?.length < 8) {
+      return res.json({ error: "Password must be at least 8 characters long" });
     }
 
     const user = await User.findOne({ email });
-    if(user){
-        return res.json({error: "Email is taken"});
+    if (user) {
+      return res.json({ error: "Email is taken" });
     }
 
-    const phoneexist = await User.findOne({phone})
-    if(phoneexist){
-        return res.json({error: "Phone number is already registered"});
+    const phoneexist = await User.findOne({ phone })
+    if (phoneexist) {
+      return res.json({ error: "Phone number is already registered" });
     }
 
     // generate jwt using email and password
-    const token = jwt.sign({ email, password,firstname,lastname,phone }, config.JWT_SECRET, {
+    const token = jwt.sign({ email, password, firstname, lastname, phone }, config.JWT_SECRET, {
       expiresIn: "1h",
     });
-    // send test email
-    config.AWSSES.sendEmail(
-      emailTemplate(
-        email,
-        `
-        <p>Please click the link below to activate your account.</p>
-        <a href="${config.CLIENT_URL}/auth/activate-account/${token}">Activate my account</a>
-    `,
-        config.REPLY_TO,
-        "Welcome to MyRoom"
-      ),
-      (err, data) => {
-        if (err) {
-          return res.json({ error: "Provide a valid email address" });
-        } else {
-          return res.json({ sucess: "Check your email to complete the registeration" });
-        }
+
+    // create nodemailer transporter
+    const transporter = nodemailer.createTransport({
+      service: 'hotmail',
+      auth: {
+          user: `${config.EMAIL_FROM}`,
+          pass: `${config.emailPassword}`
+      }});
+
+    // send email using nodemailer
+    const mailOptions = {
+      from:'"My Room" <my.room417@outlook.com>',
+      to: email,
+      subject: 'Welcome to MyRoom',
+      html: `
+        <html>
+          <div style="background: #eee; padding: 20px; border-radius: 20px;">
+            <h1>Welcome to MyRoom</h1>
+            <p>Please click the link below to activate your account.</p>
+            <a href="${config.CLIENT_URL}/auth/activate-account/${token}">Activate my account</a>
+            <p>&copy; ${new Date().getFullYear()}</p>
+          </div>
+        </html>
+      `,
+    };
+
+    transporter.sendMail(mailOptions , (err, info) => {
+      if (err) {
+        console.log(err);
+        return res.json({ error: "Something went wrong. Try again." });
       }
-    );
+      else{
+        console.log("verification email sent");
+      }
+
+    })
+
+    return res.json({ sucess: "Check your email to complete the registration" });
   } catch (err) {
     console.log(err);
     res.json({ error: "Something went wrong. Try again." });
@@ -145,10 +165,6 @@ export const login = async (req, res)=>{
         //find user by email
         const user = await User.findOne({email});
 
-
-        
-
-
         if (!user){
             return res.json ({error: "Could not find the user with provided email"});
         }
@@ -161,7 +177,6 @@ export const login = async (req, res)=>{
         tokenAndUserResponse(req, res, user, user.role);
         console.log(user.role)
   
-
     }
     catch(err){
       console.log(err)
@@ -189,24 +204,60 @@ export const forgotPassword = async (req, res) => {
       user.save();
 
       // send email
-      config.AWSSES.sendEmail(
-        emailTemplate(
-          email,
-          `
-        <p>Please click the link below to recover your account.</p>
-        <a href="${config.CLIENT_URL}/auth/access-account/${token}">Recover my account</a>
-    `,
-          config.REPLY_TO,
-          "Recover your account"
-        ),
-        (err, data) => {
-          if (err) {
-            return res.json({ error: "Provide a valid email address" });
-          } else {
-            return res.json({ ok:true });
-          }
-        }
-      );
+    //   config.AWSSES.sendEmail(
+    //     emailTemplate(
+    //       email,
+    //       `
+    //     <p>Please click the link below to recover your account.</p>
+    //     <a href="${config.CLIENT_URL}/auth/access-account/${token}">Recover my account</a>
+    // `,
+    //       config.REPLY_TO,
+    //       "Recover your account"
+    //     ),
+    //     (err, data) => {
+    //       if (err) {
+    //         return res.json({ error: "Provide a valid email address" });
+    //       } else {
+    //         return res.json({ ok:true });
+    //       }
+    //     }
+    //   );
+
+          // create nodemailer transporter
+    const transporter = nodemailer.createTransport({
+      service: 'hotmail',
+      auth: {
+          user: `${config.EMAIL_FROM}`,
+          pass: `${config.emailPassword}`
+      }});
+
+    // send email using nodemailer
+    const mailOptions = {
+      from:'"My Room" <my.room417@outlook.com>',
+      to: email,
+      subject: 'Recover your account',
+      html: `
+        <html>
+          <div style="background: #eee; padding: 20px; border-radius: 20px;">
+            <h1>Welcome to MyRoom</h1>
+            <p>Please click the link below to recover your.</p>
+            <a href="${config.CLIENT_URL}/auth/access-account/${token}">Recover my account</a>
+            <p>&copy; ${new Date().getFullYear()}</p>
+          </div>
+        </html>
+      `,
+    };
+
+    transporter.sendMail(mailOptions , (err, info) => {
+      if (err) {
+        console.log(err);
+        return res.json({ error: "Something went wrong. Try again." });
+      }
+      else{
+        return res.json({ ok:true });
+      }
+
+    })
     }
   } catch (err) {
     console.log(err);
@@ -354,5 +405,21 @@ export const updateProfile = async (req, res) => {
       
     }
   }
+  export const getUser = async (req, res) => {
+    const id = req.params.id;
+  
+    try {
+      const user = await User.findById(id);
+      if (user) {
+        const { password, ...rest } = user._doc;
+  
+        res.status(200).json(rest);
+      } else {
+        res.status(404).json("No such User");
+      }
+    } catch (error) {
+      res.status(500).json(error);
+    }
+  };
 
 

@@ -7,6 +7,9 @@ import SearchForm from "../components/forms/SearchForm.js";
 
 
 
+
+
+
 export default function Home() {
   // context
   // const [auth, setAuth] = useAuth();
@@ -16,6 +19,7 @@ export default function Home() {
   const [roomForRent, setRoomForRent] = useState();
   const [roomForSell, setRoomForSell] = useState();
 
+ 
   useEffect(() => {
     fetchAds();
   },[]);

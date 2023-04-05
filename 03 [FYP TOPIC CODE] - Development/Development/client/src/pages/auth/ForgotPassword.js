@@ -16,36 +16,58 @@ export default function ForgotPassword() {
 
 
 
-
   const handleSubmit = async (e) => {
     e.preventDefault();
-   try {
-      console.log(email, );
-   
-      const {data} = await axios.post('/forgot-password', {
+    try {
+      setLoading(true); // Move this line here
+      const { data } = await axios.post("/forgot-password", {
         email,
-        
       });
       console.log(data);
-      setLoading(true);
-
-      if(data?.error){
+  
+      if (data?.error) {
         toast.error(data.error);
-        setLoading(false);
-      }
-      else{
+      } else {
         toast.success("Password reset link sent to your email.");
-        setLoading(false);
         navigate("/");
       }
-     
     } catch (err) {
       console.log(err);
       toast.error("Something went wrong. Try again.");
+    } finally {
       setLoading(false);
-    
     }
   };
+  
+  // const handleSubmit = async (e) => {
+  //   e.preventDefault();
+  //  try {
+  //     console.log(email, );
+   
+  //     const {data} = await axios.post('/forgot-password', {
+  //       email,
+        
+  //     });
+  //     console.log(data);
+  //     setLoading(true);
+
+  //     if(data?.error){
+  //       toast.error(data.error);
+  //       setLoading(false);
+  //     }
+  //     else{
+  //       toast.success("Password reset link sent to your email.");
+  //       setLoading(false);
+  //       navigate("/");
+  //     }
+     
+  //   } catch (err) {
+  //     console.log(err);
+  //     toast.error("Something went wrong. Try again.");
+  //     setLoading(false);
+    
+  //   }
+  // };
     return (
       <div className="container-fluid">
         <div className="row">
@@ -74,7 +96,7 @@ export default function ForgotPassword() {
                           <div className="mb-3 d-flex flex-column forgotpw">
                             <Link to="/login">Back to Login</Link>
                           </div>
-                          <button type="submit" className="btn login-btn btn-primary">{loading ? "Waiting..." : "Recover"}</button>
+                          <button type="submit" className="btn login-btn btn-primary">{loading ? "Generating Recovery Link" : "Recover"}</button>
                         </form>
                       </div>
                   </div>

@@ -28,7 +28,7 @@ export default function AccessAccount() {
 
       setAuth(data);
       toast.success("Account recovered. Update your password.");
-      navigate("/");
+      navigate("/update-password");
     }
   };
 

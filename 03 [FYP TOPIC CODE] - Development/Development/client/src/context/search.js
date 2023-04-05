@@ -5,7 +5,7 @@ const SearchContext = createContext();
 
 const initialState = {
   address: "",
-  action: "Rent",
+  action: "Buy",
   type: "Apartment",
   price: "",
   priceRange: [0, 1000000],

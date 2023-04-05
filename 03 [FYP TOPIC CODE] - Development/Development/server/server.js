@@ -8,6 +8,9 @@ import mongoose from "mongoose";
 import {DATABASE} from "./config.js";
 import authRoutes from "./routes/auth.js";
 import adRoutes from "./routes/ad.js";
+import chatRoutes from "./routes/Chat.js";
+import messageRoutes from "./routes/message.js";
+
 
 //connecting the database
 mongoose.set('strictQuery',false);
@@ -28,6 +31,9 @@ app.use(cors());
 //routes middlewares
 app.use('/api',authRoutes);
 app.use('/api',adRoutes);
+app.use('/api',chatRoutes);
+app.use('/api',messageRoutes);
+
 
 
 
@@ -35,3 +41,4 @@ app.use('/api',adRoutes);
 
 
 app.listen(8000, ()=> console.log("Server running on port 8000"));
+

@@ -12,6 +12,7 @@ router.post('/forgot-password',controllers.forgotPassword);
 router.post('/access-account',controllers.accessAccount);
 router.get('/refresh-token',controllers.refreshToken);
 router.get('/current-user',requireSignin, controllers.currentUser);
+router.get('/getuser/:id',requireSignin, controllers.getUser);
 router.get('/profile/:username', controllers.publicProfile);
 router.put('/update-password',requireSignin, controllers.updatePassword);
 router.put('/update-profile',requireSignin, controllers.updateProfile);

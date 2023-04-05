@@ -45,6 +45,10 @@ p{
     font-family: 'sm';
 
 }
+.login-btn:focus {
+    /* Other button focus styles */
+    outline: none;
+  }
 
 .deletebtn {
     border: 1px solid #ff0000;
@@ -67,10 +71,7 @@ p{
     /* Other button focus styles */
     outline: none;
   }
-.login-btn:focus {
-    /* Other button focus styles */
-    outline: none;
-  }
+
 
 label{
     font-family: 'sm';
