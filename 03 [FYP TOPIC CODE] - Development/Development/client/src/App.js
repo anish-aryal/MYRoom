@@ -25,7 +25,7 @@ import SellApartment from "../src/components/forms/SellApartment.js";
 import SellRoom from "./components/forms/SellRoom";
 import RentRoom from "./components/forms/RentRoom";
 import RentApartment from "./components/forms/RentApartment";
-import Viewpage from "./pages/user/Ad/Viewpage";
+import Viewpage from "./pages/user/Ad/viewpage";
 import UpdateAd from "./pages/user/Ad/UpdateAd";
 import Dashboard from "../src/pages/user/Dashboard.js";
 import UserProfile from "../src/pages/user/UserProfile.js";
@@ -34,9 +34,11 @@ import Enquiries from "../src/pages/user/Enquiries";
 import UserList from "../src/pages/UserList.js";
 import Buy from "./pages/Buy";
 import Rent from "./pages/Rent";
+import ExpiredAdsPage from "./pages/user/ExpiredAds";
 
 // search
 import Search from "./pages/Search";
+
 
 
 
@@ -61,6 +63,7 @@ function MainWithRoutes() {
           <Route path="/ad/:slug" element={<Viewpage />}/>
           <Route path="/buy" element={<Buy />}/>
           <Route path="/rent" element={<Rent />}/>
+        
           <Route path="/search" element={<Search />}/>
     
           <Route path="/" element={<LoggedInRoute />}>
@@ -77,6 +80,7 @@ function MainWithRoutes() {
             <Route path="create/ad/rent/Apartment" element={<RentApartment />} />
             <Route path="userlist" element={<UserList />} />
             <Route path="chat" element={<Chat />} />
+            <Route path="expiredAds" element={<ExpiredAdsPage />} />
           
           </Route>
           

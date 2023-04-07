@@ -153,20 +153,25 @@ export default function Viewpage (){
                  
             </div>
             <div className="div">
-            { auth?.user?._id !== ad?.postedBy?._id ? (  <button
-                    onClick={() => {
-                      axios.post('/chat', { senderId: auth?.user?._id, receiverId: ad?.postedBy?._id })
-                      .then((response) => {
-                        console.log(response.data);
-                       
-                        navigate('/chat');
+            {auth?.user?._id !== ad?.postedBy?._id ? (
+              <button
+                onClick={() => {
+                  axios.post('/chat', { senderId: auth?.user?._id, receiverId: ad?.postedBy?._id })
+                  .then((response) => {
+                    console.log(response);
+                    navigate('/chat');
+                    toast.success('Seller Has been added to your chat list');
+                  })
+                  .catch((error) => {
+                    console.log(error);
+                  })
+                }}
+              >
+                Message
+              </button>
+            ) : ""}
 
-                        toast.success('Seller Has been added to your chat list');
-                      })
-                    }}
-                  >
-                    Message
-                  </button>) : ""}
+
             </div>
             
            

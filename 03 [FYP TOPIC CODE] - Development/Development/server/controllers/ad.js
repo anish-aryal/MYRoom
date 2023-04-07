@@ -4,6 +4,70 @@ import slugify from "slugify";
 import Ad from "../models/ad.js";
 import User from "../models/user.js";
 import {emailTemplate} from '../helpers/email.js';
+import cron from 'node-cron';
+import nodemailer from 'nodemailer';
+
+cron.schedule("0 0 * * *", async () => {
+  console.log("cron job is running");
+  const threeDaysAgo = new Date();
+  threeDaysAgo.setDate(threeDaysAgo.getDate() - 10);
+
+  const expiredAds = await Ad.find({ createdAt: { $lt: threeDaysAgo },isExpired:false });
+
+  // Update the expiredAds field for each user who posted an expired ad
+  for (const ad of expiredAds) {
+    const user = await User.findById(ad.postedBy);
+
+    if (user) {
+      // Only send email if the ad is being added to the expiredAds array for the first time
+      if (!user.expiredAds.includes(ad._id)) {
+        user.expiredAds.addToSet(ad._id);
+        await user.save();
+
+        try {
+          const transporter = nodemailer.createTransport({
+            service: 'hotmail',
+            auth: {
+                user: `${config.EMAIL_FROM}`,
+                pass: `${config.emailPassword}`
+            }
+          });
+  
+          // send email using nodemailer
+          const mailOptions = {
+            from: '"My Room" <my.room417@outlook.com>',
+            to: user.email,
+            subject: 'Your ad has expired',
+            html: `<p>Dear ${user.username}, <br>
+  
+            We are writing to let you know that your listing has expired.<br> <h1><a href="${config.CLIENT_URL}/ad/${ad.slug}">${ad.title}</a></h1><br>
+            
+            We thank you for using our platform to post your listing and we hope that you were able to connect with potential buyers or renters during the listing's active period.<br>
+            
+            Please feel free to post another ad in the future if you have additional rental or sale properties to list.<br>
+            
+            Thank you again for choosing My Room.<br>
+            
+            Best regards,
+            The My Room Team </p>`, 
+          };
+  
+          await transporter.sendMail(mailOptions);
+        } catch (err) {
+          console.log(err);
+        }
+      }
+    }
+
+    // Mark the ad as expired
+    ad.isExpired = true;
+    await ad.save();
+  }
+});
+
+
+
+
 
 
 export const uploadImage = async (req, res) => {
@@ -115,22 +179,22 @@ export const uploadImage = async (req, res) => {
 
   export const ads = async (req, res) => {
     try{
-      const apartmentForSell = await Ad.find({action: "Sell", type:"Apartment"})
+      const apartmentForSell = await Ad.find({action: "Sell", type:"Apartment",isExpired:false })
       .select("-googleMap -location -photo.Key -photo.key -photo.ETag ")
       .populate("postedBy", "firstname username email phone company")
       .sort({createdAt: -1}).limit(6).exec();
 
-      const apartmentForRent = await Ad.find({action: "Rent", type:"Apartment"})
+      const apartmentForRent = await Ad.find({action: "Rent", type:"Apartment",isExpired:false })
       .select("-googleMap -location -photo.Key -photo.key -photo.ETag ")
       .populate("postedBy", "firstname username email phone company")
       .sort({createdAt: -1}).limit(6).exec();
 
-      const roomForRent = await Ad.find({action: "Rent", type:"Room"})
+      const roomForRent = await Ad.find({action: "Rent", type:"Room",isExpired:false })
       .select("-googleMap -location -photo.Key -photo.key -photo.ETag ")
       .populate("postedBy", "firstname username email phone company")
       .sort({createdAt: -1}).limit(6).exec();
 
-      const roomForSell = await Ad.find({action: "Sell", type:"Room"})
+      const roomForSell = await Ad.find({action: "Sell", type:"Room", isExpired:false})
       .select("-googleMap -location -photo.Key -photo.key -photo.ETag ")
       .populate("postedBy", "firstname username email phone company")
       .sort({createdAt: -1}).limit(6).exec();
@@ -299,7 +363,7 @@ export const contactSeller= async (req, res) => {
           const apartmentSell = await Ad.find({
             postedBy: req.user._id,
             type: "Apartment",
-            action: "Sell"
+            action: "Sell", isExpired:false
           })
             .populate("postedBy", "firstname username email phone")
             .sort({ createdAt: -1 })
@@ -309,7 +373,7 @@ export const contactSeller= async (req, res) => {
           const apartmentRent = await Ad.find({
             postedBy: req.user._id,
             type: "Apartment",
-            action: "Rent"
+            action: "Rent", isExpired:false
           })
             .populate("postedBy", "firstname username email phone")
             .sort({ createdAt: -1 })
@@ -319,7 +383,7 @@ export const contactSeller= async (req, res) => {
           const roomSell = await Ad.find({
             postedBy: req.user._id,
             type: "Room",
-            action: "Sell"
+            action: "Sell", isExpired:false
           })
             .populate("postedBy", "firstname username email phone")
             .sort({ createdAt: -1 })
@@ -329,7 +393,7 @@ export const contactSeller= async (req, res) => {
           const roomRent = await Ad.find({
             postedBy: req.user._id,
             type: "Room",
-            action: "Rent"
+            action: "Rent", isExpired:false
           })
             .populate("postedBy", "firstname username email phone")
             .sort({ createdAt: -1 })
@@ -415,6 +479,20 @@ export const wishlist = async (req, res) => {
   }
 }
 
+export const expiredAds = async (req, res) => {
+  try {
+    const user = await User.findById(req.user._id);
+    const ads = await Ad.find({ _id: user.expiredAds }).sort({createdAt: -1})
+    res.json(ads);
+    console.log(user.expiredAds)
+  } catch (err) {
+    console.log(err);
+    
+  }
+}
+
+
+
 export const remove = async (req, res) => {
   try {
     const ad = await Ad.findById(req.params._id);
@@ -449,12 +527,12 @@ export const adsForRent = async (req, res) => {
   try{
   
 
-    const apartmentForRent = await Ad.find({action: "Rent", type:"Apartment"})
+    const apartmentForRent = await Ad.find({action: "Rent", type:"Apartment", isExpired:false})
     .select("-googleMap -location -photos.Key -photos.key -photos.ETag ")
     .populate("postedBy", "firstname username email phone company")
     .sort({createdAt: -1}).exec();
 
-    const roomForRent = await Ad.find({action: "Rent", type:"Room"})
+    const roomForRent = await Ad.find({action: "Rent", type:"Room", isExpired:false})
     .select("-googleMap -location -photos.Key -photos.key -photos.ETag ")
     .populate("postedBy", "firstname username email phone company")
     .sort({createdAt: -1}).exec();
@@ -470,12 +548,12 @@ export const adsForRent = async (req, res) => {
 
 export const adsForSell = async (req, res) => {
   try{
-    const apartmentForSell = await Ad.find({action: "Sell", type:"Apartment"})
+    const apartmentForSell = await Ad.find({action: "Sell", type:"Apartment", isExpired:false})
     .select("-googleMap -location -photos.Key -photos.key -photos.ETag ")
     .populate("postedBy", "firstname username email phone company")
     .sort({createdAt: -1}).exec();
 
-    const roomForSell = await Ad.find({action: "Sell", type:"Room"})
+    const roomForSell = await Ad.find({action: "Sell", type:"Room", isExpired:false})
     .select("-googleMap -location -photos.Key -photos.key -photos.ETag ")
     .populate("postedBy", "firstname username email phone company")
     .sort({createdAt: -1}).exec();

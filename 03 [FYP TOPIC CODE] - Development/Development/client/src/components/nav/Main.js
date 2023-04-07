@@ -44,7 +44,9 @@ export default function Main() {
         "/update-password",
         "/update/ad/:slug",
         "/wishlist",
-        "/enquiries"
+        "/enquiries",
+        "/expiredAds",
+        "/userlist",
     ];
     
     const location = useLocation();

@@ -2,6 +2,7 @@ import { NavLink } from "react-router-dom";
 import '../nav/sidebar.css'
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/auth";
+import {FcExpired} from 'react-icons/fc'
 
 
 
@@ -37,22 +38,18 @@ export default function Sidebar(){
               <i className="bi bi-fingerprint" /> MyRoom Users
             </NavLink>
           )}
-     
    
           <NavLink className="nav-link side-item mt-1" style={{color: '#303972'}} to="/chat"><i className="bi bi-wechat" />  Chat</NavLink>
-    
        
           <NavLink className="nav-link side-item mt-1" to="/create/ad"> <i className="bi bi-house-add" /> CreateAd</NavLink>
-      
+
+          <NavLink className="nav-link side-item " style={{marginTop: '-5px'}} to="/expiredAds"> <span className="mr-1" style={{fontSize: '26px'}}><FcExpired /></span> Expired Ads</NavLink>
      
           <NavLink className="nav-link side-item mt-1" to="/wishlist"> <i className="bi bi-heart-half"></i> Wishlist</NavLink>
-    
         
           <NavLink className="nav-link side-item mt-1 " to="/enquiries"> <i className="bi bi-envelope"></i> Enquiries</NavLink>
-    
 
           <NavLink className="nav-link side-item mt-1" to="/user/profile"> <i className="bi bi-person-fill-gear" />Update Profile</NavLink>
-   
    
           <NavLink className="nav-link side-item mt-1" to="/update-password"> <i className="bi bi-fingerprint" /> Password</NavLink>
 

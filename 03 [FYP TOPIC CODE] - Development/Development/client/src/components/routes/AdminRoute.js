@@ -16,7 +16,7 @@ const AdminRoute = () => {
     try {
       const { data } = await axios.get(`/current-user`, {
         headers: {
-          Authorization: auth?.token,
+          Authorization: auth?.token 
         },
       });
       if (data.role === "Admin") {

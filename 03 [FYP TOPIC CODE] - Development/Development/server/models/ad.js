@@ -1,4 +1,6 @@
 import { model, Schema, ObjectId } from "mongoose";
+import nodemailer from "nodemailer";
+import * as config from "../config.js";
 
 const schema = new Schema(
     {
@@ -19,10 +21,7 @@ const schema = new Schema(
             required: true,
             maxlength: 1000
         },
-        // pets: {
-        //     type: String,
-        //     enum: ['yes', 'no']
-        //   },
+       
         address: {
             type: String,
             required: true,
@@ -77,13 +76,19 @@ const schema = new Schema(
     views:{
         type: Number,
         default: 0,
-    }
-
+    },
+    isExpired:{
+        type: Boolean,
+        default: false}
     },
     { timestamps: true }
   );
   
 schema.index({ location: '2dsphere' });
+
+
+
+
 
 export default model("Ad", schema);
 

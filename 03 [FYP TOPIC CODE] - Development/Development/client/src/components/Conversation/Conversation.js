@@ -4,7 +4,7 @@ import axios from "axios";
 import { Avatar } from 'antd';
 import './Conversation.css'
 
-export default function Conversation({ data, currentUserId }) {
+export default function Conversation({ data, currentUserId, online }) {
 
     const [userData, setUserData] = useState(null);
 
@@ -43,7 +43,7 @@ export default function Conversation({ data, currentUserId }) {
             <div className="d-flex flex-column">
 
                 <div className="sm ml-2 chatname">{userData?.firstname} {userData?.lastname}</div>
-                <div className=" status text-left ml-2">Online</div>
+               {online? (<div className=" status text-left ml-2"> 🟢 Online</div>) : (<div className=" status text-left ml-2">🔴 Offline</div>)}
            
             </div>
             </div>

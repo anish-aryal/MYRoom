@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import Card from "../components/card.js";
 import SearchForm from "../components/forms/SearchForm.js";
+import { useAuth } from "../context/auth.js";
 
 
 
@@ -18,6 +19,8 @@ export default function Home() {
   const [apartmentForSell, setApartmentForSell] = useState();
   const [roomForRent, setRoomForRent] = useState();
   const [roomForSell, setRoomForSell] = useState();
+
+  const [auth, setAuth] = useAuth();
 
  
   useEffect(() => {
@@ -113,7 +116,7 @@ export default function Home() {
 
          
              
-          {/* <pre>{JSON.stringify(auth.user, null, 2)}</pre> */}
+          <pre>{JSON.stringify(auth.user, null, 2)}</pre>
   </div>
 
   

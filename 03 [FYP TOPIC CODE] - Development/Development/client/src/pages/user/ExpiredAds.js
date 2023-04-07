@@ -16,7 +16,7 @@ export default function Wishlist() {
   
     const fetchWishlist = async () => {
       try {
-        const { data } = await axios.get(`/wishlist`);
+        const { data } = await axios.get(`/expiredAds`);
         setAds(data);
         console.log(data)
 
@@ -35,7 +35,7 @@ export default function Wishlist() {
                 <div className ="col-9 col-lg-10 pl-0 pr-5">
                     <div className="row"></div>
                     <div className="col-10 mt-5 ">
-                            <h1 className="adH1">WishList</h1>
+                            <h1 className="adH1">Expired Ads</h1>
                             <p className="w-75 adP"> All the ads you liked are showcased here. </p>
                         </div>
                 {ads?.length > 0 ?(     
@@ -46,13 +46,13 @@ export default function Wishlist() {
                             </>
                         ))}
                     </div>) :<div className="d-flex justify-content-center nothinghight align-items-center">
-                                <p className="  sl btn-shine text-animation" target="_blank">No Ads to display</p>
+                                <p className="  sl btn-shine text-animation" target="_blank">No Ads have been expired Yet.</p>
                             </div>}
                 </div>
                 
 
             </div>
-                
+            {/* <pre>{JSON.stringify(auth.user, null, 2)}</pre> */}
       </div>
         
     );

@@ -31,6 +31,10 @@ const schema = new Schema(
       required: true,
       maxlength: 256,
     },
+    isBanned: {
+      type: Boolean,
+      default: false,
+    },
     address: { type: String, default: "" },
     phone: { 
       type: String, 
@@ -44,12 +48,12 @@ const schema = new Schema(
     },
     enquiredProperties: [{ type: ObjectId, ref: "Ad" }],
     wishlist: [{ type: ObjectId, ref: "Ad" }],
+    expiredAds: [{ type: ObjectId, ref: "Ad" }],
     resetCode: {
         type: String, default: "",
     },
   },
   { timestamps: true }
 );
-
 
 export default model("User", schema);

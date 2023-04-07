@@ -9,16 +9,12 @@ import Ad from '../models/ad.js';
 import nodemailer from 'nodemailer';
 
 
-
-
-
-
 const tokenAndUserResponse = (req,res,user,role) =>{
-    const token = jwt.sign({ _id: user._id}, config.JWT_SECRET,{
+    const token = jwt.sign({ _id: user._id,role: role}, config.JWT_SECRET,{
         expiresIn: '1h',
     });
 
-    const refreshToken = jwt.sign({ _id: user._id}, config.JWT_SECRET,{
+    const refreshToken = jwt.sign({ _id: user._id,role: role}, config.JWT_SECRET,{
         expiresIn: '7d',
     });
 
@@ -152,9 +148,6 @@ export const register = async (req, res)=>{
         return res.json({ error: "Something went wrong. Try again."})
     }
 };
-
-
-
 
 // Login User Controller
 export const login = async (req, res)=>{
@@ -357,23 +350,27 @@ export const updatePassword = async (req, res) => {
   // controllers/auth
 // name username company image phone about
 export const updateProfile = async (req, res) => {
-    try {
-      const user = await User.findByIdAndUpdate(req.user._id,req.body,
-        { new: true }
-      );
-  
-      user.password = undefined;
-      user.resetCode = undefined;
-      res.json(user);
-    } catch (err) {
-      console.log(err);
-      if (err.codeName === "DuplicateKey") {
-        return res.status(403).json({ error: "Username or phone number must be unique.  " });
-      } else {
-        return res.status(403).json({ error: "Unauhorized" });
-      }
+  try {
+    const user = await User.findByIdAndUpdate(
+      req.user._id,
+      {
+        ...req.body,
+      },
+      { new: true }
+    );
+
+    user.password = undefined;
+    user.resetCode = undefined;
+    res.json(user);
+  } catch (err) {
+    console.log(err);
+    if (err.codeName === "DuplicateKey") {
+      return res.status(403).json({ error: "Username is taken" });
+    } else {
+      return res.status(403).json({ error: "Unauhorized" });
     }
-  };
+  }
+};
 
   export const users = async (req, res) => {
     try {
@@ -386,15 +383,26 @@ export const updateProfile = async (req, res) => {
     }
   }
 
+  // export const userad = async (req, res) => {
+  //   try {
+  //     const ads = await Ad.find({postedBy: req.params._id}).select('_id');
+  //     res.json(ads);
+  //   } catch (err) {
+  //     console.log(err);
+      
+  //   }
+  // }
+
   export const userad = async (req, res) => {
     try {
-      const ads = Ad.find({postedBy: req.params._id}).select('_id');
+      const ads = await Ad.find({ postedBy: req.params._id });
       res.json(ads);
     } catch (err) {
       console.log(err);
-      
+      res.status(500).json({ error: 'Server error' });
     }
   }
+  
   export const user = async (req, res) => {
     try {
       const user = await User.findOne({username: req.params.username}).select("-password -resetCode -role -enquiredProperties -wishlist ");
@@ -421,5 +429,29 @@ export const updateProfile = async (req, res) => {
       res.status(500).json(error);
     }
   };
+
+
+export const banUser = async (req, res) => {
+  console.log("banuser request made");
+  try {
+    const { userId } = req.params;
+
+     const user = await User.findByIdAndUpdate(
+      userId,
+      {
+        isBanned: true,
+      }
+    );
+  
+    if (!user) {
+      return res.status(404).json({ error: 'User not found' });
+    }
+
+    return res.json({ message: 'User banned successfully' });
+  } catch (err) {
+    console.log(err);
+    return res.status(500).json({ error: 'Something went wrong. Try again.' });
+  }
+};
 
 

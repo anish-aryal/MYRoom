@@ -14,7 +14,6 @@ export default function UserProfile() {
     const [auth, setAuth] = useAuth();
     const [username ,setUsername] = useState("");
     const [firstname ,setFirstname] = useState("");
- 
     const [lastname ,setLastname] = useState("");
     const [email ,setEmail] = useState("");
     const [phone ,setPhone] = useState("");
@@ -35,36 +34,42 @@ export default function UserProfile() {
             setAddress(auth.user?.phone);
             setPhoto(auth.user?.photo);
         }
-    },[]);
+    },[auth.user]);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        try{
-            // console.log({username,firstname,lastname,email,phone,address})
-            setLoading(true)
-            const {data} = await axios.put(`/update-profile`, {username,firstname,lastname,email,phone,address,photo});
-            if (data?.error){
-                toast.error(data.error);
-            }
-            else{
-                setAuth({...auth, user: data})
-                console.log("Profile Updated")
-                
-
-                let localStorageData = JSON.parse(localStorage.getItem("auth"));
-                localStorageData.user = data;
-                localStorage.setItem("auth", JSON.stringify(localStorageData));
-                setLoading(false);
-                toast.success("Profile Updated Sucessfully")
-            }
+        try {
+          setLoading(true);
+          // console.log(username, name, email, company, address, phone, about, photo);
+          const { data } = await axios.put("/update-profile", {
+            username,
+            firstname,
+            email,
+            lastname,
+            address,
+            phone,
+            photo,
+          });
+          
+          if (data?.error) {
+            toast.error(data?.error);
+            setLoading(false);
+          } else {
+            console.log("profile update response => ", data);
+            setAuth({ ...auth, user: data });
+    
+            let fromLS = JSON.parse(localStorage.getItem("auth"));
+            fromLS.user = data;
+            localStorage.setItem("auth", JSON.stringify(fromLS));
+            setLoading(false);
+            toast.success("Profile updated");
+          }
+        } catch (err) {
+          console.log(err);
+          toast.error('username is already taken');
+          setLoading(false);
         }
-        catch(err){
-            console.log(err)
-
-        }
-    }
-
-
+      };
     
     return (
     <div className="container-fluid">
@@ -114,7 +119,7 @@ export default function UserProfile() {
                         <div className='d-flex col-6 mb-4 flex-column'>
                           <label htmlFor="phonelabel" className="form-label" >Phone Number: {auth.user?.phone}</label>
                           <input type="number" className=" login-input" id="inputphone" placeholder='Phone number' aria-describedby="PhoneNumber" 
-                            value={phone}
+                    
                             onChange={(e) => setPhone(slugify(e.target.value.toLowerCase()))}
                             autoFocus/>
                         </div>

@@ -1,6 +1,6 @@
 import React, { useRef } from 'react';
 import './Chat.css';
-import {useState, useEffect, useCallback} from 'react';
+import {useState, useEffect} from 'react';
 import { useAuth } from '../../context/auth';
 import axios from 'axios';
 import Conversation from '../../components/Conversation/Conversation';
@@ -61,6 +61,13 @@ export default function Chat(){
         getChats();
     },[auth?.user]);
 
+    const checkOnline = (chat) => {
+        const chatMembers = chat?.members?.find((member) => member !== auth?.user?._id);
+        const check = onlineUsers?.find((user) => user.userId === chatMembers);
+        return check ? true : false;
+
+    }
+
     return(
         <div className="container">
                 <h2>Chats</h2>
@@ -70,7 +77,7 @@ export default function Chat(){
                         <div className=" bg-white">
                         {chats.map((chat) => (
                             <div className='Chat-list px-5 py-4'onClick={()=>setCurrentChat(chat)} >
-                                <Conversation  data ={chat} currentUserId={auth?.user?._id} key={auth?.user?._id} />
+                                <Conversation  data ={chat} currentUserId={auth?.user?._id} key={auth?.user?._id} online ={checkOnline(chat)} />
                             </div>
                         ))}
                         </div>
@@ -79,7 +86,7 @@ export default function Chat(){
                             <div className="row">
                             <div className="container">
                                 <div className="text-center">
-                                    <ChatBox chat ={currentChat} currentUser={auth?.user?._id} setSendMessage={setSendMessage} receiveMessage={receiveMessage} />
+                                    <ChatBox chat ={currentChat} currentUser={auth?.user?._id} setSendMessage={setSendMessage} receiveMessage={receiveMessage}  />
                                 </div>
                              </div>
                             </div>

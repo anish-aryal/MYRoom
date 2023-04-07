@@ -18,6 +18,7 @@ router.get("/ad/:slug", ad.read);
 router.post("/wishlist", requireSignin, ad.addToWishlist);
 router.get("/enquiredByUser",requireSignin, ad.enquiredByUser);
 router.get("/wishlist",requireSignin, ad.wishlist);
+router.get("/expiredAds",requireSignin, ad.expiredAds);
 router.delete("/wishlist/:adId", requireSignin, ad.removeFromWishlist);
 router.get('/ads-for-rent', ad.adsForRent);
 router.get('/ads-for-sell', ad.adsForSell);

@@ -1,6 +1,7 @@
 import express from "express"
 import * as controllers from "../controllers/auth.js"
 import { requireSignin } from "../middlewares/auth.js";
+import {requireAdmin} from "../middlewares/admin.js";
 
 const router =  express.Router();
 
@@ -17,7 +18,8 @@ router.get('/profile/:username', controllers.publicProfile);
 router.put('/update-password',requireSignin, controllers.updatePassword);
 router.put('/update-profile',requireSignin, controllers.updateProfile);
 router.get('/users',requireSignin, controllers.users);
-router.get('/user-ad-count/:_id',requireSignin, controllers.userad);
-router.get('/user/:username',requireSignin, controllers.user);
+router.get('/user-ad-count/:_id',requireAdmin, controllers.userad);
+router.put('/banuser/:userId',requireAdmin, controllers.banUser);
+router.get('/user/:username',requireAdmin, controllers.user);
 
 export default router;

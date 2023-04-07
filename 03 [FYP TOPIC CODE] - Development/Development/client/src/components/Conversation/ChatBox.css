@@ -1,46 +1,20 @@
 .Ownmessageown{
-    background-color: #e6e6e6;
-    border-radius: 10px;
-    padding: 10px;
     margin: 10px;
     width: 50%;
     float: right;
-    text-align: right;
     font-size: 15px;
-    color: #000000;
-    word-wrap: break-word;
-    word-break: break-all;
-    overflow-wrap: break-word;
-    overflow: hidden;
-    white-space: pre-wrap;
-    word-wrap: break-word;
-    -webkit-hyphens: auto;
-    -moz-hyphens: auto;
-    -ms-hyphens: auto;
-    hyphens: auto;
+    color: #ffffff;
+   
 }
 .sendersMessage{
-    background-color: #e6e6e6;
-    border-radius: 10px;
-    padding: 10px;
+ 
     margin: 10px;
     width: 50%;
     float: left;
     text-align: left;
     font-size: 15px;
-    font-family: 'Roboto', sans-serif;
-    font-weight: 500;
     color: #000000;
-    word-wrap: break-word;
-    word-break: break-all;
-    overflow-wrap: break-word;
-    overflow: hidden;
-    white-space: pre-wrap;
-    word-wrap: break-word;
-    -webkit-hyphens: auto;
-    -moz-hyphens: auto;
-    -ms-hyphens: auto;
-    hyphens: auto;
+  
 }
 .chattimepassed{
     font-size: 10px;
@@ -54,6 +28,18 @@
 .chat-body{
     height:400px !important;
     overflow-y: scroll;
+}
+.messagesent{
+    background: linear-gradient(90deg, rgba(164, 98, 233, 0.7) 20%, rgba(111, 27, 197, 0.8) 90%);
+    border-top-right-radius: 25px;
+    border-top-left-radius: 30px;
+    border-bottom-left-radius: 30px;
+}
+.messagereceived{
+    background: linear-gradient(90deg, rgba(192, 190, 192, 0.7) 20%, rgba(193, 193, 194, 0.8) 90%);
+    border-top-left-radius: 25px;
+    border-top-right-radius: 30px;
+    border-bottom-right-radius: 30px;
 }
 
 
@@ -71,3 +57,15 @@
     /* Other button focus styles */
     outline: none;
   }
+.delivered{
+    font-size: 10px;
+    font-weight: 500;
+    color: #828080;
+    font-family: 'sm';
+    padding: 0px;   
+}
+
+.chatbox-container{
+    border: 1px solid black;
+    padding: 20px 0px;
+}
