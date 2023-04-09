@@ -1,13 +1,14 @@
-// components/routes/PrivateRoute.js
 import { useEffect, useState } from "react";
-import { Outlet } from "react-router-dom";
+import { Outlet, Navigate } from "react-router-dom";
 import { useAuth } from "../../context/auth";
 import axios from "axios";
 import Nopermission from "./Nopermission";
 
+
 const LoggedInRoute = () => {
   const [auth, setAuth] = useAuth();
   const [ok, setOk] = useState(false);
+  const [isBanned, setIsBanned] = useState(false);
 
   useEffect(() => {
     if (auth?.token) getCurrentUser();
@@ -20,11 +21,16 @@ const LoggedInRoute = () => {
           Authorization: auth?.token,
         },
       });
+      setIsBanned(data.isBanned);
       setOk(true);
     } catch (err) {
       setOk(false);
     }
   };
+
+  if (isBanned) {
+    return <Navigate to="/banned" />;
+  }
 
   return ok ? <Outlet /> : <Nopermission />;
 };

@@ -515,7 +515,17 @@ export const remove = async (req, res) => {
           }
         });
       });
+      
       await Ad.findByIdAndRemove(ad._id);
+      
+      // Remove the ad from the wishlist of all users who added it
+      const users = await User.find({ wishlist: ad._id });
+      for (const user of users) {
+        await User.findByIdAndUpdate(user._id, { $pull: { wishlist: ad._id } });
+      }
+      
+      await User.findByIdAndUpdate(req.user._id, { $pull: { expiredAds: ad._id } });
+      
       res.json({ ok: true });
     }
   } catch (err) {
@@ -523,13 +533,14 @@ export const remove = async (req, res) => {
   }
 }
 
+
 export const adsForRent = async (req, res) => {
   try{
   
 
-    const apartmentForRent = await Ad.find({action: "Rent", type:"Apartment", isExpired:false})
+    const apartmentForRent = await Ad.find({action: "Rent", type:"Apartment", isExpired:false,})
     .select("-googleMap -location -photos.Key -photos.key -photos.ETag ")
-    .populate("postedBy", "firstname username email phone company")
+    .populate("postedBy", "firstname username email phone company ")
     .sort({createdAt: -1}).exec();
 
     const roomForRent = await Ad.find({action: "Rent", type:"Room", isExpired:false})
@@ -548,7 +559,7 @@ export const adsForRent = async (req, res) => {
 
 export const adsForSell = async (req, res) => {
   try{
-    const apartmentForSell = await Ad.find({action: "Sell", type:"Apartment", isExpired:false})
+    const apartmentForSell = await Ad.find({action: "Sell", type:"Apartment", isExpired:false,})
     .select("-googleMap -location -photos.Key -photos.key -photos.ETag ")
     .populate("postedBy", "firstname username email phone company")
     .sort({createdAt: -1}).exec();
@@ -603,6 +614,57 @@ export const search = async (req, res) => {
   }
 }
 
+export const Repost = async (req, res) => {
+  try {
+    const { title, photos, price, type, address, description } = req.body;
+
+    let ad = await Ad.findById(req.params._id);
+
+    const owner = req.user._id == ad?.postedBy;
+    if (!owner) {
+      return res.json({ error: "Permission denied" });
+    } else {
+      if (!title) {
+        return res.json({ error: "Enter the title for the Ad" });
+      }
+      if (!photos?.length) {
+        return res.json({ error: "Photos are required" });
+      }
+      if (!price) {
+        return res.json({ error: "Price is required" });
+      }
+      if (!type) {
+        return res.json({ error: "Is property house or land?" });
+      }
+      if (!address) {
+        return res.json({ error: "Address is required" });
+      }
+      if (!description) {
+        return res.json({ error: "Description is required" });
+      }
+
+      const geography = await config.Google_Geocoder.geocode(address);
+
+      await ad.updateOne({
+        ...req.body,
+        postedBy: req.user._id,
+        slug: slugify(`${title}-${nanoid(8)}`),
+        location: {
+          type: "Point",
+          coordinates: [geography[0]?.longitude, geography[0].latitude],
+        },
+        createdAt: new Date(),
+        isExpired: false,
+      });
+
+      await User.findByIdAndUpdate(req.user._id, { $pull: { expiredAds: ad._id } });
+
+      res.json({ ok: true });
+    }
+  } catch (err) {
+    console.log(err);
+  }
+};
 
     
       

@@ -20,6 +20,8 @@ router.put('/update-profile',requireSignin, controllers.updateProfile);
 router.get('/users',requireSignin, controllers.users);
 router.get('/user-ad-count/:_id',requireAdmin, controllers.userad);
 router.put('/banuser/:userId',requireAdmin, controllers.banUser);
-router.get('/user/:username',requireAdmin, controllers.user);
+router.put('/report/:userId',requireSignin, controllers.Report);
+router.put('/examine/:userId',requireAdmin, controllers.examine);
+router.get('/user/:username',requireSignin, controllers.user);
 
 export default router;

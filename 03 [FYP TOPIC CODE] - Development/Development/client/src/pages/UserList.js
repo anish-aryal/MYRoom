@@ -88,13 +88,15 @@ export default function UserList() {
     {
       name: "Phone",
       selector: (row) => row.phone,
+    
       sortable: true,
       cell: (row) => <div className="sm">{row.phone}</div>
     },
     {
-      name: "Ads Posted",
+      name: "Ads",
       selector: (row) => row.adCount,
       sortable: true,
+      width: "80px",
       cell: (row) => <div className="sm">{row.adCount}</div>,
     },
     
@@ -112,12 +114,32 @@ export default function UserList() {
   
     },
     {
-      name: "Ban/Unban",
+      name: "Status",
+      selector: (row) => row.isReported,
+      sortable: true,
+      cell: (row) => (
+        <>
+          {row.isReported ? (
+            <span className="text-danger">Reported</span>
+          ) : (
+            <span className="text-success">Okay</span>
+          )}
+        </>
+      ),
+    },
+    {
+      name: "Action",
       sortable: false,
       cell: (row) => (
-        <div>
-          <button className="btn btn-danger" onClick={() => handleBan(row)}>Ban</button>
-          <button className="btn btn-primary" >Unban</button>
+        <div className="">
+     
+        <button className={`${row.isBanned ? "btn btn-primary" : "btn btn-danger"}`} onClick={() => handleBan(row)}>
+          {row.isBanned ? "Unblock" : "Block"}
+        </button>
+
+        {row.isReported && !row.isBanned ? ( <button className="btn btn-primary" onClick={()=>handleUnReport(row)}>Examined</button>):''}
+       
+
         </div>
       )
     }
@@ -143,11 +165,10 @@ export default function UserList() {
 
   const handleBan = async (row) => {
     try {
-
       await axios.put(`/banuser/${row._id}`);
       const updatedUsers = users.map((user) => {
         if (user._id === row._id) {
-          return { ...user, isBanned: true };
+          return { ...user, isBanned: !user.isBanned };
         }
         return user;
       });
@@ -156,19 +177,37 @@ export default function UserList() {
       console.log(err);
     }
   };
-  
+  const handleUnReport= async (row) => {
+    try {
+      await axios.put(`/examine/${row._id}`);
+      const updatedUsers = users.map((user) =>{
+        if (user._id === row._id) {
+          return { ...user, isReported: false };
+        }
+        return user;
+      })
+      setUsers(updatedUsers);
+      
+    } catch (error) {
+      console.error();
+      
+    }
+  }
+
   return (
     <div className="container-fluid">
-    <div className="row">
-        
-        <div className ="col-3 col-lg-2  p-0 justify-content-center"> <div><Sidebar /></div></div>
-        
-            <div className ="col-9 col-lg-10 pl-0 pr-5">
-              <div className="container">
-                  <div className="apartmentsForSell">
-                    <h6>MyRoom User List</h6>
+        <div className="row">
+            
+            <div className ="col-3 col-lg-2  p-0 justify-content-center"> <div><Sidebar /></div></div>
+            
+                <div className ="col-9 col-lg-10 pl-0 pr-5">
+                    <div className="row"></div>
+                    <div className="col-10 mt-5 ">
+                            <h1 className="adH1">MyRoom User List</h1>
+                            <p className="w-75 adP"> All new Conversation starts from the top. </p>
+                        </div>
                     <div className="mb-3">
-                      <input
+                      <input className="sm"
                         type="text"
                         placeholder="Search for a user..."
                         value={searchQuery}
@@ -184,6 +223,7 @@ export default function UserList() {
                       paginationPerPage={10}
                       paginationRowsPerPageOptions={[10, 20, 30]}
                       noHeader
+                      pointerOnHover
                       highlightOnHover
                       onRowClicked={handleRowClick}
                       style={{ maxWidth: "100%", overflowX: "auto" }}
@@ -191,9 +231,9 @@ export default function UserList() {
                   </div>
                 </div>
               </div>
-        </div>
-        {/* <pre>{JSON.stringify(auth.user, null, 2)}</pre> */}
-  </div>
+
+        // {/* <pre>{JSON.stringify(auth.user, null, 2)}</pre> */}
+
    
   );
 };

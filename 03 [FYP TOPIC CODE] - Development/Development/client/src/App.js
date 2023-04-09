@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route,useLocation } from "react-router-dom";
 import { AuthProvider } from "./context/auth";
 import Main from "./components/nav/Main";
 // import Cards from './components/Card';
@@ -35,6 +35,12 @@ import UserList from "../src/pages/UserList.js";
 import Buy from "./pages/Buy";
 import Rent from "./pages/Rent";
 import ExpiredAdsPage from "./pages/user/ExpiredAds";
+import PageNotFound from "./components/routes/PageNotFound";
+import RepostAd from "./pages/user/Ad/RepostAd";
+import Banned from "./components/routes/Banned";
+import AdminRoute from "./components/routes/AdminRoute";
+import { useAuth } from "./context/auth";
+import Publicprofile from "./pages/Publicprofile";
 
 // search
 import Search from "./pages/Search";
@@ -44,28 +50,27 @@ import Search from "./pages/Search";
 
 
 function MainWithRoutes() {
-
- 
+  const [auth, setAuth] = useAuth();
   
-
   return (
     <>
       <Main />
       <Toaster />
       {/* <Cards /> */}
       <Routes>
-          <Route path="/" element={<Home />} />
+
+       
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/auth/activate-account/:token" element={<ActivateAccount />} />
           <Route path="/auth/access-account/:token" element={<AccessAccount />}/>
           <Route path="/auth/forgot-password" element={<ForgotPassword />}/>
-          <Route path="/ad/:slug" element={<Viewpage />}/>
+          <Route path="/banned" element={<Banned />}/>
+          <Route path="/search" element={<Search />}/>
+          <Route path="/" element={<Home />} />
           <Route path="/buy" element={<Buy />}/>
           <Route path="/rent" element={<Rent />}/>
-        
-          <Route path="/search" element={<Search />}/>
-    
+
           <Route path="/" element={<LoggedInRoute />}>
             <Route path="dashboard" element={<Dashboard />} />
             <Route path="create/ad" element={<AdCreate />}/>
@@ -73,18 +78,23 @@ function MainWithRoutes() {
             <Route path="/enquiries" element={<Enquiries />}/>
             <Route path="user/profile" element={<UserProfile />}/>
             <Route path="update/ad/:slug" element={<UpdateAd />}/>
+            <Route path="repost/ad/:slug" element={<RepostAd />}/>
             <Route path="update-password" element={<UpdatePassword />}/>
             <Route path="create/ad/sell/Apartment" element={<SellApartment />} />
+            <Route path="/ad/:slug" element={<Viewpage />}/>
             <Route path="create/ad/sell/Room" element={<SellRoom />} />
             <Route path="create/ad/rent/Room" element={<RentRoom />} />
             <Route path="create/ad/rent/Apartment" element={<RentApartment />} />
-            <Route path="userlist" element={<UserList />} />
             <Route path="chat" element={<Chat />} />
             <Route path="expiredAds" element={<ExpiredAdsPage />} />
-          
+            <Route path="user/:username" element={<Publicprofile />} />
           </Route>
-          
-          
+
+          <Route path="/" element={<AdminRoute />}>
+            <Route path="userlist" element={<UserList />} />
+          </Route>
+
+            <Route path="*" element={<PageNotFound />} />
         </Routes>
     </>
   );
@@ -97,6 +107,8 @@ function App() {
         <SearchProvider>
         <Routes>
           <Route path="/*" element={<MainWithRoutes />} />
+
+       
         </Routes>
         </SearchProvider>
       </AuthProvider>

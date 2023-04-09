@@ -54,6 +54,10 @@ const schema = new Schema(
                 default: [85.300140,27.700769],
             }
         },
+        userisBanned: {
+            type: Boolean,
+            default: false,
+        },
         slug: {
             type: String,
             lowercasr: true,

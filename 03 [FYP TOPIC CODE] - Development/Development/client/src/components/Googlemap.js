@@ -20,6 +20,49 @@ export default function Googlemap({ ad }) {
   const [selectedMarkerPosition, setSelectedMarkerPosition] = useState(null);
   const [showSchools, setShowSchools] = useState(false);
   const [showHospitals, setShowHospitals] = useState(false);
+  const [selectedCollege, setSelectedCollege] = useState(null);
+  const [selectedMart, setSelectedMart] = useState(null);
+  const [showCollege, setShowCollege] = useState(false);
+  const [showMart, setShowMart] = useState(false);
+
+
+
+
+  // Clear the selected hospital's name after 2 seconds
+  useEffect(() => {
+    if (selectedHospital || selectedSchool) {
+      const timer = setTimeout(() => {
+        setSelectedHospital(null);
+        setSelectedSchool(null);
+        setSelectedMarkerPosition(null);
+      }, 2000);
+      return () => clearTimeout(timer);
+    }
+  }, [selectedHospital, selectedSchool]);
+
+  // Fetch nearby hospitals using the Google Maps API
+  useEffect(() => {
+    if ((showHospitals || showSchools) && window.google && window.google.maps) {
+      const map = new window.google.maps.Map(document.createElement('div'));
+      const service = new window.google.maps.places.PlacesService(map);
+      service.nearbySearch(
+        {
+          location: center,
+          radius: 1000, // 1 km radius
+          type: showHospitals ? 'hospital' :['school'],
+        },
+        (results, status) => {
+          if (status === window.google.maps.places.PlacesServiceStatus.OK) {
+            if (showHospitals) {
+              setHospitals(results);
+            } else {
+              setSchools(results);
+            }
+          }
+        }
+      );
+    }
+  }, [showHospitals, showSchools, center]);
 
 
   // Clear the selected hospital's name after 2 seconds

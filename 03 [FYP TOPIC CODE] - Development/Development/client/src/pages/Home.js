@@ -45,14 +45,7 @@ export default function Home() {
   return (
    
     <div className="container mt-4">
-      <div className="row  homebanner">
-        <div className="col-12 d-flex pt-5 pb-5 mt-5 mb-5 justify-content-center searchbox relative">
-         
-              <SearchForm className="pt-5  pb-5 "/>
-
-           
-        </div>
-      </div>
+        <SearchForm className="pt-5  pb-5 "/>
             
        <div className="apartmentsForSell mt-5 pt-3" >
 

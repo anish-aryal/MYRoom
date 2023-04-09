@@ -1,20 +1,20 @@
 // pages/user/ad/AdCreate.js
 import axios from "axios";
 import { useEffect, useState } from "react";
-import Card from "../../components/card";
+import ExpiredCard from "../../components/ExpiredCard";
 import { useAuth } from "../../context/auth";
 import Sidebar from "../../components/nav/sidebar";
 
-export default function Wishlist() {
+export default function ExpiredAds() {
     const [auth, setAuth] = useAuth();
     // state
     const [ads, setAds] = useState([]);
   
     useEffect(() => {
-      if (auth?.token) fetchWishlist();
+      if (auth?.token) fetchExpiredAds();
     }, [auth?.token]);
   
-    const fetchWishlist = async () => {
+    const fetchExpiredAds = async () => {
       try {
         const { data } = await axios.get(`/expiredAds`);
         setAds(data);
@@ -42,7 +42,7 @@ export default function Wishlist() {
                      <div className="row">
                         {ads?.map((ad) => (
                             <>
-                            <Card ad={ad} key={ad._id} />
+                            <ExpiredCard ad={ad} key={ad._id} />
                             </>
                         ))}
                     </div>) :<div className="d-flex justify-content-center nothinghight align-items-center">

@@ -196,7 +196,7 @@ export const forgotPassword = async (req, res) => {
       user.resetCode = resetCode;
       user.save();
 
-      // send email
+    // send email
     //   config.AWSSES.sendEmail(
     //     emailTemplate(
     //       email,
@@ -431,15 +431,64 @@ export const updateProfile = async (req, res) => {
   };
 
 
-export const banUser = async (req, res) => {
-  console.log("banuser request made");
+  // export const banUser = async (req, res) => {
+  //   console.log("banuser request made");
+  //   try {
+  //     const { userId } = req.params;
+  
+  //      const user = await User.findByIdAndUpdate(
+  //       userId,
+  //       {
+  //         isBanned: true,
+  //       }
+  //     );
+    
+  //     if (!user) {
+  //       return res.status(404).json({ error: 'User not found' });
+  //     }
+  
+  //     return res.json({ message: 'User banned successfully' });
+  //   } catch (err) {
+  //     console.log(err);
+  //     return res.status(500).json({ error: 'Something went wrong. Try again.' });
+  //   }
+  // };
+  export const banUser = async (req, res) => {
+    console.log("banuser request made");
+    try {
+      const { userId } = req.params;
+  
+      const user = await User.findById(userId);
+      if (!user) {
+        return res.status(404).json({ error: 'User not found' });
+      }
+  
+      user.isBanned = !user.isBanned;
+      await user.save();
+
+       // Update userisBanned status to true in all ads posted by the user
+       if (user.isBanned) {
+        await Ad.updateMany({ postedBy: user._id }, { userisBanned: true });
+      } else {
+        await Ad.updateMany({ postedBy: user._id }, { userisBanned: false });
+      }
+  
+      return res.json({ message: `User ${user.isBanned ? 'banned' : 'unbanned'} successfully` });
+    } catch (err) {
+      console.log(err);
+      return res.status(500).json({ error: 'Something went wrong. Try again.' });
+    }
+  };
+
+export const Report = async (req, res) => {
+  console.log("Reoprt request made");
   try {
     const { userId } = req.params;
 
      const user = await User.findByIdAndUpdate(
       userId,
       {
-        isBanned: true,
+        isReported: true,
       }
     );
   
@@ -454,4 +503,25 @@ export const banUser = async (req, res) => {
   }
 };
 
+export const examine = async (req, res) => {
+  console.log("Reoprt request made");
+  try {
+    const { userId } = req.params;
 
+     const user = await User.findByIdAndUpdate(
+      userId,
+      {
+        isReported: false,
+      }
+    );
+  
+    if (!user) {
+      return res.status(404).json({ error: 'User not found' });
+    }
+
+    return res.json({ message: 'User banned successfully' });
+  } catch (err) {
+    console.log(err);
+    return res.status(500).json({ error: 'Something went wrong. Try again.' });
+  }
+};

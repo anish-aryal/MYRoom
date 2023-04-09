@@ -35,6 +35,10 @@ const schema = new Schema(
       type: Boolean,
       default: false,
     },
+    isReported: {
+      type: Boolean,
+      default: false,
+    },
     address: { type: String, default: "" },
     phone: { 
       type: String, 

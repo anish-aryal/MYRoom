@@ -19,7 +19,7 @@ const AdminRoute = () => {
           Authorization: auth?.token 
         },
       });
-      if (data.role === "Admin") {
+      if (data.role.includes("Admin")) {
         setOk(true);
       } else {
         setOk(false);

@@ -12,6 +12,7 @@ import { useAuth } from "../../../context/auth";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-hot-toast";
 // import OpenChatButton from "../../../components/OpenChatButton";
+import {  IoLogoWechat } from "react-icons/io5";
 
 
 
@@ -35,18 +36,18 @@ export default function Viewpage (){
     }
 
     const descriptionWithLineBreaks = ad?.description
-  .split('.')
-  .map((sentence, index) => (
-    <React.Fragment key={index}>
-      {sentence.trim() + '.'}
-      <br/><br/>
-    </React.Fragment>
-  ));
+    .split('.')
+    .map((sentence, index) => (
+      <React.Fragment key={index}>
+        {sentence.trim() + '.'}
+        <br/><br/>
+      </React.Fragment>
+    ));
 
-    useEffect(() =>{
-        if (params?.slug) getAd();
+      useEffect(() =>{
+          if (params?.slug) getAd();
 
-    },[params?.slug]);
+      },[params?.slug]);
 
    
 
@@ -82,8 +83,21 @@ export default function Viewpage (){
       text = `${months} month${months !== 1 ? "s" : ""} ago`;
     }
     
+    function handleReportClick() {
+      axios.put(`/report/${ad.postedBy._id}`)
+        .then(res => {
+          // handle successful response
+          console.log(res.data.message);
+        })
+        .catch(err => {
+          // handle error response
+          console.error(err.response.data.error);
+        });
+    }
+  const handlenameclick = () => {
+    navigate(`/user/${ad.postedBy.username}`);
+  }
 
- 
 
     return (
         <div className="container" id="top">
@@ -91,22 +105,54 @@ export default function Viewpage (){
                 <div className="col-9 pl-0 pt-5 pb-3 ">
                
                     <div className="mb-3">
-                    <span className="typeofad sl">{ad?.type} for {ad?.action} / Posted by: <span className="viewpostedby">{ad?.postedBy?.firstname}  </span>   </span>
+                    <span className="typeofad sl">{ad?.type} for {ad?.action} / Posted by: <span className="viewpostedby pointer" onClick={handlenameclick}>{ad?.postedBy?.firstname}  </span>   </span>
                     </div>
                   
                     <p className="viewTitle  d-flex flex-column">{ad?.title}
                     <span className="viewAddress "> <MdLocationOn className="viewAddressMark"/> {ad?.address}</span>
                     </p>
-                    <div className="mb-3">
+                    <div className="mb-3 d-flex justify-content-between">
+                      <div className="">
                         <span className="viewposted px-3 py-2"> {text}</span>
-                       <LikeFeature ad={ad}/>
-                        
+                        <LikeFeature ad={ad}/>
+                      </div>
+                    
                     </div>
+                    
                 </div>
-                <div className="col-3 mt-4 pt-3 pb-3  d-flex justify-content-end">
-                    <p className="viewPrice pt-5"><span className="rs ">NPR </span>{formatPrice(ad?.price)}<span className="priceend">/-</span>
-                    </p>
+                <div className="col-3 mt-4 d-flex flex-column text-right" >
+                  <div className="">  
+                      <p className="viewPrice pt-5"><span className="rs ">NPR </span>{formatPrice(ad?.price)}<span className="priceend">/-</span></p>
+                  </div>
+                  
+                    <div className="">
+                                <button className="isclicked px-4 py-2 text-white"
+                                style={{fontSize:'14px'}}
+                                  onClick={() => {
+                                    axios.post('/chat', { senderId: auth?.user?._id, receiverId: ad?.postedBy?._id })
+                                      .then((response) => {
+                                        console.log(response);
+                                        axios.post('/messages', { chatId: response.data._id, senderId: auth?.user?._id, text: "hi" })
+                                          .then((response) => {
+                                            console.log(response);
+                                            navigate('/chat');
+                                            toast.success('Seller Has been added to your chat list');
+                                          })
+                                          .catch((error) => {
+                                            console.log(error);
+                                          })
+                                      })
+                                      .catch((error) => {
+                                        console.log(error);
+                                      })
+                                  }}
+                                >
+                                  <IoLogoWechat className="mr-2" style={{fontSize:'24px', color:'#7B30C8'}} />Have a Chat
+                                </button>
+                      </div>
+                    
                 </div>
+                
             </div>
             <div className="row">
                 <div className="col-12 pl-0 col-lg-8 pr-0 pr-lg-4">
@@ -153,32 +199,31 @@ export default function Viewpage (){
                  
             </div>
             <div className="div">
-            {auth?.user?._id !== ad?.postedBy?._id ? (
-              <button
-                onClick={() => {
-                  axios.post('/chat', { senderId: auth?.user?._id, receiverId: ad?.postedBy?._id })
+            {/* <button
+              onClick={() => {
+                axios.post('/chat', { senderId: auth?.user?._id, receiverId: ad?.postedBy?._id })
                   .then((response) => {
                     console.log(response);
-                    navigate('/chat');
-                    toast.success('Seller Has been added to your chat list');
+                    axios.post('/messages', { chatId: response.data._id, senderId: auth?.user?._id, text: "hi" })
+                      .then((response) => {
+                        console.log(response);
+                        navigate('/chat');
+                        toast.success('Seller Has been added to your chat list');
+                      })
+                      .catch((error) => {
+                        console.log(error);
+                      })
                   })
                   .catch((error) => {
                     console.log(error);
                   })
-                }}
-              >
-                Message
-              </button>
-            ) : ""}
+              }}
+            >
+              Message
+            </button> */}
 
-
+            <button onClick={handleReportClick}>Report</button>
             </div>
-            
-           
-          
-            
-           
-                
                 <pre>
                     {JSON.stringify({ad, related}, null, 4)}
                 </pre>

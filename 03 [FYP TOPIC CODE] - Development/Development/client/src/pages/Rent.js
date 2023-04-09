@@ -11,6 +11,7 @@ export default function Rent() {
   const [apartmentForRent, setApartmentForRent] = useState();
 
   const [roomForRent, setRoomForRent] = useState();
+  const [showApartments, setShowApartments] = useState(true);
 
 
   useEffect(() => {
@@ -29,14 +30,47 @@ export default function Rent() {
       }
     };
  
+    const handleToggleApartments = () => {
+      setShowApartments(true);
+      const apartmentButton = document.querySelector(".togglebutton.apartments");
+      const roomButton = document.querySelector(".togglebutton.rooms");
+      apartmentButton.classList.add("isclicked");
+      roomButton.classList.remove("isclicked");
+    };
+  
+    const handleToggleRooms = () => {
+      setShowApartments(false);
+      const apartmentButton = document.querySelector(".togglebutton.apartments");
+      const roomButton = document.querySelector(".togglebutton.rooms");
+      apartmentButton.classList.remove("isclicked");
+      roomButton.classList.add("isclicked");
+    };
   
 
 
   return (
    
-    <div className="container">
+    <div className="container mt-4">
       <SearchForm />
-      <div className="apartmentsForRent " >
+
+      <div className="row mt-5">
+        <div className="col-12">
+          <button
+            className="togglebutton px-3 py-2 apartments isclicked"
+            onClick={handleToggleApartments}
+          >
+            Apartments
+          </button>
+          <button
+            className="togglebutton ml-4 px-3 py-2 rooms shadow-none"
+            onClick={handleToggleRooms}
+          >
+            Rooms
+          </button>
+        </div>
+      </div>
+
+      {showApartments ?(  <div className="apartmentsForRent mt-5" >
          <h6 > Apartments for Rent</h6>
          <div className="container">
             <div className="row">
@@ -46,9 +80,7 @@ export default function Rent() {
             }
             </div>
          </div>
-        </div>
-
-          <div className="roomsForRent" >
+        </div>):(  <div className="roomsForRent mt-5" >
             <h6 > Rooms for Rent</h6>
             <div className="container">
                 <div className="row">
@@ -58,7 +90,10 @@ export default function Rent() {
                 }
                 </div>
             </div>
-          </div>
+          </div>)}
+    
+
+        
              
           <pre>{JSON.stringify(auth.user, null, 2)}</pre>
   </div>

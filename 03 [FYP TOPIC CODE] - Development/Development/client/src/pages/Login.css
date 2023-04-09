@@ -149,3 +149,31 @@ span a{
     position: relative;
     z-index: 99;
   }
+
+  .togglebutton{
+    font-size: 12px;
+    font-family: 'sm';
+    background-color: #efefef;
+    border: none;
+    outline: none;
+    border-radius: 30px;
+
+  }
+  .togglebutton:focus{
+    font-size: 12px;
+    font-family: 'sm';
+    background-color: #c0afef;
+    border: none;
+    outline: none;
+    border-radius: 30px;
+
+  }
+  .isclicked{
+    font-size: 12px;
+    font-family: 'sm';
+    background-color: #c0afef;
+    border: 0;
+    outline: none;
+    border-radius: 30px;
+
+  }

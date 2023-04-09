@@ -3,6 +3,7 @@ import { useLocation } from 'react-router-dom';
 import { useAuth } from "../../context/auth.js";
 import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
+import {IoLogoWechat} from "react-icons/io5";
 
 import './nav.css'
 
@@ -47,6 +48,10 @@ export default function Main() {
         "/enquiries",
         "/expiredAds",
         "/userlist",
+        "/repost/ad/:slug",
+        "/chat",
+       
+
     ];
     
     const location = useLocation();
@@ -82,7 +87,7 @@ export default function Main() {
 
     </div>
     <div className="justify-content-end  w-50"> 
-        <ul className="nav justify-content-between">
+        <ul className="nav justify-content-between text-center align-items-center">
                
                 <NavLink className="nav-link " aria-current="page" to="/">
                     Home
@@ -98,8 +103,8 @@ export default function Main() {
                     Buy
                 </NavLink>
 
-                <NavLink className="nav-link " aria-current="page" to="/search">
-                    Search
+                <NavLink className="nav-link " aria-current="page" to="/chat"style={{fontSize: '26px', color:'#7B30C8'}}>
+                    <IoLogoWechat />
                 </NavLink>
             
               

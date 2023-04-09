@@ -1,9 +1,9 @@
 import {useState, useEffect} from "react";
 import {useNavigate} from "react-router-dom";
 import '..//..//pages/Login.css'
-import {TbMoodSadDizzy} from 'react-icons/tb'
+import {TfiFaceSad} from 'react-icons/tfi'
 
-export default function Nopermission() {
+export default function PageNotFound() {
 
     const [count, setCount] = useState(5);
     const navigate = useNavigate();
@@ -13,18 +13,18 @@ export default function Nopermission() {
             setCount(count - 1);
         }, 1000);
         if (count === 0) {
-            navigate("/login");
+            navigate("/");
         }
         return () => clearInterval(interval);
     })
   return (
     <div className="d-flex flex-column justify-content-center align-items-center text-center vh-100" style={{marginTop:"-7%"}} >
-        <div className="image-container"></div>
-        <TbMoodSadDizzy style={{fontSize:'100px', fontWeight:'100'}}/>
-      <h1>Please login first to continue</h1>
+      
+        <TfiFaceSad style={{fontSize:'100px', color:" #a478d0"}}/>
+      <div className="display-1 sr text-muted">Page Not Found</div>
       
       <div className="row">
-      <h2>Redirecting to Login in <span><h1>{count} seconds</h1> </span></h2>
+      <h2 className="sm">Redirecting to homepage in <span><h1>{count} seconds</h1> </span></h2>
       </div>
        
     </div>
