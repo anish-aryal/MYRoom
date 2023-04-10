@@ -3,15 +3,18 @@
     color: #9d52e7;
 }
 .navlogo{
-    background-image: url("../../../public/MyRoomLogo.jpg");
-    height:50px;
+    background-image: url("../../../public/MyRoomLogo.svg");
+    height:45px;
     width:190px;
     background-size: contain;
     background-repeat: no-repeat;
     cursor: pointer;
 }
+.globalnav{
+   top: 0px;
+}
 .nav-link {
-    font-size: 13px;
+    font-size: 14px;
     font-family: 'sm';
 }
 .addnew{
@@ -20,6 +23,7 @@
     font-size: 13px;
     font-family: 'sm';
 }
+
 .loginbtn {
     border: 1px solid #7B30C8;
     color: #7B30C8;
@@ -36,6 +40,7 @@
   
   .loginbtn:hover {
     background-position: left bottom;
+    border: 1px solid #7B30C8;
     color: white;
   }
   
@@ -43,3 +48,4 @@
     /* Other button focus styles */
     outline: none;
   }
+ 

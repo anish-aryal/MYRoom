@@ -33,8 +33,9 @@ export default function Enquiries() {
     <div className="container-fluid">
         <div className="row">
             <div className ="col-3 col-lg-2  p-0 justify-content-center"> <div><Sidebar /></div></div>
-                <div className ="col-9 col-lg-10 pl-0 pr-4">
-                <div className="col-10 mt-5 ">
+                <div className ="col-9 col-lg-10 pl-0 pr-4 mt-5">
+                  <div className="container">
+                  <div className="col-10 mt-5 ">
                         <h1 className="adH1">Enquired Ads.</h1>
                      
                         <p className="w-75 adP"> All the ads you enquired are showcased below. </p>
@@ -49,6 +50,8 @@ export default function Enquiries() {
                                 <p className="  sl btn-shine text-animation" target="_blank">No Ads have been enquired yet.</p>
                             </div>
                         }
+                  </div>
+              
                 </div>
                 
 

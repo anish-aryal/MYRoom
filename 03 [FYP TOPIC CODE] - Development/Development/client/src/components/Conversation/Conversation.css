@@ -1,0 +1,21 @@
+.usercard:hover{
+    background-color: #f8eeff;
+    border-radius: 10px;
+    cursor: pointer;
+
+}
+.usercard{
+    padding: 10px;
+
+    font-family: 'sm';
+    font-size: 14px;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+   
+}
+
+.usercard:focus{
+    background-color: #bb57ea;
+    
+}

@@ -44,9 +44,12 @@ export default function Home() {
 
   return (
    
-    <div className="container mt-4">
+    <div className="container">
+
+      <div className="row mt-5 pt-5">
         <SearchForm className="pt-5  pb-5 "/>
-            
+      </div>
+      
        <div className="apartmentsForSell mt-5 pt-3" >
 
             <div className=" homesectiontitle">
@@ -61,9 +64,9 @@ export default function Home() {
                 }
                 </div>
             </div>
-          </div>
+        </div>
 
-          <div className="roomsForSell mt-5 pt-3" >
+        <div className="roomsForSell mt-5 pt-3" >
             <div className="homesectiontitle sm">
             <h5 > Rooms for Sell</h5>
             </div>
@@ -76,8 +79,9 @@ export default function Home() {
                 }
                 </div>
             </div>
-          </div>
-      <div className="apartmentsForRent mt-5 pt-3" >
+        </div>
+
+        <div className="apartmentsForRent mt-5 pt-3" >
         <div className="homesectiontitle sm">
         <h5 > Apartments for Rent</h5>
         </div>
@@ -91,8 +95,8 @@ export default function Home() {
             </div>
          </div>
         </div>
-
-          <div className="roomsForRent mt-5 pt-3" >
+        
+        <div className="roomsForRent mt-5 pt-3" >
           <div className="homesectiontitle sm">
               <h5 > Rooms for Rent</h5>
           </div>
@@ -104,12 +108,8 @@ export default function Home() {
                 }
                 </div>
             </div>
-          </div>
-
-
-         
-             
-          <pre>{JSON.stringify(auth.user, null, 2)}</pre>
+        </div>
+        <pre>{JSON.stringify(auth.user, null, 2)}</pre>
   </div>
 
   

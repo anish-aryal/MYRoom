@@ -1,7 +1,6 @@
 // pages/user/ad/AdCreate.js
 
 import Sidebar from "../../../components/nav/sidebar";
-import Main from "../../../components/nav/Main";
 import "./Postad.css";
 
 import { useState } from "react";
@@ -28,10 +27,7 @@ export default function AdCreate() {
     <div className="container-fluid">
         <div className="row">
             <div className ="col-3 col-lg-2 col-xxl-1 p-0 justify-content-center"> <div><Sidebar /></div></div>
-                <div className ="col-9 col-lg-10">
-                  
-                    <Main />
-              
+                <div className ="col-9 col-lg-10 mt-5">      
                 <div className="row justify-content-center">
                     <div className="col-10 mt-5 ">
                         <h1 className="adH1">Welcome to Ad Posting!</h1>

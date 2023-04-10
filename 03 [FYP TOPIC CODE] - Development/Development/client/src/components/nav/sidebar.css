@@ -1,7 +1,8 @@
 #sidebar{
-    background: linear-gradient(90deg, rgba(111, 27, 197, 0.02) 0%, rgba(164, 98, 233, 0.03) 75%);
+    background-color: #f8eeff;
     height: 100vh;
-
+    top: 0px;
+   
 }
 
 #sidebar strong{

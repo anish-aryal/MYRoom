@@ -89,8 +89,8 @@ export default function ChatBox({ chat, currentUser, setSendMessage, receiveMess
           <div className="container chatbox-container">
             <div className="row">
               <div className="col-12">
-                <div className="chatheader">
-                  <div className="d-flex justify-content-start align-items-center border-bottom pb-3">
+                <div className="chatheader ">
+                  <div className="d-flex justify-content-start align-items-center border-bottom pb-3 px-3">
                     {userData?.photo?.Location ? (
                       <Avatar
                         src={userData.photo?.Location}
@@ -126,7 +126,7 @@ export default function ChatBox({ chat, currentUser, setSendMessage, receiveMess
                         }
                         >
                         <div className={ message.senderId === currentUser ? 'text-right' : 'text-left' }> 
-                            <span className={ message.senderId === currentUser ? 'text-right pl-5 pr-2 py-2 sr messagesent' : ' pr-5 pl-3 py-2 text-left sr messagereceived' } style={{ display: 'inline-block' }}>{message.text}</span>
+                            <span className={ message.senderId === currentUser ? 'text-right pl-4 pr-3 py-2 sr messagesent' : ' pr-4 pl-3 py-2 text-left sr messagereceived' } style={{ display: 'inline-block' }}>{message.text}</span>
                         </div> 
                         <div  className={ message.senderId === currentUser ? 'text-right' : 'text-left' }>
                             <span
@@ -141,14 +141,13 @@ export default function ChatBox({ chat, currentUser, setSendMessage, receiveMess
                         </div>
                     ))}
                     </div>
-
-      
-                  <div className="chat-sender d-flex">
+                  <div className="chat-sender d-flex px-3 py-3">
                     <InputEmoji value={newMessage} onChange={handleChange} />
-                    <button className="chat-send-button" onClick={handleSend}>
-                      Send Message
+                    <button className="chat-send-button px-5 " style={{fontFamily:'sm',fontSize:'12px',borderRadius:'30px'}} onClick={handleSend}>
+                      Send
                     </button>
                   </div>
+
                 </div>
               </div>
             </div>

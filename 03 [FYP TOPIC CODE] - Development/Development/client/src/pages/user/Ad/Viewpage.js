@@ -15,6 +15,17 @@ import { toast } from "react-hot-toast";
 import {  IoLogoWechat } from "react-icons/io5";
 
 
+import Button from '@mui/material/Button';
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
+import DialogTitle from '@mui/material/DialogTitle';
+import Slide from '@mui/material/Slide';
+
+const Transition = React.forwardRef(function Transition(props, ref) {
+  return <Slide direction="down" ref={ref} {...props} />;
+});
 
 export default function Viewpage (){
     const params = useParams();
@@ -23,6 +34,21 @@ export default function Viewpage (){
     
     const [ad, setAd] = useState();
     const [related, setRelated] = useState();
+
+  
+
+    const [open, setOpen] = React.useState(false);
+    const [dialogOpened, setDialogOpened] = React.useState(false);
+
+    const handleClickOpen = () => {
+      setOpen(true);
+    };
+  
+    const handleClose = () => {
+      setOpen(false);
+    };
+
+    
   
     const getAd = async () => {
         try{
@@ -83,20 +109,25 @@ export default function Viewpage (){
       text = `${months} month${months !== 1 ? "s" : ""} ago`;
     }
     
-    function handleReportClick() {
-      axios.put(`/report/${ad.postedBy._id}`)
-        .then(res => {
-          // handle successful response
-          console.log(res.data.message);
-        })
-        .catch(err => {
-          // handle error response
-          console.error(err.response.data.error);
-        });
-    }
+    
   const handlenameclick = () => {
     navigate(`/user/${ad.postedBy.username}`);
   }
+
+  function handleReportClick() {
+    axios.put(`/report/${ad.postedBy._id}`)
+      .then(res => {
+        setOpen(false);
+        // handle successful response
+        console.log(res.data.message);
+        toast.success(res.data.message);
+      })
+      .catch(err => {
+        // handle error response
+        console.error(err.response.data.error);
+      });
+  }
+
 
 
     return (
@@ -199,7 +230,7 @@ export default function Viewpage (){
                  
             </div>
             <div className="div">
-            {/* <button
+            <button
               onClick={() => {
                 axios.post('/chat', { senderId: auth?.user?._id, receiverId: ad?.postedBy?._id })
                   .then((response) => {
@@ -220,15 +251,46 @@ export default function Viewpage (){
               }}
             >
               Message
-            </button> */}
+            </button>
+           
+           
+            <div>
+              <Button variant="outlined" onClick={handleClickOpen}>
+                Report
+              </Button>
+              <Dialog
+                open={open}
+                TransitionComponent={Transition}
+                keepMounted
+                onClose={handleClose}
+                aria-describedby="alert-dialog-slide-description"
+              >
+                <DialogTitle className="text-center text-white sb"  style={{  "backgroundColor": "#8557b2"}}>{"Are you sure?"}</DialogTitle>
+                <DialogContent  >
+               <DialogContentText className=" p-3 pt-5 sm"  id="alert-dialog-slide-description">
+                   We take all reports seriously and investigate them thoroughly to maintain the integrity of our platform. Use this feature to only report any suspicious activity or content that violates our Terms of Use.
+                  </DialogContentText>
+                </DialogContent>
+                <DialogActions>
+                  <Button onClick={handleClose}>Close</Button>
+                  <Button className="text-white  sm" style={{backgroundColor:"#7B30C8", border:'0', borderRadius:'0'}} onClick={handleReportClick}>Report</Button>
+                </DialogActions>
+              </Dialog>
+              {!dialogOpened && (
+                <script>
+                  {window.onload = handleClickOpen}
+                </script>
+              )}
+            </div>
+         
 
-            <button onClick={handleReportClick}>Report</button>
             </div>
                 <pre>
                     {JSON.stringify({ad, related}, null, 4)}
                 </pre>
         
      </div>
+
        
     );
    

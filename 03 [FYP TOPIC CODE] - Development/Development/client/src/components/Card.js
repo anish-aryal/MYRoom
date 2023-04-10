@@ -54,6 +54,7 @@ export default function Card({ad}){
             <div className=" col-md-6 col-lg-4 p-4 gx-4 gy-2  " id='cardtop'>
                 <Link to={`/ad/${ad.slug}`} className="text-decoration-none text-dark">
                 <Badge.Ribbon text={text} color="#9052D0" style={{'fontFamily':'sr'}}>
+                  
                     <div className=" card ">
                         <img src={ad?.photos?.[0].Location} className="card-img-top adimage" style={{"maxHeight":"200px", "height":"200px"}} alt={`${ad?.type}=${ad?.title}-${ad?.action}`} />
                         <div className="card-body py-2 px-3">

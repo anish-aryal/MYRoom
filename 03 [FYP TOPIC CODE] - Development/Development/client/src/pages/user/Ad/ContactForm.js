@@ -47,7 +47,7 @@ export default function ContactForm({ad}) {
             toast.error(data.error);
             setLoading(false);
           } else {
-            toast.success("Thank you for your enquiry");
+            toast.success("Thank you for your enquir. Email sent to the seller.");
             setLoading(false);
           }
         } catch (err) {

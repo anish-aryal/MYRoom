@@ -83,9 +83,12 @@ const schema = new Schema(
     },
     isExpired:{
         type: Boolean,
-        default: false}
+        default: false},
+    createdAt: {
+        type: Date,
+        default: Date.now
+      }
     },
-    { timestamps: true }
   );
   
 schema.index({ location: '2dsphere' });

@@ -11,9 +11,9 @@
 /* Apply the animation to the component */
 
 .dashboard-banner{
-  background: linear-gradient(90deg, rgba(111, 27, 197, 0.05) 100%, rgba(164, 98, 233, 0.9) 90%);
-
-  position: sticky;
+  background-color: #e8dbf5;
+  top: 85px;
+  z-index: 8;
 }
 
 .box{
@@ -36,11 +36,18 @@
 
 .loadmore:hover {
   background-position: left bottom;
+  border: 2px solid #7B30C8;
   color: white;
 }
 
 .loadmore:focus {
   /* Other button focus styles */
   outline: none;
+}
+.dashboardbanner{
+  top: 0px;
+  height: 100px;
+
+
 }
 

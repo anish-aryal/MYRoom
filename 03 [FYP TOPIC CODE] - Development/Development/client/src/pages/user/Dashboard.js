@@ -53,49 +53,46 @@ export default function Dashboard() {
     return (
     <div className="container-fluid">
         <div className="row">
-            <div className ="col-3 col-lg-2 p-0 justify-content-center">
-                 <div  className="dashside"><Sidebar /></div>
+        
+            <div className ="col-3 col-lg-2 p-0" >
+                <Sidebar />
             </div>
-                <div className ="col-9  col-lg-10 pl-0 pr-4"> 
-               
-                  
-                    <div className="container">
+            <div className ="col-9  col-lg-10 "> 
+                    <div className="container ">
                         
-                        <div className="row  ">
-                            <div className="col-12 dashboard-banner sticky-top p-3 text-center">
+                        <div className="row ">
+                            <div className="col-12 dashboard-banner p-3  sticky-top text-center">
                                 <h1 className="d-flex flex-column sb "> You have posted
                                 </h1>
                             </div>
+                                <div className="col-12 mt-3 pt-5 sticky-top bg-white pb-2" style={{top:"130px",zIndex:'6'}}>
+                                    <button
+                                        className="togglebutton px-3 py-2 apartmentsforsell"
+                                        onClick={() => setSection('apartmentSell')}
+                                    >
+                                        Apartments For Sell
+                                    </button>
+                                    <button
+                                        className="togglebutton ml-4 px-3 py-2 roomsforsell shadow-none"
+                                        onClick={() => setSection('roomSell')}
+                                    >
+                                        Rooms For Sell
+                                    </button>
+                                    <button
+                                        className="togglebutton ml-4 px-3 py-2 roomsforrent shadow-none"
+                                        onClick={() => setSection('roomRent')}
 
-                            <div className="row mt-5">
-                                <div className="col-12">
-                                <button
-                                    className="togglebutton px-3 py-2 apartmentsforsell"
-                                    onClick={() => setSection('apartmentSell')}
-                                >
-                                    Apartments For Sell
-                                </button>
-                                <button
-                                    className="togglebutton ml-4 px-3 py-2 roomsforsell shadow-none"
-                                    onClick={() => setSection('roomSell')}
-                                >
-                                    Rooms For Sell
-                                </button>
-                                <button
-                                    className="togglebutton ml-4 px-3 py-2 roomsforrent shadow-none"
-                                    onClick={() => setSection('roomRent')}
-
-                                >
-                                    Rooms For Rent
-                                </button>
-                                <button
-                                    className="togglebutton ml-4 px-3 py-2 apartmentsrent shadow-none"
-                                    onClick={() => setSection('apartmentRent')}
-                                >
-                                    Apartments For Rent
-                                </button>
+                                    >
+                                        Rooms For Rent
+                                    </button>
+                                    <button
+                                        className="togglebutton ml-4 px-3 py-2 apartmentsrent shadow-none"
+                                        onClick={() => setSection('apartmentRent')}
+                                    >
+                                        Apartments For Rent
+                                    </button>
                                 </div>
-                            </div>
+                         
 
                             <div className="col-12 mt-5 px-5 py-3 ">
                                 <div className="row dashboardSellingRooms" style={{ display: section === 'roomSell' ? '' : 'none' }}>
@@ -148,10 +145,9 @@ export default function Dashboard() {
                             </div>
                         </div>
                     </div>
-                </div>
-                
+            </div>
+             
         </div>
-        
     </div>
     );
 }

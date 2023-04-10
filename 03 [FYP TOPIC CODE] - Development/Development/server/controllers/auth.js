@@ -496,7 +496,7 @@ export const Report = async (req, res) => {
       return res.status(404).json({ error: 'User not found' });
     }
 
-    return res.json({ message: 'User banned successfully' });
+    return res.json({ message: "Thank you for reporting. We'll take it from here" });
   } catch (err) {
     console.log(err);
     return res.status(500).json({ error: 'Something went wrong. Try again.' });

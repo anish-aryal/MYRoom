@@ -92,21 +92,20 @@ export default function Chat(){
     return(
         <div className="container-fluid">
         <div className="row">
-            
             <div className ="col-3 col-lg-2  p-0 justify-content-center"> <div><Sidebar /></div></div>
             
-                <div className ="col-9 col-lg-10 pl-0 pr-5">
-                    <div className="row"></div>
+                <div className ="col-9 col-lg-10 pl-0 pr-5 mt-5">
+                    <div className="container ">
                     <div className="col-10 mt-5 ">
                             <h1 className="adH1">Start a Conversation</h1>
                             <p className="w-75 adP"> All new Conversation starts from the top. </p>
                         </div>
 
-                <div className="row">
+                <div className="row justify-content-between" >
                     <div className="col-4">
                         <div className=" bg-white">
                         {chats.map((chat) => (
-                                <div className='Chat-list px-5 py-4' onClick={() => setCurrentChat(chat)}>
+                                <div className={`Conversation Chat-list px-2  ${chat === currentChat ? 'selectedchat' : ''}`} onClick={() => setCurrentChat(chat)}>
                                     <Conversation data={chat} currentUserId={auth?.user?._id} key={auth?.user?._id} online={checkOnline(chat)} />
                                 </div>
                             ))}
@@ -114,17 +113,20 @@ export default function Chat(){
 
                         </div>
                     </div>
-                    <div className="col-8">
-                            <div className="row">
-                            <div className="container">
-                                <div className="text-center">
+                    <div className="col-8 px-5">
+                            <div className="row pr-5">
+                            <div className="container justify-content-center "style={{marginTop:'-50px'}}>
+                              <div className="col-12">
+                              <div className="text-center">
                                     <ChatBox chat ={currentChat} currentUser={auth?.user?._id} setSendMessage={setSendMessage} receiveMessage={receiveMessage}  />
                                 </div>
+                              </div>
+                                
                              </div>
                             </div>
-                        </div>
+                    </div>
                 </div>
-               
+                    </div>
         </div>
                
                 </div>

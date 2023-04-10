@@ -200,8 +200,9 @@ export default function UserList() {
             
             <div className ="col-3 col-lg-2  p-0 justify-content-center"> <div><Sidebar /></div></div>
             
-                <div className ="col-9 col-lg-10 pl-0 pr-5">
-                    <div className="row"></div>
+                <div className ="col-9 col-lg-10">
+                  <div className="container">
+                  <div className="row"></div>
                     <div className="col-10 mt-5 ">
                             <h1 className="adH1">MyRoom User List</h1>
                             <p className="w-75 adP"> All new Conversation starts from the top. </p>
@@ -228,6 +229,9 @@ export default function UserList() {
                       onRowClicked={handleRowClick}
                       style={{ maxWidth: "100%", overflowX: "auto" }}
                     />
+                  </div>
+
+                    
                   </div>
                 </div>
               </div>

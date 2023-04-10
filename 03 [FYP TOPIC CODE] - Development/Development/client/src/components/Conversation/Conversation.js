@@ -39,7 +39,7 @@ export default function Conversation({ data, currentUserId, online }) {
   }, [data, currentUserId]);
 
   return (
-    <div className="usercard" style={{order: -lastMessageTime}}>
+    <div className="usercard mb-2" style={{order: -lastMessageTime}}>
       <div className="d-flex">
         {userData?.photo?.Location ? (
           <Avatar
@@ -60,17 +60,20 @@ export default function Conversation({ data, currentUserId, online }) {
         )}
 
         <div className="d-flex flex-column">
-          <div className="sm ml-2 chatname">
-            {userData?.firstname} {userData?.lastname}
-          </div>
-          {online ? (
-            <div className=" status text-left ml-2"> 🟢 </div>
+          <div className="sm ml-2 chatname d-flex align-items-center">
+            <div style={{fontSize:'15px', fontFamily:'sm'}} > {userData?.firstname} {userData?.lastname}</div>
+            <div> {online ? (
+            <div className=" status text-left ml-2" style={{fontSize:'10px'}}> 🟢 </div>
           ) : (
-            <div className=" status text-left ml-2">🔴 </div>
-          )}
-          <div className="sm ml-2">
+            <div className=" status text-left ml-2"style={{fontSize:'10px'}}>🔴 </div>
+          )}</div>
+           
+          </div>
+         
+          <div className="sm mt-1 w-75" style={{fontSize:'14px', fontFamily:"sm", height:'20px',overflow:'hidden'}}>
             {latestMessage ? latestMessage : (<span className="text-secondary">say hi !</span>)}
           </div>
+        
         </div>
       </div>
     </div>

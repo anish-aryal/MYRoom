@@ -10,7 +10,7 @@ import nodemailer from 'nodemailer';
 cron.schedule("0 0 * * *", async () => {
   console.log("cron job is running");
   const threeDaysAgo = new Date();
-  threeDaysAgo.setDate(threeDaysAgo.getDate() - 10);
+  threeDaysAgo.setDate(threeDaysAgo.getDate() - 15);
 
   const expiredAds = await Ad.find({ createdAt: { $lt: threeDaysAgo },isExpired:false });
 
@@ -271,7 +271,8 @@ export const uploadImage = async (req, res) => {
 export const contactSeller= async (req, res) => {
   try {
     const { firstname, email, phone, message,adId } = req.body;
-    const ad = await Ad.findById(adId).populate('postedBy','email');
+    const ad = await Ad.findById(adId).populate('postedBy','email',);
+    const seller = await User.findById(ad.postedBy);
    const user = await User.findOneAndUpdate(
       { email },
       {
@@ -282,31 +283,45 @@ export const contactSeller= async (req, res) => {
     if(!user){
       return res.json({error: "User not found"})
     }else{
-      
-      config.AWSSES.sendEmail(
-        emailTemplate(
-          ad.postedBy.email,
-          `
-          <p>You have recieved an enquiry from ${firstname} about the ${ad.type} you listed in MyRoom for ${ad.action}</p>
-          <a href="${config.CLIENT_URL}/ad/${ad.slug}">View Enquired Property</a>
-
-          <h3>Enquiry Details</h3>
-          <p>Firstname: ${firstname}</p>
-          <p>Email: ${email}</p>
-          <p>Phone: ${phone}</p>
-          <p>Message: <strong>${message}</stong></p>
-      `,
-          email,
-          `New Enquiry for ${ad.title}`
-        ),
-        (err, data) => {
-          if (err) {
-            return res.json({ error: "Provide a valid email address" });
-          } else {
-            return res.json({ sucess: "Check your email to complete the registeration" });
-          }
+    
+      const transporter = nodemailer.createTransport({
+        service: 'hotmail',
+        auth: {
+            user: `${config.EMAIL_FROM}`,
+            pass: `${config.emailPassword}`
         }
-      );
+      });
+
+      // send email using nodemailer
+      const mailOptions = {
+        from: '"My Room" <my.room417@outlook.com>',
+        to: ad.postedBy.email,
+        subject: 'Your ad has expired',
+        html:  `
+        <p>Dear ${seller.firstname},</p>
+        <p>You have received an enquiry from ${firstname} about the ${ad.type} you listed in MyRoom for ${ad.action}.</p>
+        <p>Please click on the following link to view the enquired property: <a href="${config.CLIENT_URL}/ad/${ad.slug}">View Enquired Property</a></p>
+        <h3>Enquiry Details</h3>
+        <ul>
+          <li><strong>First name:</strong> ${firstname}</li>
+          <li><strong>Email:</strong>  ${email}</li>
+          <li><strong>Phone:</strong>  ${phone}</li>
+          <li><strong>Customer Message:</strong> ${message}</li>
+        </ul>
+        <p>Thank you for using My Room for your property listing needs. We look forward to assisting you in the future.</p>
+        <p>Best regards,</p>
+        <p>MyRoom</p>
+    `, 
+      };
+
+     transporter.sendMail(mailOptions,(error, info) => {
+        if (error) {
+            res.json({error: "Email could not be sent"})
+        }
+        else{
+          res.json({success: "Email has been sent"})
+        }
+      });
     }
 
  
@@ -368,7 +383,7 @@ export const contactSeller= async (req, res) => {
             .populate("postedBy", "firstname username email phone")
             .sort({ createdAt: -1 })
             .skip(skip)
-            .limit(3);
+  
       
           const apartmentRent = await Ad.find({
             postedBy: req.user._id,
@@ -378,7 +393,7 @@ export const contactSeller= async (req, res) => {
             .populate("postedBy", "firstname username email phone")
             .sort({ createdAt: -1 })
             .skip(skip)
-            .limit(3);
+          
       
           const roomSell = await Ad.find({
             postedBy: req.user._id,
@@ -388,7 +403,7 @@ export const contactSeller= async (req, res) => {
             .populate("postedBy", "firstname username email phone")
             .sort({ createdAt: -1 })
             .skip(skip)
-            .limit(3);
+          
       
           const roomRent = await Ad.find({
             postedBy: req.user._id,
@@ -397,9 +412,7 @@ export const contactSeller= async (req, res) => {
           })
             .populate("postedBy", "firstname username email phone")
             .sort({ createdAt: -1 })
-            .skip(skip)
-            .limit(3);
-      
+            .skip(skip)      
           res.json({ apartmentSell, apartmentRent, roomSell, roomRent, totalapartmentsell,totalroomsell,totalroomrent,totalapartmentrent });
         } catch (err) {
           console.log(err);
@@ -656,6 +669,7 @@ export const Repost = async (req, res) => {
         createdAt: new Date(),
         isExpired: false,
       });
+      
 
       await User.findByIdAndUpdate(req.user._id, { $pull: { expiredAds: ad._id } });
 
