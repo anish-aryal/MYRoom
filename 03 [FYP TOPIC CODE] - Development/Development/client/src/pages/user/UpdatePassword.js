@@ -46,9 +46,9 @@ export default function UpdatePassword() {
             <div className ="col-9 col-lg-10 pl-0 pr-4">
         
                 <div className="container">
-                    <div className="row justify-content-center">
-                        <div className="col-11">
-                                <h1 className='pt-3  mt-3' style={{"text-decoration":"underline"}}> Update Your Password </h1>
+                    <div className="row justify-content-cente mt-5">
+                        <div className="col-11 mt-5">
+                                <h1 style={{"text-decoration":"underline"}}> Update Your Password </h1>
                                 <form className='row gx-3 pt-5 justify-content-center' onSubmit={handleSubmit}>
                                     <div className="col-6">
                                         <div className="row">

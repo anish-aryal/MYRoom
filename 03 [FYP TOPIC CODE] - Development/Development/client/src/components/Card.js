@@ -40,17 +40,9 @@ export default function Card({ad}){
       text = `${months} month${months !== 1 ? "s" : ""} ago`;
     }
 
-    useEffect(() => {
-      const body = document.querySelector('#root');
-  
-      body.scrollIntoView({
-          behavior: 'smooth'
-      }, 1000)
-  
-  }, []);
 
     return(
-        
+
             <div className=" col-md-6 col-lg-4 p-4 gx-4 gy-2  " id='cardtop'>
                 <Link to={`/ad/${ad.slug}`} className="text-decoration-none text-dark">
                 <Badge.Ribbon text={text} color="#9052D0" style={{'fontFamily':'sr'}}>

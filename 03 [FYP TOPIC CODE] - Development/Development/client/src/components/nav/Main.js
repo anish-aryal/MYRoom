@@ -5,6 +5,7 @@ import toast from "react-hot-toast";
 import {IoLogoWechat} from "react-icons/io5";
 import {AiOutlineMenu} from "react-icons/ai";
 import {Avatar} from "antd";
+import {RxExit} from "react-icons/rx";
 
 import './nav.css'
 import zIndex from "@mui/material/styles/zIndex.js";
@@ -101,12 +102,12 @@ export default function Main() {
                                             />
                                             )} {auth?.user?.firstname? auth?.user?.firstname : auth?.user?.username }
                                 
-                                    <ul className="dropdown-menu">
-                                        <li>
+                                    <ul className="dropdown-menu" >
+                                        <li className="dropdown-item">
                                             <a className="nav-link" onClick={dash} href="/dashboard">Dashboard</a>
                                         </li>
-                                        <li>
-                                        <a className="nav-link" onClick={logout}  href='/'>Logout</a>
+                                        <li className="dropdown-item">
+                                         <a className="nav-link" onClick={logout}  href='/'> <RxExit style={{fontSize: '16px', marginTop:'-5px'}}/>  Logout</a>
                                         </li>
                                     </ul>
                                     </li>

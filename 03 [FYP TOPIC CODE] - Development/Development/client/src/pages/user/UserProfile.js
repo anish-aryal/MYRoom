@@ -76,11 +76,10 @@ export default function UserProfile() {
         <div className="row">
             <div className ="col-3 col-lg-2 p-0 justify-content-center"> <div ><Sidebar /></div></div>
                 <div className ="col-9 col-lg-10 pl-0 pr-4">
-                    <Main />
                     <div className="container">
                     <div className="row justify-content-center">
-                    <div className="col-11">
-                        <h1 className='pt-3'>Update Your Profile</h1>
+                    <div className="col-11 mt-5">
+                        <h1 className='pt-3 mt-5'>Update Your Profile</h1>
                         <form className='row gx-3 pt-5' onSubmit={handleSubmit}>
                            <div className="col-12">
                                 <UploadProfile photo={photo} setPhoto={setPhoto} uploading={uploading} setUploading={setUploading} />

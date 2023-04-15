@@ -75,7 +75,7 @@ export default function Viewpage (){
 
       },[params?.slug]);
 
-   
+      
 
     function formatPrice(x){
         return x?.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
@@ -128,10 +128,8 @@ export default function Viewpage (){
       });
   }
 
-
-
     return (
-        <div className="container" id="top">
+        <div className="container mt-5" id="top">
             <div className="row ">
                 <div className="col-9 pl-0 pt-5 pb-3 ">
                
@@ -206,9 +204,12 @@ export default function Viewpage (){
                     <Googlemap ad={ad}/>
                 </div>
             </div>      
-            <div className="row mt-4">
-                <div className=" col-12 highlightssection mt-4 py-5 px-4 sr ">
-                    {descriptionWithLineBreaks}
+            <div className="row mt-5">
+                <div className=" col-12 highlightssection mt-4 py-3 px-4 sr ">
+                    <h1 className="mb-3" style={{fontSize:'24px'}}>About this property</h1>
+                    <hr />
+                 {descriptionWithLineBreaks}
+                  
                 </div>
             </div>      
             <div className="row">

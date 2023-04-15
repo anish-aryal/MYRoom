@@ -48,4 +48,14 @@
     /* Other button focus styles */
     outline: none;
   }
- 
+  .dropdown-item:hover{
+    background-color: #f2f2f2;
+  }
+  .dropdown-item:focus{
+    background-color: #f2f2f2;
+    color: black;
+
+  }
+  .dropdown-item a:hover{
+    color:#7B30C8;
+  }

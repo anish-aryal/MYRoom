@@ -21,3 +21,49 @@
     /* Other button focus styles */
     outline: none;
   }
+
+  .markets {
+    border: 2px solid brown;
+    color: brown;
+    border-radius: 0;
+    display: block;
+    background: linear-gradient(to right, brown 50%, white 50%);
+    background-size: 200% 100%;
+    background-position: right bottom;
+    transition: all .2s ease-out;
+    outline: none;
+    
+  }
+  
+  .markets:hover {
+    background-position: left bottom;
+    color: white;
+  }
+  
+  .markets:focus {
+    /* Other button focus styles */
+    outline: none;
+  }
+
+  .colleges {
+    border: 2px solid #3d4944;
+    color: #3d4944;
+    border-radius: 0;
+    display: block;
+    background: linear-gradient(to right, #3d4944 50%, white 50%);
+    background-size: 200% 100%;
+    background-position: right bottom;
+    transition: all .2s ease-out;
+    outline: none;
+    
+  }
+  
+  .colleges:hover {
+    background-position: left bottom;
+    color: white;
+  }
+  
+  .colleges:focus {
+    /* Other button focus styles */
+    outline: none;
+  }
