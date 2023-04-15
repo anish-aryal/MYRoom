@@ -4,7 +4,7 @@ import axios from "axios";
 import Carousel from "../../../components/Carousel";
 import { MdLocationOn } from 'react-icons/md';
 import LikeFeature from "../../../components/Likefeature";
-import Googlemap from "../../../components/Googlemap";
+import Googlemap from "../../../components//Googlemap";
 import React from "react";
 import Card from "../../../components/card";
 import ContactForm from "./ContactForm";

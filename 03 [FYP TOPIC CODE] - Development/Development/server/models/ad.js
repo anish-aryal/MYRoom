@@ -1,6 +1,4 @@
 import { model, Schema, ObjectId } from "mongoose";
-import nodemailer from "nodemailer";
-import * as config from "../config.js";
 
 const schema = new Schema(
     {

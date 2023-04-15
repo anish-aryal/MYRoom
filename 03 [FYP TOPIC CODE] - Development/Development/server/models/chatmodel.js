@@ -1,4 +1,3 @@
-import mongoose from "mongoose";
 import { model, Schema, ObjectId } from "mongoose";
 
 const chatmodel = new Schema(
