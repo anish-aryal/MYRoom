@@ -1,0 +1,73 @@
+{
+  "nodes": [
+    {
+      "id": "n0",
+      "label": "Sniffer Host  - INSPIRON N4010",
+      "x": 0,
+      "y": 0,
+      "size": 3
+    },
+    {
+      "id": "n1",
+      "label": "www.facebook.com",
+      "x": 1,
+      "y": 0.1,
+      "size": 2
+    },
+    {
+      "id": "n2",
+      "label": "www.twitter.com",
+      "x": -1,
+      "y": -0.1,
+      "size": 1
+    },
+	{
+      "id": "n3",
+      "label": "www.linkedin.com",
+      "x": -1,
+      "y": 0.1,
+      "size": 1
+    },
+	{
+      "id": "n4",
+      "label": "www.pininterest.com",
+      "x": 1,
+      "y": -0.1,
+      "size": 1
+    },
+	{
+      "id": "n_1_1",
+      "label": "m.facebook.com",
+      "x": 3,
+      "y": 0,
+      "size": 1
+    }
+  ],
+  "edges": [
+    {
+      "id": "e0",
+      "source": "n0",
+      "target": "n1"
+    },
+    {
+      "id": "e1",
+      "source": "n0",
+      "target": "n2"
+    },
+    {
+      "id": "e2",
+      "source": "n0",
+      "target": "n3"
+    },
+	{
+      "id": "e3",
+      "source": "n0",
+      "target": "n4"
+    },
+	{
+      "id": "e4",
+      "source": "n1",
+      "target": "n_1_1"
+    }
+  ]
+}

@@ -1,0 +1,22 @@
+2 IGMP, Internet Group Management Protocol.
+3 GGP, Gateway to Gateway Protocol.
+4 IP in IP encapsulation.
+5 ST, Internet Stream Protocol.
+8 EGP, Exterior Gateway Protocol.
+9 IGRP, Interior Gateway Routing Protocol.
+10 BBN RCC Monitoring.
+11 NVP, Network Voice Protocol.
+14 EMCON, Emission Control Protocol.
+15 XNET, Cross Net Debugger.
+18 TMux, Transport Multiplexing Protocol.
+20 HMP, Host Monitoring Protocol.
+27 RDP, Reliable Data Protocol.
+28 IRTP, Internet Reliable Transaction Protocol.
+30 NETBLT, Network Block Transfer.
+33 DCCP, Datagram Congestion Control Protocol.
+35 IDPR, Inter-Domain Policy Routing Protocol.
+36 XTP, Xpress Transfer Protocol.
+38 IDPR, Control Message Transport Protocol.
+42 SDRP, Source Demand Routing Protocol.
+46 RSVP, Reservation Protocol.
+47 GRE, General Routing Encapsulation.

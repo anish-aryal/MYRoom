@@ -3,16 +3,15 @@ import * as config from "../config.js";
 import slugify from "slugify";
 import Ad from "../models/ad.js";
 import User from "../models/user.js";
-import {emailTemplate} from '../helpers/email.js';
 import cron from 'node-cron';
 import nodemailer from 'nodemailer';
 
 cron.schedule("0 0 * * *", async () => {
   console.log("cron job is running");
-  const threeDaysAgo = new Date();
-  threeDaysAgo.setDate(threeDaysAgo.getDate() - 15);
+  const thirtyDaysAgo = new Date();
+  thirtyDaysAgo.setDate(threeDaysAgo.getDate() - 30);
 
-  const expiredAds = await Ad.find({ createdAt: { $lt: threeDaysAgo },isExpired:false });
+  const expiredAds = await Ad.find({ createdAt: { $lt: thirtyDaysAgo },isExpired:false });
 
   // Update the expiredAds field for each user who posted an expired ad
   for (const ad of expiredAds) {
@@ -64,9 +63,6 @@ cron.schedule("0 0 * * *", async () => {
     await ad.save();
   }
 });
-
-
-
 
 
 
@@ -296,7 +292,7 @@ export const contactSeller= async (req, res) => {
       const mailOptions = {
         from: '"My Room" <my.room417@outlook.com>',
         to: ad.postedBy.email,
-        subject: 'Your ad has expired',
+        subject: 'New Enquiry Received ',
         html:  `
         <p>Dear ${seller.firstname},</p>
         <p>You have received an enquiry from ${firstname} about the ${ad.type} you listed in MyRoom for ${ad.action}.</p>
@@ -610,7 +606,7 @@ export const search = async (req, res) => {
       },
       location: {
         $near: {
-          $maxDistance: 5000,
+          $maxDistance: 1000,
           $geometry: {
             type: "Point",
             coordinates: [geography[0]?.longitude, geography[0].latitude],

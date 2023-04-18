@@ -1,0 +1,577 @@
+
+@media only screen and (max-width: 1199px) {
+    .image-box figure .album-list {
+        min-height: 200px;
+        max-height: 200px;
+        overflow: hidden;
+    }
+
+    .nav-pills.sort-list > li > a {
+        padding: 5px 20px 5px 10px;
+        font-size:14px;
+    }
+    .ads-a, .ads-b, .ads-c, .ads-d, .ads-e, .ads-f, .ads-g, .ads-h {
+        min-height:inherit;
+    }
+    .deal-pricebox h3 {
+        font-size: 18px;
+    }
+    .final-price-dtl small {
+        font-size: 1.2em;
+    }
+    .final-price-dtl, .final-price-dtl span {
+        font-size: 1.7em;
+    }
+    .price{font-size: 1em;}
+    #myBtn{
+    bottom: 25px;
+    right: auto;
+    left: 15px;
+    }
+    #myBtn:hover {
+      background-color: red;
+    }
+}
+
+@media only screen and (max-width: 991px) {
+    .search-tabs h1 {
+        font-size: 18px;
+        margin-top: 0px;
+    }
+    .search-tabs .nav > li > a {
+        font-size: 1em;
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+    .input-field input.input-width {
+        width: 64.5%;
+    }
+    
+    .search-tabs .input-field > select{
+        width: 28.7%;
+    }
+    .main-banner {
+        padding-top:72px;
+    }
+    .image-box figure .album-list {
+        min-height:250px;
+        max-height: 250px;
+        overflow:hidden;
+    }
+    .hover-effect img {
+        max-height: 310px;
+    }
+
+    .footer-top .media-left h5, .footer-top .media-right h5, .footer-top .media-body h5 {
+        font-size: 16px;
+    }
+    .footer-top i {
+        font-size: 2em;
+    }
+    ul.social_share li, ul.downloads li {
+        padding-right: 15px;
+    }
+
+    #associated-payment {
+        border-top: 0;
+    }
+
+    #associated-payment h2 {
+        border-bottom: 1px solid #545454;
+        margin:0px -15px 15px -15px;
+        padding-left:15px; 
+        padding-right:15px;
+    }
+    #associated-payment h2:before {
+        top: 100%;
+        left: 15px;
+    }
+    .footer-top {
+        margin-bottom: 0px;
+    }
+    .sort-list li i {
+        display: none;
+    }
+    .nav-pills.sort-list > li > a {
+        font-size: 13px;
+    }
+    .leftspan {
+        width: 90%;
+        display: inline-block;
+    }
+    .dtl-carousel {
+        min-height: inherit;
+    }
+
+    .pad-r-o {
+        padding-right: 15px;
+    }
+    .welcome_sec .list.main-list ul li{padding: 10px 10px;}
+    .facility ul li i, .welcome_sec .list ul li i{padding-right:0px; min-width:10px;}
+    
+}
+
+@media only screen and (max-width: 767px) {
+
+    header .collapse {
+    display: block;
+    height: auto !important;
+    margin-right: 0 !important;
+    margin-left: 0 !important;
+    width: auto !important;
+    }
+
+    header .navbar-nav {
+    margin: 0px !important;
+    }
+
+    header .navbar-nav li {
+    display: inline-block;
+    }
+
+    header .navbar-nav li.dropdown ul li {
+    display: block;
+    }
+
+    .navbar-left {
+    float: left!important;
+    }
+
+    header .navbar-right {
+    float: right!important;
+    }
+
+    header .navbar-header {
+    margin-right: 0 !important;
+    margin-left: 0 !important;
+    float: left !important;
+    }
+
+    header .navbar-toggle {
+    display: none !important;
+    }
+    .input-lg, select.input-lg {
+        height: 34px;
+        font-size: 14px;
+    }
+    .btn-group-lg > .btn, .btn-lg {
+        padding: 4px 16px;
+    }
+
+    .search-tabs .input-field > select {
+        display: none;
+    }
+    .input-field input.input-width {
+        width: 100%;
+    }
+    .search-tabs button {
+        position: absolute;
+        right: 15px;
+    }
+
+    .navbar-nav > li > a {
+        padding: 5px 5px;
+        padding-bottom: 20px;
+    }
+
+    .navbar-nav > li > a.icon-app, .navbar-nav > li > a.icon-notify {
+        margin-right: 5px;
+    }
+    .main-banner {
+        min-height: inherit; padding-top: 30px;
+    }
+    .login-form:after {
+        right: 20px;
+    }
+    .footer-top .media-left {
+        padding-right: 5px;
+    }
+    .mid-call {
+        display: none !important;
+    }
+    .adv_sec {
+        padding-left: 15px;
+        text-align:center;
+        margin-top:15px;
+    }
+    .adv_sec figure {
+        text-align: center;
+    }
+    .adv_sec figure img {
+        max-width: 100%;
+        width:auto;
+        margin-left:auto;
+        margin-right:auto;
+    }
+    .blog-box a.btn{
+        margin-bottom: 10px;
+    }
+    .blog-box figure img {
+        max-height: 400px;
+    }
+}
+
+@media only screen and (max-width: 736px) {
+    .reg-modal .modal-title {
+        font-size: 24px;
+    }
+    .nav-pills.sort-list > li > a {
+        padding: 5px 15px 5px 9px;
+    }
+}
+
+@media only screen and (max-width: 684px) {
+
+    .search-tabs .nav > li > a {
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+
+    .banner-search-tabs .nav > li > a i {
+        padding-right: 2px;
+    }
+    ul.social_share a {
+        font-size: 16px;
+        height: 30px;
+        width:30px;
+    }
+    ul.social_share li, ul.downloads li {
+        padding-right: 5px;
+    }
+    .nav-pills.sort-list > li > a {
+        font-size: 12px;
+        margin-left: 1px;
+        margin-right: 1px;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    .search-tabs .nav > li > a {
+        padding-left: 5px;
+        padding-right: 5px;
+    }
+    .navbar-left {
+        padding-left: 15px;
+    }
+
+    .image-box figure .album-list {
+        min-height: 220px;
+        max-height: 220px;
+        overflow: hidden;
+    }
+    .price {
+        font-size: 1.1em;
+    }
+    .navbar-nav > li > a.icon-app, .navbar-nav > li > a.icon-notify {
+        margin-right: 0px;
+    }
+    .main-banner {
+        padding-top: 40px;
+    }
+    .reg-modal .modal-title {
+        font-size: 18px;
+    }
+    #associated-payment .col-xs-4 {
+        width: 100%;
+        display: block;
+    }
+    .footer-top {
+        padding: 20px 0 20px;
+    }
+    .nav-pills.sort-list > li > a {
+        padding: 5px 10px 4px 5px;
+    }
+    .single-sidebar-widget > h4, h4.blog-title {
+        font-size: 16px;
+    }
+    .single-widget-posts, .single-sidebar-widget {
+        margin-bottom: 10px;
+    }
+    .sidebar-widget {
+        margin-bottom: 0px;
+    }
+}
+@media only screen and (max-width:568px) {
+    .final-price, .final-price-dtl {
+        font-size: 1em;
+    }
+    .renttypestyle {
+        font-weight: normal;
+        font-size: 11px;
+    }
+    .box-title small {
+        font-size: 9px;
+    }
+    .managedby {
+        font-size: 12px;
+    }
+    p.description {
+        font-size: 0.8em;
+    }
+    .ttl p, .title h2 {
+        font-size: 18px;
+    }
+    .g_ads figure {
+        margin-bottom: 15px;
+    }  
+    
+}
+
+@media only screen and (max-width:550px) {
+
+    header .navbar-right {
+        float: none !important;
+    }
+
+    .navbar-nav > li > a {
+        padding-bottom: 10px;
+    }
+
+    .logo img {
+        max-height: 45px;
+    }
+
+    .navbar-nav > li > a.icon-app, .navbar-nav > li > a.icon-notify {
+        height: 30px;
+        width: 30px;
+        font-size: 13px;
+    }
+
+    .navbar-left {
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+
+    .login-form {
+        top: 35px;
+    }
+
+    .navbar-nav > li > a, .navbar-nav .btn-login {
+        font-size: 14px;
+    }
+    .banner-search-tabs .nav > li > a i {
+       display: none;
+    }
+    .search-tabs .nav > li > a {
+        padding:2px 10px;
+    }
+    .input-lg, select.input-lg {
+        font-size: 12px;
+    }
+    .pre-property .col-lg-3, #top-ten-hotels li figure, #all-categories-list li figure, 
+    #top-ten-hotels .image-box .box>.details, #top-ten-hotels .image-box.box>.details, #all-categories-list .image-box .box>.details, #all-categories-list .image-box.box>.details,
+     #associated-payment .col-xs-7,  #associated-payment .col-xs-5, .welcome_sec .list.main-list ul li, .welcome_sec .list ul li {
+        display: block;
+        width: 100% !important;
+        float:none;
+    }
+    .renttypestyle {
+        font-weight: bold;
+        font-size: 14px;
+    }
+    .image-box figure .album-list {
+        min-height: 390px;
+        max-height: 390px;
+        overflow: hidden;
+    }
+    .hover-effect img {
+        max-height: 400px;
+    }
+    .nav-pills.sort-list > li > a {
+        margin-bottom: 6px;
+    }
+    .nav-pills.sort-list {
+        margin-bottom: 5px;
+    }
+}
+@media only screen and (max-width:500px) {
+    .logo img {
+        max-height: 40px;
+    }
+    .navbar-nav > li > a {
+        padding: 3px 3px;
+        padding-bottom: 9px;
+    }
+
+    .navbar-nav > li > a.icon-app, .navbar-nav > li > a.icon-notify {
+        height: 26px;
+        width: 26px;
+        font-size: 11px;
+    }
+    .navbar-nav > li > a.icon-app i, .navbar-nav > li > a.icon-notify i {
+        padding:6px;
+    }
+    .login-form {
+        top: 32px;
+    }
+    .search-tabs .nav > li > a {
+        padding: 2px 8px;
+    }
+    .main-banner {
+        padding-top: 50px;
+    }
+    .leftspan {
+        width: 85%;
+        display: inline-block;
+    }
+    .ht-facilities li{font-size:11px;}
+    .product-page-meta .ht-facilities li{padding-right:2px;}
+    .search-tabs .nav > li.active > a:before{height:7px; width:7px;}
+}
+
+@media only screen and (max-width:420px) {
+    .search-tabs .nav > li > a {
+        padding: 2px 5px; font-size: 0.9em;
+    }
+    .banner-search-tabs {
+        margin-top: 0px;
+    }
+    .main-banner {
+        padding-top: 60px;
+    }
+    .logo img {
+        max-height: 30px;
+    }
+    .navbar-nav > li > a, .navbar-nav .btn-login, .forgot-pw, .dnt-ac, .dnt-ac span, .dropdown-menu > li > a {
+        font-size: 12px;
+    }
+    .navbar-left {
+        padding-left: 5px;
+        padding-right: 5px;
+    }
+    .navbar-nav > li > a.icon-app, .navbar-nav > li > a.icon-notify {
+        height: 24px;
+        width: 24px;
+    }
+    .navbar-nav > li > a.icon-app i, .navbar-nav > li > a.icon-notify i {
+        padding: 5px;
+    }
+    .login-form {
+        width: 300px;
+    }
+    .navbar-left, .navbar-right {
+        padding-top: 15px;
+    }
+    .logo {
+        padding: 10px 0px;
+    }
+    .image-box figure .album-list {
+        min-height: 320px;
+        max-height: 320px;
+        overflow: hidden;
+    }
+    .hover-effect img {
+        max-height: 330px;
+    }
+    .login-form .tab-content {
+        padding-top: 0px;
+    }
+    .footer-top .media-left {
+        padding-right: 1px;
+    }
+    .footer-top {
+        padding: 15px 0 15px;
+    }
+    .faq .nav-tabs > li > a {
+        margin-right: 4px;
+        padding: 7px 10px;
+    }
+    .single-sidebar-widget > h4, h4.blog-title, .blog-box h4 {
+        font-size: 14px;
+    }
+    .single-widget-posts {
+        margin-bottom: 5px;
+    }
+    .search-tabs .nav > li.active > a:before{top:80%;}
+}
+@media only screen and (max-width:384px) {
+    .reg-li {
+        display: none !important;
+    }
+    .login-form:after {
+        right: 15px;
+    }
+    .search-tabs .nav > li > a {
+        font-size: 0.8em;
+    }
+    .search-tabs h1 {
+        font-size: 16px;
+    }
+    .image-box figure .album-list {
+        min-height: 290px;
+        max-height: 290px;
+        overflow: hidden;
+    }
+    .footer-top .media-left {
+        padding-right: 0px;
+        display: block;
+        width: 100%;
+        float:none !important;
+        text-align:center;
+    }
+    .footer-top i {
+        margin-right: 0px;
+    }
+    .list-unstyled.address li, #footer .copyright {
+        font-size: 13px;
+    }
+    .footer-top .media-body {
+        text-align: center;
+    }
+    .leftspan {
+        width: 80%;
+        display: inline-block;
+    }
+    .facility ul.suitable-for li, .facility ul li, .lf, .av {
+        display: block;
+        width: 100% !important;
+        float:none !important;
+    }
+    .feedback{text-align:left;}
+    .search-tabs .nav > li.active > a:before{height:5px; width:5px;}
+}
+@media only screen and (max-width: 320px) {
+    .logo img {
+        max-width: 57px;
+        height:30px;
+    }
+    .login-form {
+        width: 275px;
+    }
+
+    .search-tabs .nav-tabs.nav-justified>li {
+        float: left;
+        margin-right: 1px;
+    }
+
+    .search-tabs .nav > li > a {
+        font-size: 0.68em;
+    }
+    .main-banner {
+        padding-top: 50px;
+    }
+    .renttypestyle {
+        font-weight: normal;
+        font-size: 12px;
+    }
+    a.button, .final-price-dtl small {
+        width: 100%;
+    }
+    .image-box figure .album-list {
+        min-height: 230px;
+        max-height: 230px;
+        overflow: hidden;
+    }
+    .hover-effect img {
+        max-height: 250px;
+    }
+    ul.social_share a {
+        font-size: 12px;
+        height: 24px;
+        width: 24px;
+        padding:3px;
+    }
+    .final-price-dtl small {
+        display: block;
+    }
+}

@@ -1,6 +1,7 @@
 import { NavLink } from "react-router-dom";
 import { useAuth } from "../../context/auth.js";
 import { useNavigate } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import toast from "react-hot-toast";
 import {IoLogoWechat} from "react-icons/io5";
 import {AiOutlineMenu} from "react-icons/ai";
@@ -8,7 +9,6 @@ import {Avatar} from "antd";
 import {RxExit} from "react-icons/rx";
 
 import './nav.css'
-import zIndex from "@mui/material/styles/zIndex.js";
 
 
 export default function Main() {
@@ -16,6 +16,7 @@ export default function Main() {
 
     //const to navigate to different pages
     const navigate = useNavigate();
+    const location = useLocation();
 
 
     //logout function
@@ -44,6 +45,10 @@ export default function Main() {
         }else{
         navigate("/login");
         }
+    }
+    //dont show nav in login and signup page
+    if (location.pathname === "/login" || location.pathname === "/register"){
+        return null;
     }
   
 

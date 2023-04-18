@@ -39,12 +39,10 @@ export default function Publicprofile() {
   
 
   return (
-    <div className="container-fluid">
+    <div className="container">
     <div className="row">
         
-        <div className ="col-3 col-lg-2  p-0 justify-content-center"> <div><Sidebar /></div></div>
-        
-            <div className ="col-9 col-lg-10">
+            <div className ="col-12 mt-5 col-lg-12">
               <div className="container">
                 <div className="row justify-content-center mt-5 pr-5">
                 {user?.photo?.Location ? (

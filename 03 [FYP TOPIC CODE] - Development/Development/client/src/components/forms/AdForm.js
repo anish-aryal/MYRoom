@@ -118,22 +118,7 @@ export default function AdForm({action, type})  {
                             />
                           
                         </div>
-                        {/* <div className='d-flex col-6 mb-3 flex-column parking'>
-                          <label htmlFor="pets" className="form-label" >Pets</label>
-                          <select
-                            className="form-select"
-                            aria-label="Default select example"
-                            value={ad.pets} // set the selected value of the select element to ad.pets
-                            onChange={(e) => setAd({ ...ad, pets: e.target.value })}
-                          >
-                            <option value="yes">Allowed</option>
-                            <option value="no">Not Allowed</option>
-                            
-                          </select>
-                          {ad.pets}
-                        </div> */}
                       
-          
             
                         <div className='d-flex col-6 mb-3 flex-column bathrooms'>
                           <label htmlFor="passwordlabel" className="form-label" >Bathrooms</label>

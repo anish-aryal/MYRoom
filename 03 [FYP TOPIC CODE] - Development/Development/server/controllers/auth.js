@@ -161,6 +161,9 @@ export const login = async (req, res)=>{
         if (!user){
             return res.json ({error: "Could not find the user with provided email"});
         }
+        if (user.isBanned) {
+          return res.json({ error: "Account Blocked due to the violation of policy." });
+        }
         // match Password
         const match = await comparePassword(password, user.password);
         if(!match){

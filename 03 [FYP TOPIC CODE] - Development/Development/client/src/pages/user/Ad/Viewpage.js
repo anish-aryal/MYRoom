@@ -144,8 +144,30 @@ export default function Viewpage (){
                       <div className="">
                         <span className="viewposted px-3 py-2"> {text}</span>
                         <LikeFeature ad={ad}/>
+                        <div className="report-button">
+                            <Button className="mt-3 " variant="outlined" style={{borderColor:'#7B30C8', color:'#7B30C8', outline:'none', borderRadius:'0px'}} onClick={handleClickOpen}>
+                              Report Seller
+                            </Button>
+                            <Dialog
+                              open={open}
+                              TransitionComponent={Transition}
+                              keepMounted
+                              onClose={handleClose}
+                              aria-describedby="alert-dialog-slide-description"
+                            >
+                              <DialogTitle className="text-center text-white sb"  style={{  "backgroundColor": "#8557b2"}}>{"Are you sure?"}</DialogTitle>
+                              <DialogContent  >
+                            <DialogContentText className=" p-3 pt-5 sm"  id="alert-dialog-slide-description">
+                                We take all reports seriously and investigate them thoroughly to maintain the integrity of our platform. Use this feature to only report any suspicious activity or content that violates our Terms of Use.
+                                </DialogContentText>
+                              </DialogContent>
+                              <DialogActions>
+                                <Button onClick={handleClose}>Close</Button>
+                                <Button className="text-white  sm" style={{backgroundColor:"#7B30C8", border:'0', borderRadius:'0'}} onClick={handleReportClick}>Report</Button>
+                              </DialogActions>
+                            </Dialog>
+                        </div>
                       </div>
-                    
                     </div>
                     
                 </div>
@@ -231,60 +253,6 @@ export default function Viewpage (){
                  
             </div>
             <div className="div">
-            <button
-              onClick={() => {
-                axios.post('/chat', { senderId: auth?.user?._id, receiverId: ad?.postedBy?._id })
-                  .then((response) => {
-                    console.log(response);
-                    axios.post('/messages', { chatId: response.data._id, senderId: auth?.user?._id, text: "hi" })
-                      .then((response) => {
-                        console.log(response);
-                        navigate('/chat');
-                        toast.success('Seller Has been added to your chat list');
-                      })
-                      .catch((error) => {
-                        console.log(error);
-                      })
-                  })
-                  .catch((error) => {
-                    console.log(error);
-                  })
-              }}
-            >
-              Message
-            </button>
-           
-           
-            <div>
-              <Button variant="outlined" onClick={handleClickOpen}>
-                Report
-              </Button>
-              <Dialog
-                open={open}
-                TransitionComponent={Transition}
-                keepMounted
-                onClose={handleClose}
-                aria-describedby="alert-dialog-slide-description"
-              >
-                <DialogTitle className="text-center text-white sb"  style={{  "backgroundColor": "#8557b2"}}>{"Are you sure?"}</DialogTitle>
-                <DialogContent  >
-               <DialogContentText className=" p-3 pt-5 sm"  id="alert-dialog-slide-description">
-                   We take all reports seriously and investigate them thoroughly to maintain the integrity of our platform. Use this feature to only report any suspicious activity or content that violates our Terms of Use.
-                  </DialogContentText>
-                </DialogContent>
-                <DialogActions>
-                  <Button onClick={handleClose}>Close</Button>
-                  <Button className="text-white  sm" style={{backgroundColor:"#7B30C8", border:'0', borderRadius:'0'}} onClick={handleReportClick}>Report</Button>
-                </DialogActions>
-              </Dialog>
-              {!dialogOpened && (
-                <script>
-                  {window.onload = handleClickOpen}
-                </script>
-              )}
-            </div>
-         
-
             </div>
                 <pre>
                     {JSON.stringify({ad, related}, null, 4)}

@@ -1,0 +1,4 @@
+import socket
+
+def dns_mapper(destination_address):
+	if

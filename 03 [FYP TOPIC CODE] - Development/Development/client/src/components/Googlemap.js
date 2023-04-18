@@ -126,41 +126,7 @@ export default function Googlemap({ ad }) {
 
   return (
     <div style={{ width: '100%', height: '350px' }}>
-      {/* <div className="d-flex">
-        <button className=' hospitals  px-3 py-2 mr-3 sm' onClick={() => {
-            setShowHospitals(!showHospitals);
 
-            setShowSchools(false);
-            setShowColleges(false);
-            setShowMarkets(false);
-          }}>
-            <FaHospitalSymbol /> Nearby Hospitals
-          </button>
-          <button className='schools loadmore px-3 py-2 mx-3 sm' onClick={() => {
-            setShowHospitals(false);
-            setShowColleges(false);
-            setShowMarkets(false);
-            setShowSchools(!showSchools);
-          }}>
-           <FaBook /> Nearby Schools
-          </button>
-          <button className=' Markets  px-3 py-2 sm mx-3' onClick={() => {
-            setShowMarkets(!showMarkets);
-            setShowColleges(false);
-            setShowHospitals(false);
-            setShowSchools(false);
-          }}>
-            <HiShoppingBag /> Nearby Markets
-          </button>
-          <button className='Colleges loadmore px-3 py-2 mx-3 sm' onClick={() => {
-            setShowMarkets(false);
-            setShowHospitals(false);
-            setShowSchools(false);
-            setShowColleges(!showColleges);
-          }}>
-           <MdSchool /> Nearby Colleges
-          </button>
-      </div> */}
  <ul className="nav nav-pills mb-1" id="pills-tab" role="tablist">
   <li className="nav-item" role="presentation">
   <button className=' hospitals  px-3 py-2 mr-3 sm' onClick={() => {
